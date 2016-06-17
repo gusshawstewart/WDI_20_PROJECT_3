@@ -4,4 +4,8 @@ Merge test
 Group project - Alissa, Gus, Viktor
 
 
-Add something.
+### Wireframe
+
+suggested platform:
+mybalsamiq.com
+open collaboration
