@@ -6,20 +6,18 @@ Group project - Alissa, Gus, Viktor
 
 ### Wireframe
 
-suggested platform:
 mybalbsamiq.com
-open collaboration
+
+web app to access api
+-login users 
+-crud pages
+
+
+
+
+### Wireframe end
 
 This is a one week project using node.js and api's. 
-
-
-GUS -- any good team name ideas? 
-
-
-Added a Viktor branch
-
-
-Added an Alissa branch
 
 
 
