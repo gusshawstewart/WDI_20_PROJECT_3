@@ -4,7 +4,6 @@ Merge test
 Group project - Alissa, Gus, Viktor
 
 
-
 ### Wireframe
 
 suggested platform:
@@ -16,5 +15,5 @@ This is a one week project using node.js and api's.
 
 GUS -- any good team name ideas? 
 
-
+Added a Viktor branch
 
