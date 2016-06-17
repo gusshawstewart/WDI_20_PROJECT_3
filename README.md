@@ -7,7 +7,7 @@ Group project - Alissa, Gus, Viktor
 ### Wireframe
 
 suggested platform:
-mybalsamiq.com
+mybalbsamiq.com
 open collaboration
 
 This is a one week project using node.js and api's. 
@@ -15,5 +15,11 @@ This is a one week project using node.js and api's.
 
 GUS -- any good team name ideas? 
 
+
 Added a Viktor branch
+
+
+Added an Alissa branch
+
+
 
