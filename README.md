@@ -13,13 +13,40 @@ open collaboration
 This is a one week project using node.js and api's. 
 
 
-GUS -- any good team name ideas? 
 
 
-Added a Viktor branch
+User Stories
+-------------------------------------------
+
+See full user stories here: 
 
 
-Added an Alissa branch
+Users should be able to: 
+- 
+-
+-
+-
+-
+-
+-
+-
+-
+-
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
