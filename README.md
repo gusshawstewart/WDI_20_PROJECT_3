@@ -3,3 +3,8 @@ Team Shandy
 Group project - Alissa, Gus, Viktor
 
 This is a one week project using node.js and api's. 
+
+
+GUS -- any good team name ideas? 
+
+
