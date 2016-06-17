@@ -6,16 +6,20 @@ Group project - Alissa, Gus, Viktor
 
 ### Wireframe
 
-suggested platform:
 mybalbsamiq.com
-open collaboration
+
+web app to access api
+-login users 
+-crud pages
+
+
+
+### Wireframe end
 
 This is a one week project using node.js and api's. 
 
 
-
-
-User Stories
+### User Stories
 -------------------------------------------
 
 See full user stories here: 
@@ -32,21 +36,5 @@ Users should be able to:
 -
 -
 -
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
