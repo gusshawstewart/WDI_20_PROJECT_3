@@ -14,8 +14,11 @@
   <link rel="stylesheet" href="css/main.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxM36DxD-TmmCuWMML0UXBVSirOUkF42Q" charset="utf-8"></script>
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
+  <script src="bower_components/moment/moment.js"></script>
+  <script src="bower_components/datetime/src/js/bootstrap-datetimepicker.js"></script>
+
   <script src="js/app.js"></script>
 
 </head>
@@ -23,21 +26,21 @@
 
 
 
-<nav id='sidemenu' class="navmenu navmenu-default navmenu-fixed-left offcanvas col-sm-2" role="navigation">
-  <a class="navmenu-brand" href="#">Brand</a>
+  <nav id='sidemenu' class="navmenu navmenu-default navmenu-fixed-left offcanvas col-sm-2" role="navigation">
+    <a class="navmenu-brand" href="#">Brand</a>
 
-  <div id="custom-search-input">
-                     <div class="input-group col-md-12">
-                         <input type="text" class="  search-query form-control" placeholder="Search" />
-                         <span class="input-group-btn">
-                             <button class="btn btn-danger" type="button">
-                                 <span class=" glyphicon glyphicon-search"></span>
-                             </button>
-                         </span>
-                     </div>
-                 </div>
+    <div id="custom-search-input">
+     <div class="input-group col-md-12">
+       <input type="text" class="  search-query form-control" placeholder="Search" />
+       <span class="input-group-btn">
+         <button class="btn btn-danger" type="button">
+           <span class=" glyphicon glyphicon-search"></span>
+         </button>
+       </span>
+     </div>
+   </div>
 
-  <ul class="nav navmenu-nav">
+   <ul class="nav navmenu-nav">
     <li class="active"></li>
     <li><a href="#">Link</a></li>
     <li class="dropdown">
@@ -53,16 +56,15 @@
   </ul>
 </nav>
 
-<div class='col-sm-6"'>
 
-  <section class="homepage">
+<section class="homepage">
 
-    <div class="shader"></div>
- <div class="centered">
+  <div class="shader"></div>
+  <div class="centered">
 
- 
-      <h5 id="trigger">Line</h5>
-      <h1>up</h1>
+
+    <h5 id="trigger">Line</h5>
+    <h1>up</h1>
 
 <!--       <h3>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vel dolor ratione.</h3>
 -->      <button><i class="fa fa-arrow-circle-down down" aria-hidden="true"></i></button>
@@ -70,7 +72,7 @@
 </section>
 
 <section class="index">
-<!-- <div class="centered"> -->
+  <!-- <div class="centered"> -->
 
   <button id='burger'> MOY
 <!--     <span class="icon-bar"></span>
@@ -82,34 +84,93 @@
   <button> Log in </button>
   <button id='btn-create'> Add new </button>
 
-<div class="create">
-<form class="form-horizontal" role="form">
-  <div class="form-group">
-    <label class="control-label col-sm-2" for="email">Email:</label>
-    <div class="col-sm-6">
-      <input type="email" class="form-control" id="email" placeholder="Enter email">
+
+  <!-- register -->
+  <div class="register">
+    <div class='container'>
+      <form class="form-horizontal" role="form">
+        <div class="form-group">
+          <label for="email">Email:</label>
+
+          <input type="email" class="form-control" id="email" placeholder="Enter email">
+
+        </div>
+
+        <div class="form-group">
+          <label for="pwd">Password:</label>
+
+          <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+
+        </div>
+
+        <div class="form-group">
+          <label for="pwd">First name:</label>
+
+          <input type="text" class="form-control" id="pwd" placeholder="First name">
+
+        </div>
+
+        <div class="form-group">
+          <label for="pwd">Last Name:</label>
+
+          <input type="text" class="form-control" id="pwd" placeholder="Last name">
+
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <div class="checkbox">
+              <label><input type="checkbox"> Remember me</label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Submit</button>
+          </div>
+        </div>
+      </form>
+      <!-- end of register -->
     </div>
   </div>
-  <div class="form-group">
-    <label class="control-label col-sm-2" for="pwd">Password:</label>
-    <div class="col-sm-6">
-      <input type="password" class="form-control" id="pwd" placeholder="Enter password">
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <div class="checkbox">
-        <label><input type="checkbox"> Remember me</label>
+
+  <!-- submit a gig -->
+  <div class="create">
+    <form class="form-horizontal" role="form" id='gig-submit-form'>
+      <div class="form-group">
+        <label for="email">Title:</label>
+
+        <input type="email" class="form-control" id="email" placeholder="Title">
+
       </div>
+
+<!--   <div class="form-group">
+    <label class="control-label col-sm-2" for="pwd">Description:</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" id="pwd" placeholder="Description">
     </div>
-  </div>
+  </div> -->
+
   <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">Submit</button>
-    </div>
+                  <div class='input-group date' id='datetimepicker2'>
+                      <input type='text' class="form-control" />
+                      <span class="input-group-addon">
+                          <span class="glyphicon glyphicon-calendar"></span>
+                      </span>
+                  </div>
+              </div>
+
+
+  <div class="form-group">
+    <label for="pwd">Cost:</label>
+
+    <input type="text" class="form-control" id="pwd" placeholder="Cost">
+
   </div>
+
 </form>
 
+<!-- end of submit gig -->
 </div>
 
 
@@ -117,16 +178,16 @@
 <div id="map-canvas">
 
 </div>
-    <h2>What is HawtDogz?</h2>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione recusandae nisi id aliquam sed alias quaerat culpa! Obcaecati officiis omnis ipsam, quas. Architecto commodi eaque labore magni soluta minima quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil repellendus, soluta, quod sapiente earum quisquam sit, praesentium quidem et molestias sed placeat harum laborum maiores iste. Repudiandae recusandae vel ut.
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione recusandae nisi id aliquam sed alias quaerat culpa! Obcaecati officiis omnis ipsam, quas. Architecto commodi eaque labore magni soluta minima quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil repellendus, soluta, quod sapiente earum quisquam sit, praesentium quidem et molestias sed placeat harum laborum maiores iste. Repudiandae recusandae vel ut.
-    </p>
-    <p>
-      Soluta, quod sapiente earum quisquam sit, praesentium quidem et molestias sed placeat harum laborum maiores iste. Repudiandae recusandae vel ut.
-    </p>
+<h2>What is HawtDogz?</h2>
+<p>
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione recusandae nisi id aliquam sed alias quaerat culpa! Obcaecati officiis omnis ipsam, quas. Architecto commodi eaque labore magni soluta minima quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil repellendus, soluta, quod sapiente earum quisquam sit, praesentium quidem et molestias sed placeat harum laborum maiores iste. Repudiandae recusandae vel ut.
+</p>
+<p>
+  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione recusandae nisi id aliquam sed alias quaerat culpa! Obcaecati officiis omnis ipsam, quas. Architecto commodi eaque labore magni soluta minima quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil repellendus, soluta, quod sapiente earum quisquam sit, praesentium quidem et molestias sed placeat harum laborum maiores iste. Repudiandae recusandae vel ut.
+</p>
+<p>
+  Soluta, quod sapiente earum quisquam sit, praesentium quidem et molestias sed placeat harum laborum maiores iste. Repudiandae recusandae vel ut.
+</p>
 
 <!-- </div> -->
 </section>

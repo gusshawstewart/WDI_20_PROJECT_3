@@ -84,6 +84,11 @@ for (var i = 0; i < divArray.length; i++) {
 }
 
 
+//Datepicker
+
+$('#datetimepicker2').datetimepicker();
+
+
 
 
 
