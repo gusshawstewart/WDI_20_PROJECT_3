@@ -1,6 +1,7 @@
 $(document).ready(function(){
   addGig(testGig);
   addGig(testGig2);
+  addGig(testGig2);
   showGig();
   })
 console.log("gig.js loaded");
@@ -42,6 +43,7 @@ cost: "£8"
 
 function createGig(){
   event.preventDefault();
+  console.log('creating gig');
 
 // $.ajax({
 //   url:'http://localhost:3000/gigs',
@@ -68,6 +70,7 @@ var testInputGig = {
     "cost": $("select#gig-cost").val(),
 }
 console.log(testInputGig.title + testInputGig.description + testInputGig.time + testInputGig.cost);
+addGig(testInputGig);
 }
 
 
