@@ -11,18 +11,27 @@
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">     
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css">
+  <link rel="stylesheet" href="bower_components/datetime/build/css/bootstrap-datetimepicker.min.css">
+  <link href="bower_components/formhelper/dist/css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen">
   <link rel="stylesheet" href="css/main.css">
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxM36DxD-TmmCuWMML0UXBVSirOUkF42Q" charset="utf-8"></script>
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAx7Yn9BPfq9meVMALPhnbaGeifwlMOwbY&libraries=places" charset="utf-8"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
   <script src="bower_components/moment/moment.js"></script>
   <script src="bower_components/datetime/src/js/bootstrap-datetimepicker.js"></script>
+  <script src="bower_components/formhelper/dist/js/bootstrap-formhelpers.min.js"></script>
 
+  <script src="js/login.js"></script>
+  <script src="js/map.js"></script>
   <script src="js/app.js"></script>
 
 </head>
 <body>
+
+
 
 
 
@@ -41,6 +50,8 @@
    </div>
 
    <ul class="nav navmenu-nav">
+
+
     <li class="active"></li>
     <li><a href="#">Link</a></li>
     <li class="dropdown">
@@ -72,126 +83,164 @@
 </section>
 
 <section class="index">
-  <!-- <div class="centered"> -->
 
-  <button id='burger'> MOY
-<!--     <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span> -->
-  </button>
+<nav id='navbar' class="navbar navbar-default" data-spy="affix" data-offset-top="500">
+  <ul class="nav navbar-nav">
+    <li class="active"><a href="#">Basic Topnav</a></li>
 
-  <button> Sign up </button>
-  <button> Log in </button>
-  <button id='btn-create'> Add new </button>
+    <li><button id='burger'> MOY </button></li>
+    <li> <button id='btn-signup'> Sign up </button></li>
+    <li><button id='btn-login'> Log in </button></li>
+    <li><button id='btn-create'> Add new </button></li>
+  
+  </ul>
+</nav>
 
+  <!-- REGISTER FORM -->
+<div id="register">
+<div class='container'>
 
-  <!-- register -->
-  <div class="register">
-    <div class='container'>
-      <form class="form-horizontal" role="form">
-        <div class="form-group">
-          <label for="email">Email:</label>
+<form class="form-horizontal" role="form" id="new-user">
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input type="email" class="form-control" id="email" placeholder="Enter email">
+  </div>
 
-          <input type="email" class="form-control" id="email" placeholder="Enter email">
+  <div class="form-group">
+    <label for="pwd">Password:</label>
+    <input type="password" class="form-control" id="pwd" placeholder="Enter password">
 
-        </div>
+  </div>
 
-        <div class="form-group">
-          <label for="pwd">Password:</label>
+  <div class="form-group">
+    <label for="first-name">First name:</label>
+    <input type="text" class="form-control" id="first-name" placeholder="First name">
+  </div>
 
-          <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+  <div class="form-group">
+    <label for="last-name">Last Name:</label>
+    <input type="text" class="form-control" id="last-name" placeholder="Last name">
+  </div>
 
-        </div>
-
-        <div class="form-group">
-          <label for="pwd">First name:</label>
-
-          <input type="text" class="form-control" id="pwd" placeholder="First name">
-
-        </div>
-
-        <div class="form-group">
-          <label for="pwd">Last Name:</label>
-
-          <input type="text" class="form-control" id="pwd" placeholder="Last name">
-
-        </div>
-
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <div class="checkbox">
-              <label><input type="checkbox"> Remember me</label>
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">Submit</button>
-          </div>
-        </div>
-      </form>
-      <!-- end of register -->
+  <div class="form-group">
+    <div class="fileinput fileinput-new" data-provides="fileinput">
+    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+    <div>
+      <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input type="file" name="..."></span>
+      <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
     </div>
   </div>
 
-  <!-- submit a gig -->
-  <div class="create">
-    <form class="form-horizontal" role="form" id='gig-submit-form'>
-      <div class="form-group">
-        <label for="email">Title:</label>
+  </div>
 
-        <input type="email" class="form-control" id="email" placeholder="Title">
+  <div class="form-group">
+    <label for="city">City:</label>
+    <input type="text" class="form-control" id="city" placeholder="City">
+  </div>
 
+  <div class="form-group">
+    <label for="sel1">Country:</label>
+    <select class="form-control bfh-countries" data-country="GB"></select>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">
+      <label><input type="checkbox"> Remember me</label>
       </div>
-
-<!--   <div class="form-group">
-    <label class="control-label col-sm-2" for="pwd">Description:</label>
-    <div class="col-sm-6">
-      <input type="text" class="form-control" id="pwd" placeholder="Description">
     </div>
-  </div> -->
+  </div>
 
   <div class="form-group">
-                  <div class='input-group date' id='datetimepicker2'>
-                      <input type='text' class="form-control" />
-                      <span class="input-group-addon">
-                          <span class="glyphicon glyphicon-calendar"></span>
-                      </span>
-                  </div>
-              </div>
-
-
-  <div class="form-group">
-    <label for="pwd">Cost:</label>
-
-    <input type="text" class="form-control" id="pwd" placeholder="Cost">
-
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">Submit</button>
+    </div>
   </div>
 
 </form>
+</div>
+</div>
+<!-- END OF REGISTER FORM -->
 
-<!-- end of submit gig -->
+<!-- LOGIN FORM -->
+<div id="login">
+  <div class='container'>
+<form class="form-horizontal" role="form" id="login">
+  <div class="form-group">
+    <label for="email">Email:</label>
+
+    <input type="email" class="form-control" id="email" placeholder="Enter email">
+
+  </div>
+
+  <div class="form-group">
+    <label for="pwd">Password:</label>
+
+    <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <div class="checkbox">
+        <label><input type="checkbox"> Remember me</label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default">Submit</button>
+    </div>
+  </div>
+</form>
+  </div>
+</div>
+<!-- END OF A LOGIN FORM  -->
+
+
+<!-- ENTER A GIG FORM-->
+<div id="create" class="container">
+
+<form class="form-horizontal" role="form" id="new-gig">
+
+<div class="form-group">
+  <label for="title">Title:</label>
+  <input type="email" class="form-control" id="title" placeholder="Title">
 </div>
 
+<div class="form-group">
+  <label for="pwd">Description:</label>
+  <br>
+ <textarea rows="4" cols="50" name="comment" form="new-gig"> Enter text here...</textarea>
+</div>
+
+<div class="form-group" id='datetime'>
+  <label for="datetimepicker2">Time:</label>
+  <input type='text' class="form-control" id='datetimepicker2' />
+</div>
+
+<div class="form-group">
+  <label for="sel1">Select list:</label>
+  <select class="form-control" id="sel1">
+    <option>£1</option>
+    <option>£2</option>
+    <option>£3</option>
+    <option>£4</option>
+  </select>
+</div>
+</form>
+</div>
+<!-- END OF GIG FORM-->
 
 
+
+<!-- GOGGLE MAP -->
+<input id="pac-input" class="controls" type="text" placeholder="Search Box">
 <div id="map-canvas">
-
 </div>
-<h2>What is HawtDogz?</h2>
-<p>
-  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione recusandae nisi id aliquam sed alias quaerat culpa! Obcaecati officiis omnis ipsam, quas. Architecto commodi eaque labore magni soluta minima quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil repellendus, soluta, quod sapiente earum quisquam sit, praesentium quidem et molestias sed placeat harum laborum maiores iste. Repudiandae recusandae vel ut.
-</p>
-<p>
-  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione recusandae nisi id aliquam sed alias quaerat culpa! Obcaecati officiis omnis ipsam, quas. Architecto commodi eaque labore magni soluta minima quibusdam. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil repellendus, soluta, quod sapiente earum quisquam sit, praesentium quidem et molestias sed placeat harum laborum maiores iste. Repudiandae recusandae vel ut.
-</p>
-<p>
-  Soluta, quod sapiente earum quisquam sit, praesentium quidem et molestias sed placeat harum laborum maiores iste. Repudiandae recusandae vel ut.
-</p>
 
-<!-- </div> -->
+
 </section>
-
 </div>
 
 </body>

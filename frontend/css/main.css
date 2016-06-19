@@ -46,7 +46,8 @@ h1 {
   font-family: 'Fjalla One', sans-serif;
   letter-spacing: -3px;
   font-size: 75px;
-  color: black;
+  color: white;
+
 }
 
 h2 {
@@ -72,6 +73,7 @@ h5 {
   font-family: 'Fjalla One', sans-serif;
   margin-bottom: -10px;
   font-size: 22px;
+  color: white;
 }
 
 .form-horizontal {
@@ -101,7 +103,9 @@ li {
   color: black;
 /*  left: 70px;*/
   z-index: 10;
+
 }
+
 
 
 { position: fixed; bottom: 0px; right: 0px; }
@@ -166,8 +170,8 @@ li {
   position: relative;
   width: 100%;
   color: #333;
-  height: 100vh;
-/*  background: url('images/the-best-background.jpg') no-repeat center center fixed; */
+  height: 95vh;
+  background: url('../images/gig.jpg') no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -240,16 +244,41 @@ button {
       padding-left: 300px;
     }
 
-.create,
-.register
+#create,
+#register,
+#login
     {
       padding: 100px;
       height: 100vh;
       display: none;
     }
 
-  
+#datetime {
+  position: relative;
+}
+
 .shrunk {
  
+
+}
+
+/*navbar*/
+
+.affix {
+    top: 0;
+    width: 100%;
+}
+
+.affix + .container-fluid {
+    padding-top: 70px;
+}
+
+#navbar {
+background: white;
+opacity: 0.8;
+}
+
+#navbar:hover{
+  background: white;
 
 }
