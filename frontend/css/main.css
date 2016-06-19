@@ -6,13 +6,9 @@ body {
   font-family: 'Roboto', sans-serif;
   color: black;
   overflow: visible;
-
   letter-spacing: -1px;
-
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-
 }
 
 
@@ -52,9 +48,9 @@ h1 {
 
 h2 {
   font-family: 'Fjalla One', sans-serif;
-  font-size: 25px;
+  font-size: 110px;
   margin: 5px;
-  color: #333;
+  color: white;
 }
 
 p {
@@ -128,7 +124,7 @@ li {
 
 #custom-search-input {
         margin:0;
-        margin-top: 10px;
+        margin: 20px;
         padding: 0;
     }
  
@@ -170,7 +166,7 @@ li {
   position: relative;
   width: 100%;
   color: #333;
-  height: 95vh;
+  height: 100vh;
   background: url('../images/gig.jpg') no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -217,7 +213,7 @@ div:hover > ul {
 
 button {
   padding: 4px 15px;
-  font-size: 10px;
+  font-size: 16px;
   font-weight: 500;
   background: none;
   border: none;
@@ -246,7 +242,7 @@ button {
 
 #create,
 #register,
-#login
+#session
     {
       padding: 100px;
       height: 100vh;
@@ -258,7 +254,6 @@ button {
 }
 
 .shrunk {
- 
 
 }
 
@@ -274,11 +269,24 @@ button {
 }
 
 #navbar {
-background: white;
-opacity: 0.8;
+  background-color: rgba(255,255,255,0.1);
+  border: none;
+
+}
+
+#navbar ul {
+margin: 0;
+padding: 10px;
 }
 
 #navbar:hover{
   background: white;
-
 }
+
+#nav-toggle {
+  margin-left: 100px;
+  text-align: right;
+  color:black;
+}
+
+

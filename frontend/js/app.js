@@ -13,7 +13,7 @@
 
 $(document).ready(function(){
  
-$('.navmenu').offcanvas({toggle: false, autohide: false})
+$('.navmenu').offcanvas({toggle: true, autohide: false, disableScrolling: false, canvas: 'map-canvas'})
 
 $('#burger').click(function(){
   $('#sidemenu').offcanvas('toggle');
@@ -31,23 +31,34 @@ $("#btn-signup").click(function(e){
 
 $("#btn-login").click(function(e){
   e.preventDefault();
-  showDiv('#login'); 
+  showDiv('#session'); 
 });
 
 //SHOW THE RELEVANT DIV AND HIDE OTHERS
+
 function showDiv(name) {
-var divArray = ['#create', '#register', '#login'];
-// var toRemove = divArray.indexOf(name);
-// divArray.splice(toRemove, 1);
+var divArray = ['#create', '#register', '#session'];
+var toRemove = divArray.indexOf(name);
+divArray.splice(toRemove, 1);
 for (var i = 0; i < divArray.length; i++) {
-  $(divArray[i]).slideUp("fast");
+  $(divArray[i]).css('display', 'none')
+  $(name).css('display', 'block');
 }
-setTimeout(function(){
-  // $("#show").html(" ");
-  // $("#projects").html(" ");
-  $(name).()
-}, 500);
 }
+
+// function showDiv(name) {
+// var divArray = ['#create', '#register', '#login'];
+// // var toRemove = divArray.indexOf(name);
+// // divArray.splice(toRemove, 1);
+// for (var i = 0; i < divArray.length; i++) {
+//   $(divArray[i]).slideUp("fast");
+// }
+// setTimeout(function(){
+//   // $("#show").html(" ");
+//   // $("#projects").html(" ");
+//   $(name).()
+// }, 500);
+// }
 
 //Datepicker
 
@@ -59,10 +70,11 @@ $('#navbar').hover(
 })
 
 // Scrolling to speicific section with js
-  $('.down').click(function() {
-    $('html body').animate({
-      scrollTop: $(".index").offset().top
-    }, 800);
-  });
+
+$('.down').click(function() {
+  $('html body').animate({
+    scrollTop: $(".index").offset().top
+  }, 800);
+});
 
 });

@@ -1,5 +1,16 @@
-
 $(document).ready(function(){
+
+console.log("user.js loaded");
+
+var testUser = 
+{
+email: "bob@bob",
+firstname: "Bob", 
+lastname: "Smith",
+profile-pic: "images/user.jpeg",
+city: "London",
+country: "United Kingdom"
+}
 
 //check for login 
 var token = window.localStorage.getItem('token');
