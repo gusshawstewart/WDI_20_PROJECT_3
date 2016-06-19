@@ -9,21 +9,21 @@
   <link href='https://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
   <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700' rel='stylesheet' type='text/css'>
   <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">     
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.min.css">
-  <link rel="stylesheet" href="bower_components/datetime/build/css/bootstrap-datetimepicker.min.css">
-  <link href="bower_components/formhelper/dist/css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen">
+  <link rel="stylesheet" href="bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
+  <link href="bower_components/bootstrap-formhelpers/dist/css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen">
   <link rel="stylesheet" href="css/main.css">
 
  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAx7Yn9BPfq9meVMALPhnbaGeifwlMOwbY&libraries=places" charset="utf-8"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.min.js"></script>
   <script src="bower_components/moment/moment.js"></script>
-  <script src="bower_components/datetime/src/js/bootstrap-datetimepicker.js"></script>
-  <script src="bower_components/formhelper/dist/js/bootstrap-formhelpers.min.js"></script>
+  <script src="bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"></script>
+  <script src="bower_components/bootstrap-formhelpers/dist/js/bootstrap-formhelpers.min.js"></script>
 
   <script src="js/gigs.js"></script>
   <script src="js/user.js"></script>
@@ -38,7 +38,6 @@
 <audio id="testMusic" >
   <source src="audio/beep.mp3"></source>
   <source src="audio/beep.ogg"></source>
-  Your browser isn't invited for super fun audio time.
 </audio>
 
   <!-- SIDEBAR -->
@@ -310,6 +309,63 @@
 </div>
 <!-- End of show gig modal -->
 
+<!-- Start of edit gig modal -->
+ <div id="editGig" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit a gig</h4>
+      </div>
+      <div class="modal-body">
+
+       <!-- EDIT A GIG FORM-->
+       <div id="edit">
+
+         <form class="form-horizontal" role="form" id="edit-gig">
+
+           <div class="form-group">
+             <label for="title">Title:</label>
+             <input type="text" class="form-control" id="edit-gig-title" placeholder="Title">
+           </div>
+
+           <div class="form-group">
+             <label for="pwd">Description:</label>
+             <br>
+             <textarea rows="4" cols="50" name="comment" form="new-gig" id="edit-gig-description"placeholder="Info about the gig..."></textarea>
+           </div>
+
+           <div class="form-group" id='datetime'>
+             <label for="datetimepicker2">Time:</label>
+             <input type='text' class="form-control" id='edit-datetimepicker2' />
+           </div>
+
+           <div class="form-group">
+             <label for="sel1">Select list:</label>
+             <select class="form-control" id="edit-gig-cost">
+               <option>£1</option>
+               <option>£2</option>
+               <option>£3</option>
+               <option>£4</option>
+             </select>
+           </div>
+           <div class="form-group">
+             <button type="submit" class="btn btn-default" data-dismiss="modal">Submit</button> 
+           </div>
+         </form>
+       </div>
+       <!-- END OF EDIT GIG FORM-->
+     </div>
+     <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+</div>
+</div>
+<!-- End of edit gig modal -->
+
 <!-- Show a user modal -->
 <div id="showUser" class="modal fade" role="dialog">
   <div class="modal-dialog">
@@ -337,7 +393,72 @@
   </div>
 </div>
 </div>
-<!-- End of show gig modal -->
+<!-- End of edit gig modal -->
+
+<!-- Sign up modal -->
+<div id="edit-user" class="modal fade" role="dialog">
+<div class="modal-dialog">
+
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">Edit Profile</h4>
+  </div>
+  <div class="modal-body">
+
+ <!-- REGISTER FORM -->
+ <div id="editUser">
+
+
+   <form class="form-horizontal" role="form" id="edit-user-form">
+     
+     <div class="form-group">
+       <label for="first-name">First name:</label>
+       <input type="text" class="form-control" id="edit-firstname" placeholder="First name">
+     </div>
+
+     <div class="form-group">
+       <label for="last-name">Last Name:</label>
+       <input type="text" class="form-control" id="edit-lastname" placeholder="Last name">
+     </div>
+
+     <div class="form-group">
+       <div class="fileinput fileinput-new" data-provides="fileinput">
+         <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+         <div>
+           <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input type="file" name="..."></span>
+           <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+         </div>
+       </div>
+
+     </div>
+
+     <div class="form-group">
+       <label for="city">City:</label>
+       <input type="text" class="form-control" id="edit-city" placeholder="City">
+     </div>
+
+     <div class="form-group">
+       <label for="sel1">Country:</label>
+       <select class="form-control bfh-countries" data-country="GB" id="edit-country"></select>
+     </div>
+
+     <div class="form-group">
+         <button type="submit" class="btn btn-default" data-dismiss="modal">Submit</button>
+     </div>
+
+     </form>
+
+     </div>
+     <!-- END OF REGISTER FORM -->
+   </div>
+   <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+  </div>
+</div>
+</div>
+</div>
+<!-- End of Sign Up Modal -->
 
 <!-- GOGGLE MAP -->
 <input id="pac-input" class="controls" type="text" placeholder="Search Box">

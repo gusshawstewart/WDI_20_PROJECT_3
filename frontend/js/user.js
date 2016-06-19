@@ -9,7 +9,7 @@ firstname: "Bob",
 lastname: "Smith",
 profilePic: "images/user.jpeg",
 city: "London",
-country: "United Kingdom"
+country: "GB"
 }
 
 // GET ALL USERS
@@ -61,7 +61,7 @@ function showUser(){
   "<li>Last Name: " + user.lastname + "</li>" +
   "<li>City: " + user.city + "</li>" +
   "<li>Country: " + user.country + "</li>" + 
-  "<br><a data-id='"+user._id+"' class='delete' href='#'>Delete</a> |  <a href='#' class='edit' data-id='"+user._id+"'>Edit</a></div>";
+  "<br><a data-id='"+user._id+"' class='delete' href='#'>Delete</a> |  <a href='#' class='edit-user' data-dismiss='modal' data-toggle='modal' data-target='#edit-user' data-id='"+user._id+"'>Edit</a></div>";
 
   $('#showuser-modal').prepend(element);
 }
@@ -163,5 +163,59 @@ $("select#reg-country").val()
 //   $("select#reg-country").val(null)
 // });
 }
+
+// EDIT USER
+
+function editUser(){
+
+  var testUser = 
+  {
+  email: "bob@bob",
+  firstname: "Bob", 
+  lastname: "Smith",
+  profilePic: "images/user.jpeg",
+  city: "London",
+  country: "GB"
+  }
+  
+  console.log('editing a user');
+  // $.ajax({
+  //   method: 'get',
+  //   url: 'http://localhost:3000/gigs/'+$(this).data().id
+  // }).done(function(user){
+
+  //   $("input#edit-firstname").val(user.firstname),
+  //   $("input#edit-lastname").val(user.lastname),
+  //   $("input#edit-city").val(user.city),
+  //   $("select#edit-country").val(user.country)
+  // });
+  var user = testUser;
+
+    $("input#edit-firstname").val(user.firstname),
+    $("input#edit-lastname").val(user.lastname),
+    $("input#edit-city").val(user.city),
+    $("select#edit-country").val(user.country)
+
+  $('#edit-user-form').on('submit', updateUser);
+}
+
+var updateUser = function(){
+  event.preventDefault();
+  var user= {
+ "fistname": $("input#edit-firstname").val(),
+ "lastname": $("input#edit-lastname").val(),
+ "city": $("input#edit-city").val(), 
+ "country": $("select#edit-country").val()
+  };
+  // $.ajax({
+  //   method: 'patch',
+  //   url: 'http://localhost:3000/users/'+$(this).data().id,
+  //   data: user
+  // }).done(function(data){
+  //   // not ideal
+  //   location.reload();
+  // });
+}
+
 
 

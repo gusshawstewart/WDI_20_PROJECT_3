@@ -10,9 +10,10 @@ $(document).ready(function(){
   // getUsers();
    $("form#new-user").on("submit", createUser);
    $("form#new-gig").on("submit", createGig);
-   // $('body').on('click', '.edit-gig', editGig);
+   $('body').on('click', '.edit-gig', editGig);
    $("form#login").on("submit", createSession);
    $("body").on("click", ".show-user", showUser);
+   $("body").on("click", ".edit-user", editUser);
 
   // $("#user-form-button" ).on("click", toggleUserForm);
   // $("#user-index-button" ).on("click", toggleShowUsers);
