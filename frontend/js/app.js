@@ -1,15 +1,27 @@
-// $(document).ready(function(){
-//   getUsers();
-//   $("form#new-user").on("submit", createUser);
-//   $("form#new-gig").on("submit", createGig);
-//   $("form#login").on("submit", createSession);
-//   $("#user-form-button" ).on("click", toggleUserForm);
-//   $("#user-index-button" ).on("click", toggleShowUsers);
-//   $("body").on("click", ".delete-gig", removeGig);
-//   $('body').on('click', '.show-gig', showGig)
-//   $('body').on('click', '.edit-gig', editGig);
-//   $('body').on('click', '#addProject', toggleAddProject);
-// });
+$(document).ready(function(){
+
+  var beepOne = $("#testMusic")[0];
+  $("#music-trigger")
+    .mouseenter(function() {
+      console.log('audio');
+      beepOne.play();
+    });
+
+  // getUsers();
+   $("form#new-user").on("submit", createUser);
+   $("form#new-gig").on("submit", createGig);
+   // $('body').on('click', '.edit-gig', editGig);
+   $("form#login").on("submit", createSession);
+   $("body").on("click", ".show-user", showUser);
+
+  // $("#user-form-button" ).on("click", toggleUserForm);
+  // $("#user-index-button" ).on("click", toggleShowUsers);
+  // $("body").on("click", ".delete-gig", removeGig);
+
+   // $('body').off('click', '.show-gig').on('click', '.show-gig', showGig);
+
+  // $('body').on('click', '#addProject', toggleAddProject);
+});
 
 $(document).ready(function(){
  

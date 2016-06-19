@@ -15,6 +15,7 @@
   <link href="bower_components/formhelper/dist/css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen">
   <link rel="stylesheet" href="css/main.css">
 
+ 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAx7Yn9BPfq9meVMALPhnbaGeifwlMOwbY&libraries=places" charset="utf-8"></script>
@@ -24,47 +25,49 @@
   <script src="bower_components/datetime/src/js/bootstrap-datetimepicker.js"></script>
   <script src="bower_components/formhelper/dist/js/bootstrap-formhelpers.min.js"></script>
 
+  <script src="js/gigs.js"></script>
   <script src="js/user.js"></script>
   <script src="js/map.js"></script>
+
   <script src="js/app.js"></script>
-  <script src="js/gigs.js"></script>
+ 
 
 </head>
 <body>
 
-<!-- SIDEBAR -->
-<nav id='sidemenu' class="navmenu navmenu-default navmenu-fixed-left offcanvas col-sm-2" role="navigation">
-  <a class="navmenu-brand" href="#">LineUp</a>
+<audio id="testMusic" >
+  <source src="audio/beep.mp3"></source>
+  <source src="audio/beep.ogg"></source>
+  Your browser isn't invited for super fun audio time.
+</audio>
 
-   <div id="custom-search-input">
-    <div class="input-group col-md-12">
-    <input type="text" class="  search-query form-control" placeholder="Search" />
-    <span class="input-group-btn">
-     <button class="btn btn-danger" type="button">
-       <span class=" glyphicon glyphicon-search"></span>
-     </button>
-      </span>
-    </div>
-  </div>
+  <!-- SIDEBAR -->
+  <nav id='sidemenu' class="navmenu navmenu-default navmenu-fixed-left offcanvas col-sm-2" role="navigation">
+    <a class="navmenu-brand" href="#">LineUp</a>
 
-  <table class="table table-striped table-hover">
-    <tbody data-link="row" class="rowlink">
-     <tr><td> <a href="/"> 
-      <ul id="gigs-side-listing">
-      </ul>
-      </a>
-      <tr><td> 
+    <div id="custom-search-input">
+      <div class="input-group col-md-12">
+        <input type="text" class="  search-query form-control" placeholder="Search" />
+        <span class="input-group-btn">
+         <button class="btn btn-danger" type="button">
+           <span class=" glyphicon glyphicon-search"></span>
+         </button>
+       </span>
+     </div>
+   </div>
+
+   <table class="table table-striped table-hover">
+    <tbody data-link="row" class="rowlink" id="gigs-side-listing">
+
     </tbody>
   </table>
 
- <ul id="gig-sidelisting">
- </ul>
+  <ul id="gig-sidelisting">
+  </ul>
 
 </nav>
 
 <!-- HOMEPAGE -->
-
-
 <!-- <section class="homepage">
 
 <div class="shader"></div>
@@ -79,172 +82,267 @@
 
 <section class="index">
 
-<nav id='navbar' class="navbar navbar-default" data-spy="affix" data-offset-top="500">
-
-    <ul class="nav navbar-nav navbar-left col-sm-1">
-    <li> <a id="nav-toggle" href="#"><span></span>YOYOYO</a> </li>
-    </ul>
-
-    <ul class="nav navbar-nav navbar-right col-sm-8">
+<nav id='navbar'  class="navbar navbar-light" data-spy="affix" data-offset-top="500">
+  <ul class="nav navbar-nav navbar-right col-sm-8">
     <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".navmenu" data-canvas="body">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
     </button>
-    <li><button id='burger'> Sidebar </button></li>
-    <li> <button id='btn-signup'> Sign up </button></li>
-    <li><button id='btn-login'> Log in </button></li>
-    <li><button id='btn-create'> Add new </button></li>
-    <li><button>Hello, <a href="">Test user</a></button></li>
+    <li><button type="button" class="btn" id='burger'> Sidebar </button></li>
+    <li><button type="button" class="btn" id='btn-signup' data-toggle="modal" data-target="#signUp"> Sign up </button></li>
+    <li><button type="button" class="btn" id='btn-login' data-toggle="modal" data-target="#logIn"> Log in </button></li>
+    <li><button type="button" class="btn" id='btn-create' data-toggle="modal" data-target="#submitGig"> Add new </button></li>
+    <li><button type="button" class="btn show-user" id='btn-create' data-toggle="modal" data-target="#showUser"> Hello, Test User </button></li>
     <li><button></button></li>
-    </ul>
-
+  </ul>
 </nav>
 
+<!-- Sign up modal -->
+<div id="signUp" class="modal fade" role="dialog">
+<div class="modal-dialog">
 
-  <!-- REGISTER FORM -->
-<div id="register">
-<div class='container'>
-
-<form class="form-horizontal" role="form" id="new-user">
-  <div class="form-group">
-    <label for="email">Email:</label>
-    <input type="email" class="form-control" id="email" placeholder="Enter email">
+<div class="modal-content">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h4 class="modal-title">Sign up</h4>
   </div>
+  <div class="modal-body">
 
-  <div class="form-group">
-    <label for="pwd">Password:</label>
-    <input type="password" class="form-control" id="pwd" placeholder="Enter password">
+ <!-- REGISTER FORM -->
+ <div id="register">
 
+
+   <form class="form-horizontal" role="form" id="new-user">
+     <div class="form-group">
+       <label for="email">Email:</label>
+       <input type="email" class="form-control" id="reg-email" placeholder="Enter email">
+     </div>
+
+     <div class="form-group">
+       <label for="pwd">Password:</label>
+       <input type="password" class="form-control" id="reg-password" placeholder="Enter password">
+
+     </div>
+
+     <div class="form-group">
+       <label for="first-name">First name:</label>
+       <input type="text" class="form-control" id="reg-firstname" placeholder="First name">
+     </div>
+
+     <div class="form-group">
+       <label for="last-name">Last Name:</label>
+       <input type="text" class="form-control" id="reg-lastname" placeholder="Last name">
+     </div>
+
+     <div class="form-group">
+       <div class="fileinput fileinput-new" data-provides="fileinput">
+         <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
+         <div>
+           <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input type="file" name="..."></span>
+           <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
+         </div>
+       </div>
+
+     </div>
+
+     <div class="form-group">
+       <label for="city">City:</label>
+       <input type="text" class="form-control" id="reg-city" placeholder="City">
+     </div>
+
+     <div class="form-group">
+       <label for="sel1">Country:</label>
+       <select class="form-control bfh-countries" data-country="GB" id="reg-country"></select>
+     </div>
+
+     <div class="form-group">
+         <button type="submit" class="btn btn-default" data-dismiss="modal">Submit</button>
+     </div>
+
+     </form>
+
+     </div>
+     <!-- END OF REGISTER FORM -->
+   </div>
+   <div class="modal-footer">
+    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
   </div>
+</div>
+</div>
+</div>
+<!-- End of Sign Up Modal -->
 
-  <div class="form-group">
-    <label for="first-name">First name:</label>
-    <input type="text" class="form-control" id="first-name" placeholder="First name">
-  </div>
+<!-- Start of login modal -->
+<div id="logIn" class="modal fade" role="dialog">
+  <div class="modal-dialog">
 
-  <div class="form-group">
-    <label for="last-name">Last Name:</label>
-    <input type="text" class="form-control" id="last-name" placeholder="Last name">
-  </div>
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Log in</h4>
+      </div>
+      <div class="modal-body">
 
-  <div class="form-group">
-    <div class="fileinput fileinput-new" data-provides="fileinput">
-    <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"></div>
-    <div>
-      <span class="btn btn-default btn-file"><span class="fileinput-new">Select image</span><span class="fileinput-exists">Change</span><input type="file" name="..."></span>
-      <a href="#" class="btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
-    </div>
-  </div>
+        <!-- LOGIN FORM -->
+        <div id="session">
+          <form class="form-horizontal" role="form" id="login">
+            <div class="form-group">
+              <label for="email">Email:</label>
 
-  </div>
+              <input type="email" class="form-control" id="login-email" placeholder="Enter email">
 
-  <div class="form-group">
-    <label for="city">City:</label>
-    <input type="text" class="form-control" id="city" placeholder="City">
-  </div>
+            </div>
 
-  <div class="form-group">
-    <label for="sel1">Country:</label>
-    <select class="form-control bfh-countries" data-country="GB"></select>
-  </div>
+            <div class="form-group">
+              <label for="pwd">Password:</label>
 
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <div class="checkbox">
-      <label><input type="checkbox"> Remember me</label>
+              <input type="password" class="form-control" id="login-password" placeholder="Enter password">
+
+            </div>
+
+            <div class="form-group">
+                <div class="checkbox">
+                  <label><input type="checkbox"> Remember me</label>
+                </div>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-default" >Submit</button> 
+            </div>
+          </form>
+
+        </div>
+        <!-- END OF A LOGIN FORM  -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">Submit</button>
-    </div>
   </div>
-
-</form>
 </div>
-</div>
-<!-- END OF REGISTER FORM -->
+<!-- End of login Modal -->
 
-<!-- LOGIN FORM -->
-<div id="session">
-  <div class='container'>
-<form class="form-horizontal" role="form" id="login">
-  <div class="form-group">
-    <label for="email">Email:</label>
+<!-- Start of gig modal -->
+ <div id="submitGig" class="modal fade" role="dialog">
+  <div class="modal-dialog">
 
-    <input type="email" class="form-control" id="email" placeholder="Enter email">
-
-  </div>
-
-  <div class="form-group">
-    <label for="pwd">Password:</label>
-
-    <input type="password" class="form-control" id="pwd" placeholder="Enter password">
-
-  </div>
-
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <div class="checkbox">
-        <label><input type="checkbox"> Remember me</label>
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Submit a gig</h4>
       </div>
+      <div class="modal-body">
+
+       <!-- ENTER A GIG FORM-->
+       <div id="create">
+
+         <form class="form-horizontal" role="form" id="new-gig">
+
+           <div class="form-group">
+             <label for="title">Title:</label>
+             <input type="text" class="form-control" id="gig-title" placeholder="Title">
+           </div>
+
+           <div class="form-group">
+             <label for="pwd">Description:</label>
+             <br>
+             <textarea rows="4" cols="50" name="comment" form="new-gig" id="gig-description"placeholder="Info about the gig..."></textarea>
+           </div>
+
+           <div class="form-group" id='datetime'>
+             <label for="datetimepicker2">Time:</label>
+             <input type='text' class="form-control" id='datetimepicker2' />
+           </div>
+
+           <div class="form-group">
+             <label for="sel1">Select list:</label>
+             <select class="form-control" id="gig-cost">
+               <option>£1</option>
+               <option>£2</option>
+               <option>£3</option>
+               <option>£4</option>
+             </select>
+           </div>
+           <div class="form-group">
+             <button type="submit" class="btn btn-default" data-dismiss="modal">Submit</button> 
+           </div>
+         </form>
+       </div>
+       <!-- END OF GIG FORM-->
+     </div>
+     <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
     </div>
   </div>
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-default">Submit</button>
+</div>
+</div>
+<!-- End of gig modal -->
+
+<!-- Show a gig modal -->
+<div id="showGig" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Gig info </h4>
+      </div>
+      <div class="modal-body">
+      <form class="form-horizontal" role="form">
+       <!-- SHOW A GIG FORM-->
+      <ul id ='showgig-modal'>
+
+      </ul>
+      </form>
+         
+   
+       <!-- END OF GIG FORM-->
+     </div>
+     <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
     </div>
   </div>
-</form>
+</div>
+</div>
+<!-- End of show gig modal -->
+
+<!-- Show a user modal -->
+<div id="showUser" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">User profile </h4>
+      </div>
+      <div class="modal-body">
+      <form class="form-horizontal" role="form">
+       <!-- SHOW A USER FORM-->
+      <ul id ='showuser-modal'>
+
+      </ul>
+      </form>
+         
+   
+       <!-- END OF USER FORM-->
+     </div>
+     <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
   </div>
 </div>
-<!-- END OF A LOGIN FORM  -->
-
-
-<!-- ENTER A GIG FORM-->
-<div id="create" class="container">
-
-<form class="form-horizontal" role="form" id="new-gig">
-
-<div class="form-group">
-  <label for="title">Title:</label>
-  <input type="email" class="form-control" id="title" placeholder="Title">
 </div>
-
-<div class="form-group">
-  <label for="pwd">Description:</label>
-  <br>
- <textarea rows="4" cols="50" name="comment" form="new-gig"> Enter text here...</textarea>
-</div>
-
-<div class="form-group" id='datetime'>
-  <label for="datetimepicker2">Time:</label>
-  <input type='text' class="form-control" id='datetimepicker2' />
-</div>
-
-<div class="form-group">
-  <label for="sel1">Select list:</label>
-  <select class="form-control" id="sel1">
-    <option>£1</option>
-    <option>£2</option>
-    <option>£3</option>
-    <option>£4</option>
-  </select>
-</div>
-</form>
-</div>
-<!-- END OF GIG FORM-->
-
-
+<!-- End of show gig modal -->
 
 <!-- GOGGLE MAP -->
 <input id="pac-input" class="controls" type="text" placeholder="Search Box">
 <div id="map-canvas">
 </div>
-
 
 </section>
 </div>
