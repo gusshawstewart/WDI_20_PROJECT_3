@@ -30,21 +30,14 @@ function gigsShow(req, res){
   })
 }
 
-function gigsUpdate(req, res){
-  var id = req.params.id;
-
-  Gig.findByIdAndUpdate({ _id: id }, req.body.gig, function(err, gig){
-    if (err) return res.status(500).send(err);
-    if (!gig) return res.status(404).send(err);
-
-    res.status(200).send(gig);
-  })
-}
 
 function gigsUpdate(req, res){
+  console.log("yo editing")
   var id = req.params.id;
+  console.log("UPDATED REQ BODY IS" + req.body.gig)
 
   Gig.findByIdAndUpdate({ _id: id }, req.body.gig, function(err, gig){
+    console.log(err);
     if (err) return res.status(500).send(err);
     if (!gig) return res.status(404).send(err);
 

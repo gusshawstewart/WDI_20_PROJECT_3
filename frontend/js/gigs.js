@@ -127,36 +127,37 @@ function showGig(){
 
 function editGig(){
   console.log('editing a gig');
+  console.log('EDIT PASSED IS' + $(this).data().id);
+  $('#submitGigUpdate').attr('data-id', 1111); 
   $.ajax({
     method: 'get',
     url: 'http://localhost:3000/gigs/'+$(this).data().id
   }).done(function(gig){
-    $("input#edit-gig-title").val(gig.title),
-    $("#edit-gig-description").html(gig.description),
+    $("input#edit-gig-title").val(gig.title);
+    $("#edit-gig-description").html(gig.description);
     // $("input#edit-datetimepicker2").val(gig.datetime),
-    $("input#edit-gig-cost").val(gig.cost)
-    $('#edit-gig').on('submit', updateGig);
+    $("input#edit-gig-cost").val(gig.cost);
+    // $('#submitGigUpdate').data('id', $(this).data().id);
+    // $('#edit-gig').on('submit', updateGig);
+
   });
-
-  var gig = testGig;
-
 }
 
 var updateGig = function(){
   event.preventDefault();
-  var gig= {
- "title": $("input#edit-gig-title").val(gig.title),
- "description": $("#edit-gig-description").html(gig.description),
+  var gig = {gig : {
+ "title": $("input#edit-gig-title").val(),
+ "description": $("#edit-gig-description").html(),
  // $("input#edit-datetimepicker2").val(gig.datetime),
- "cost": $("input#edit-gig-cost").val(gig.cost)
-  };
-  // $.ajax({
-  //   method: 'patch',
-  //   url: 'http://localhost:3000/users/'+$(this).data().id,
-  //   data: user
-  // }).done(function(data){
-  //   // not ideal
-  //   location.reload();
-  // });
+ "cost": $("input#edit-gig-cost").val()
+  }};
+  $.ajax({
+    method: 'patch',
+    url: 'http://localhost:3000/gigs/'+$(this).data().id,
+    data: gig
+  }).done(function(data){
+    // not ideal
+    // location.reload();
+  });
 }
 
