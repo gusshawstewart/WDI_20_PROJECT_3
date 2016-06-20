@@ -1,11 +1,11 @@
 $(document).ready(function(){
 
-  var beepOne = $("#testMusic")[0];
-  $("#music-trigger")
-    .mouseenter(function() {
-      console.log('audio');
-      beepOne.play();
-    });
+  // var beepOne = $("#testMusic")[0];
+  // $("#music-trigger")
+  //   .mouseenter(function() {
+  //     console.log('audio');
+  //     beepOne.play();
+  //   });
 
   // getUsers();
    // $("form#new-user").on("submit", createUser);
@@ -13,6 +13,7 @@ $(document).ready(function(){
    $('body').on('click', '.edit-gig', editGig);
    $("form#login").on("submit", createSession);
    $("body").on("click", ".show-user", showUser);
+   $("body").on("click", ".show-gig", showGig);
    $("body").on("click", ".edit-user", editUser);
    $("body").on("click", ".createGig", createGig);
    $("body").on("click", ".createUser", createUser);

@@ -10,7 +10,7 @@ function gigsIndex(req, res){
 }
 
 function gigsCreate(req, res){
-  var gig = new Gig(req.body);
+  var gig = new Gig(req.body.gig);
 
   gig.save(function(err, gig) {
     if (err) return res.status(500).send(err);
@@ -20,9 +20,9 @@ function gigsCreate(req, res){
 }
 
 function gigsShow(req, res){
+  console.log("req IIIIIS:" + req.params.id);
   var id = req.params.id;
-
-  Gig.findById({ _id: id }).populate("title").exec(function(err, gig) {
+  Gig.findById(req.params.id, function(err, gig) {
     if (err) return res.status(500).send(err);
     if (!gig) return res.status(404).send(err);
 
