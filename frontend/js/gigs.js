@@ -38,38 +38,38 @@ cost: "£8"
 
 
 
-// function createGig(){
-//   event.preventDefault();
-//   console.log('creating gig');
+function createGig(){
+  event.preventDefault();
+  console.log('creating gig');
 
-// $.ajax({
-//   url:'http://localhost:3000/gigs',
-//   type:'post',
-//   data: { gig: {
-//     "title": $("input#gig-title").val(),
-//     "description": $("input#gig-description").val(),
-//     "time": $("input#gig-time").val(),
-//     "cost": $("input#gig-cost").val(),
-//   }}
+$.ajax({
+  url:'http://localhost:3000/gigs',
+  type:'post',
+  data: { gig: {
+    "title": $("input#gig-title").val(),
+    "description": $("input#gig-description").val(),
+    "time": $("input#gig-time").val(),
+    "cost": $("input#gig-cost").val()
+  }}
+}).done(function(data){
+  addGig(data);
+  toggleUserForm();
+  $("input#gig-title").val(null),
+  $("input#gig-description").val(null),
+  $("input#gig-time").val(null),
+  $("input#gig-cost").val(null)
+});
 
-// }).done(function(data) {
-//   addGig(data);
-//   toggleUserForm();
-//   $("input#gig-title").val(null),
-//   $("input#gig-description").val(null),
-//   $("input#gig-time").val(null),
-//   $("input#gig-cost").val(null),
-// });
-// var testInputGig = {
-//     "title": $("input#gig-title").val(),
-//     "description": $("#gig-description").val(),
-//     "time": $("input#datetimepicker2").val(),
-//     "cost": $("select#gig-cost").val(),
-// }
-// console.log(testInputGig.title + testInputGig.description + testInputGig.time + testInputGig.cost);
-// addGig(testInputGig);
+var testInputGig = {
+    "title": $("input#gig-title").val(),
+    "description": $("#gig-description").val(),
+    "time": $("input#datetimepicker2").val(),
+    "cost": $("select#gig-cost").val()
+}
+console.log(testInputGig.title + testInputGig.description + testInputGig.time + testInputGig.cost);
+addGig(testInputGig);
+}
 
-// }
 
 // ADD A GIG TO PAGE
 

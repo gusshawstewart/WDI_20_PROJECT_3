@@ -14,7 +14,7 @@ $(document).ready(function(){
    $("form#login").on("submit", createSession);
    $("body").on("click", ".show-user", showUser);
    $("body").on("click", ".edit-user", editUser);
-   // $("body").on("click", ".createGig", createGig);
+   $("body").on("click", ".createGig", createGig);
    $("body").on("click", ".createUser", createUser);
 
   // $("#user-form-button" ).on("click", toggleUserForm);
