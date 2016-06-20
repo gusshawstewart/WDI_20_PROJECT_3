@@ -28,13 +28,21 @@ function usersDelete(req, res) {
   });
 }
 
-// function usersFollow(req, res){
-//   User.findById(req.params.id, function(err, user) {
-//     if(err) return res.status(500).json({ message: err });
-//     return res.status(200).json({ user: user });
-//     // user.followers.push(followed_user);
-//   });
-// }
+function attendGig(req, res){
+  User.findById({id: token.id}, function(err, user) {
+    if(err) return res.status(500).json({ message: err });
+    return res.status(200).json({ user: user });
+
+    user.attending_gigs.push(gig); 
+  });
+}
+
+function unAttendGig(req, res){
+  User.findById({id: token.id}, function(err, user) {
+    if(err) return res.status(500).json({ message: err });
+    return res.status(200).json({ user: user });   
+  });
+}
 
 // function usersUnfollow(req, res){
 //   User.findById(req.params.id, function(err, user) {
@@ -50,7 +58,8 @@ module.exports = {
   index: usersIndex,
   show: usersShow,
   update: usersUpdate,
-  delete: usersDelete
-  // follow: userFollow,
+  delete: usersDelete,
+  attend: attendGig,
+  unattend: unAttendGig
   // unfollow: usersUnfollow
 };

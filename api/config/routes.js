@@ -14,10 +14,10 @@ function checkForToken(req, res, next){
 
     jwt.verify(token, secret, function(err, user){
       if(!user) return res.status(401).json({ message: 'Invalid token'});
+      console.log("CURRENT USER DATA" + user)
       req.user = user;
       next();
-    })
-
+    });
 }
 
 // USERS
@@ -28,14 +28,12 @@ router.route('/users/:id')
   .all(checkForToken)
   .get(usersController.show)
   .put(usersController.update)
-  .delete(usersController.delete);
+  .delete(usersController.delete)
+  .post(usersController.attend)
+  .post(usersController.unattend);
 
 router.post('/login', authenticationController.login);
 router.post('/register', authenticationController.register);
-
-// USER FOLLOW / UNFOLLOW
-router.get('/users/follow/:id');
-router.get('/users/unfollow/:id');
 
 
 // GIGS
