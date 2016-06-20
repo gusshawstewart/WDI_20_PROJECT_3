@@ -94,12 +94,12 @@ function addUser(user){
 
 
 //check for login 
-var token = window.localStorage.getItem('token');
-if(token) {
- $.ajaxSetup({
-   headers: {'Authorisation': 'Bearer ' + data.token }
- });
-}
+// var token = window.localStorage.getItem('token');
+// if(token) {
+//  $.ajaxSetup({
+//    headers: {'Authorisation': 'Bearer ' + data.token }
+//  });
+// }
 
 function createSession(){
 event.preventDefault();

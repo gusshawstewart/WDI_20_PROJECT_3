@@ -69,18 +69,41 @@ searchBox.addListener('places_changed', function() {
   map.fitBounds(bounds);
 });
 
+// initialise map
+var canvas = document.getElementById("map-canvas");
+
+var mapOptions = {
+  zoom:12,
+  center: new google.maps.LatLng(51.506178,-0.088369),
+  mapTypeId: google.maps.MapTypeId.ROADMAP
+}
+
+var map = new google.maps.Map(canvas , mapOptions);
+
+navigator.geolocation.getCurrentPosition(function(position){
+
+  var latlng = new google.maps.LatLng(position.coords.latitude , position.coords.longitude);
+
+  var marker = new google.maps.Marker({
+      position: latlng,
+      map: map,
+      icon: '/images/marker.png'
+  });
+
 });
 
-// $.get("/cameras" , function(data){
+$.get("http://localhost:3000/gigs" , function(gigs){
 
-  // $(data.cameras).each(function(index, camera){
 
-    // var latlng = new google.maps.LatLng(51.519170 , -0.101879);
+  $(gigs).each(function(index, gig){
 
-    // var marker = new google.maps.Marker({
-    //     position: latlng,
-    //     map: map
-    // });
+    var latlng = new google.maps.LatLng(gig.lat , gig.lng);
+    console.log(gig);
+    var marker = new google.maps.Marker({
+        position: latlng,
+        map: map
+      });
+  
 
     // create the info window
     // var infowindow = new google.maps.InfoWindow({
@@ -91,32 +114,12 @@ searchBox.addListener('places_changed', function() {
     //   infowindow.open(map, marker);
     // });
 
-  // });
+  });
 
-// });
+});
 
-// initialise map
-// var canvas = document.getElementById("map-canvas");
+});
 
-// var mapOptions = {
-//   zoom:12,
-//   center: new google.maps.LatLng(51.506178,-0.088369),
-//   mapTypeId: google.maps.MapTypeId.ROADMAP
-// }
-
-// var map = new google.maps.Map(canvas , mapOptions);
-
-// navigator.geolocation.getCurrentPosition(function(position){
-
-//   var latlng = new google.maps.LatLng(position.coords.latitude , position.coords.longitude);
-
-//   var marker = new google.maps.Marker({
-//       position: latlng,
-//       map: map,
-//       icon: '/images/marker.png'
-//   });
-
-// });
 
 
 
