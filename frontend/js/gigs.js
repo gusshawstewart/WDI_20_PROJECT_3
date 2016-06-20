@@ -1,7 +1,7 @@
 $(document).ready(function(){
-  addGig(testGig);
-  addGig(testGig2);
-  addGig(testGig2);
+  getGigs();
+  // addGig(testGig2);
+  // addGig(testGig2);
   })
 console.log("gig.js loaded");
 
@@ -24,14 +24,15 @@ cost: "£8"
 
 // GET ALL GIGS
 
-// function getGigs(){
-//   var ajax = $.get('http://localhost:3000/gigs')
-//   .done(function(data){
-//     $.each(data, function(index, gig){
-//       addGig(gig);
-//     });
-//   });
-// }
+function getGigs(){
+  var ajax = $.get('http://localhost:3000/gigs')
+  .done(function(data){
+    $.each(data, function(index, gig){
+      console.log(gig);
+      addGig(gig);
+    });
+  });
+}
 
 // CREATE GIG
 
@@ -128,7 +129,7 @@ function showGig(){
 function editGig(){
   console.log('editing a gig');
   console.log('EDIT PASSED IS' + $(this).data().id);
-  $('#submitGigUpdate').attr('data-id', 1111); 
+  $('#submitGigUpdate').attr('data-id', $(this).data().id); 
   $.ajax({
     method: 'get',
     url: 'http://localhost:3000/gigs/'+$(this).data().id
@@ -156,8 +157,9 @@ var updateGig = function(){
     url: 'http://localhost:3000/gigs/'+$(this).data().id,
     data: gig
   }).done(function(data){
+    console.log('got to the done');
     // not ideal
-    // location.reload();
+    location.reload();
   });
 }
 

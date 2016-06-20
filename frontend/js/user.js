@@ -97,7 +97,7 @@ function addUser(user){
 var token = window.localStorage.getItem('token');
 if(token) {
  $.ajaxSetup({
-   headers: {'Authorisation': 'Bearer ' + data.token }
+   headers: {'Authorisation': 'Bearer ' + token }
  });
 }
 
