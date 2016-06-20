@@ -35,11 +35,11 @@
 </head>
 <body>
 
-<audio id="testMusic" >
+<!-- <audio id="testMusic" >
   <source src="audio/beep.mp3"></source>
   <source src="audio/beep.ogg"></source>
 </audio>
-
+ -->
   <!-- SIDEBAR -->
   <nav id='sidemenu' class="navmenu navmenu-default navmenu-fixed-left offcanvas col-sm-2" role="navigation">
     <a class="navmenu-brand" href="#">LineUp</a>
@@ -115,23 +115,27 @@
    <form class="form-horizontal" role="form" id="new-user">
      <div class="form-group">
        <label for="email">Email:</label>
-       <input type="email" class="form-control" id="reg-email" placeholder="Enter email">
+       <input type="email" class="form-control" name="email" id="reg-email" placeholder="Enter email">
      </div>
 
      <div class="form-group">
        <label for="pwd">Password:</label>
-       <input type="password" class="form-control" id="reg-password" placeholder="Enter password">
+       <input type="password" class="form-control" name="password" id="reg-password" placeholder="Enter password">
+     </div>
 
+     <div class="form-group">
+       <label for="pwd-confirmation">Password confirmation:</label>
+       <input type="passwordConfirmation" class="form-control" name="passwordConfirmation" id="reg-passwordconfirmation" placeholder="Password confirmation">
      </div>
 
      <div class="form-group">
        <label for="first-name">First name:</label>
-       <input type="text" class="form-control" id="reg-firstname" placeholder="First name">
+       <input type="text" class="form-control" name="email" id="reg-firstname" placeholder="First name">
      </div>
 
      <div class="form-group">
        <label for="last-name">Last Name:</label>
-       <input type="text" class="form-control" id="reg-lastname" placeholder="Last name">
+       <input type="text" class="form-control" name="email" id="reg-lastname" placeholder="Last name">
      </div>
 
      <div class="form-group">
@@ -156,7 +160,7 @@
      </div>
 
      <div class="form-group">
-         <button type="submit" class="btn btn-default" data-dismiss="modal">Submit</button>
+         <button type="submit" class="btn btn-default createUser" data-dismiss="modal">Submit</button>
      </div>
 
      </form>

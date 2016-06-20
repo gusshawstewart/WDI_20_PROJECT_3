@@ -10,7 +10,7 @@ function gigsIndex(req, res){
 }
 
 function gigsCreate(req, res){
-  var gig = new Gig(req.body.gig);
+  var gig = new Gig(req.body);
 
   gig.save(function(err, gig) {
     if (err) return res.status(500).send(err);
