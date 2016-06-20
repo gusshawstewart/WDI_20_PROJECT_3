@@ -106,6 +106,7 @@ function removeGig(){
 // SHOW GIG
 
 function showGig(){
+  $('#showgig-modal').empty();
   $.ajax({
     method: 'GET',
     url: 'http://localhost:3000/gigs/'+ $(this).data().id
@@ -118,7 +119,6 @@ function showGig(){
     "<li>Cost: " + gig.cost + "</li>" +
     "<br><a data-id='"+gig._id+"' class='delete' href='#'>Delete</a> |  <a href='#' data-dismiss='modal' data-toggle='modal' data-target='#editGig' class='edit-gig' data-id='"+gig._id+"'>Edit</a></div>";
 
-
     $('#showgig-modal').prepend(gigShow);
   });
 }
@@ -127,25 +127,19 @@ function showGig(){
 
 function editGig(){
   console.log('editing a gig');
-  // $.ajax({
-  //   method: 'get',
-  //   url: 'http://localhost:3000/gigs/'+$(this).data().id
-  // }).done(function(user){
-  //   $("input#edit-name").val(user.name),
-  //   $("input#edit-github").val(user.github),
-  //   $("input#edit-bio").val(user.bio),
-  //   $("input#edit-portfolio").val(user.portfolio)
-  //   $('form#edit-user').slideDown()
-  // });
+  $.ajax({
+    method: 'get',
+    url: 'http://localhost:3000/gigs/'+$(this).data().id
+  }).done(function(gig){
+    $("input#edit-gig-title").val(gig.title),
+    $("#edit-gig-description").html(gig.description),
+    // $("input#edit-datetimepicker2").val(gig.datetime),
+    $("input#edit-gig-cost").val(gig.cost)
+    $('#edit-gig').on('submit', updateGig);
+  });
+
   var gig = testGig;
 
-  $("input#edit-gig-title").val(gig.title),
-  $("#edit-gig-description").html(gig.description),
-  // $("input#edit-datetimepicker2").val(gig.datetime),
-  $("input#edit-gig-cost").val(gig.cost)
-
-
-  $('#edit-gig').on('submit', updateGig);
 }
 
 var updateGig = function(){
