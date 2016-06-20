@@ -132,36 +132,38 @@ console.log('creating session' + $('#login-email').val() + $('#login-password').
 
 function createUser(){
 event.preventDefault();
-console.log(
-$("input#reg-email").val(),
-$("input#reg-password").val(),
-$("input#reg-firstname").val(),
-$("input#reg-lastname").val(),
-$("input#reg-city").val(),
-$("select#reg-country").val()
-);
+console.log("creating user");
+// console.log(
+// $("input#reg-email").val(),
+// $("input#reg-password").val(),
+// $("input#reg-firstname").val(),
+// $("input#reg-lastname").val(),
+// $("input#reg-city").val(),
+// $("select#reg-country").val()
+// );
 
-// $.ajax({
-//   url:'http://localhost:3000/users',
-//   type:'post',
-//   data: { user: {
-//     "email": $("input#reg-email").val(),
-//     "password": $("input#reg-password").val(),
-//     "firstname": $("input#reg-firstname").val(),
-//     "lastname": $("input#reg-lastname").val(),
-//     "city": $("input#reg-city").val(),
-//     "country": $("select#reg-country").val()
-//   }}
-// }).done(function(data) {
-//   addUser(data);
-//   toggleUserForm();
-//   $("input#reg-email").val(null),
-//   $("input#reg-password").val(null),
-//   $("input#reg-firstname").val(null),
-//   $("input#reg-lastname").val(null),
-//   $("input#reg-city").val(null),
-//   $("select#reg-country").val(null)
-// });
+$.ajax({
+  url:'http://localhost:3000/register',
+  type:'post',
+  data: { user: {
+    email: $("input#reg-email").val(),
+    password: $("input#reg-password").val(),
+    passwordConfirmation: $("input#reg-passwordconfirmation").val(),
+    firstName: $("input#reg-firstname").val(),
+    lastName: $("input#reg-lastname").val(),
+    city: $("input#reg-city").val(),
+    country: $("select#reg-country").val()
+  }}
+}).done(function(data) {
+  // addUser(data);
+  console.log(data);
+  $("input#reg-email").val(null),
+  $("input#reg-password").val(null),
+  $("input#reg-firstname").val(null),
+  $("input#reg-lastname").val(null),
+  $("input#reg-city").val(null),
+  $("select#reg-country").val(null)
+});
 }
 
 // EDIT USER

@@ -2,10 +2,10 @@ var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 
 var userSchema = mongoose.Schema({
-  firstName: { type: String, unique: true, required: true },
-  lastName: { type: String, unique: true, required: true },
-  email:    { type: String, unique: true, required: true },
-  passwordHash: { type: String, required: true },
+  firstName: String,
+  lastName: String,
+  email: String,
+  passwordHash: String,
   city: String,
   country: String,
   profile_photo: String,
@@ -14,6 +14,20 @@ var userSchema = mongoose.Schema({
   // follower_ids: [{type: Schema.Types.ObjectId, ref: 'Follower'}]
 
 });
+
+// var userSchema = mongoose.Schema({
+//   firstName: { type: String, unique: true, required: true },
+//   lastName: { type: String, unique: true, required: true },
+//   email:    { type: String, unique: true, required: true },
+//   passwordHash: { type: String, required: true },
+//   city: String,
+//   country: String,
+//   profile_photo: String,
+//   // owned_gigs: {},
+//   // attending_gigs: {},
+//   // follower_ids: [{type: Schema.Types.ObjectId, ref: 'Follower'}]
+
+// });
 
 userSchema.set('toJSON', {
   transform: function(document, json) {
