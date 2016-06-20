@@ -21,7 +21,8 @@ function checkForToken(req, res, next){
 }
 
 // USERS
-router.get('/users', checkForToken, usersController.index);
+// router.get('/users', checkForToken, usersController.index);
+router.get('/users', usersController.index);
 
 router.route('/users/:id')
   .all(checkForToken)

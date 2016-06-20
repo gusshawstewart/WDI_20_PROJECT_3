@@ -8,13 +8,14 @@ $(document).ready(function(){
     });
 
   // getUsers();
-   $("form#new-user").on("submit", createUser);
+   // $("form#new-user").on("submit", createUser);
    // $("form#new-gig").on("submit", createGig);
    $('body').on('click', '.edit-gig', editGig);
    $("form#login").on("submit", createSession);
    $("body").on("click", ".show-user", showUser);
    $("body").on("click", ".edit-user", editUser);
-   $("body").on("click", ".createGig", createGig);
+   // $("body").on("click", ".createGig", createGig);
+   $("body").on("click", ".createUser", createUser);
 
   // $("#user-form-button" ).on("click", toggleUserForm);
   // $("#user-index-button" ).on("click", toggleShowUsers);

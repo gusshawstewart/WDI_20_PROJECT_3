@@ -14,11 +14,17 @@ function login(req, res) {
   });
 }
 
+
+
 function register(req, res) {
   User.create(req.body.user, function(err, user) {
+    console.log(err)
     if(err) return res.status(500).json({ message: err });
 
-    return res.status(200).json({ message: "Thank you for registering", user: user });
+
+    console.log("USER DETAILSSSSSSS" + user);
+
+    return res.status(200).json({ message: "Thank you for registering", user: user});
   });
 }
 
