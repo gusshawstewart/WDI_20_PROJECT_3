@@ -42,15 +42,15 @@ function createGig(){
   event.preventDefault();
   console.log('creating gig');
 
-// $.ajax({
-//   url:'http://localhost:3000/gigs',
-//   type:'post',
-//   data: { gig: {
-//     "title": $("input#gig-title").val(),
-//     "description": $("input#gig-description").val(),
-//     "time": $("input#gig-time").val(),
-//     "cost": $("input#gig-cost").val(),
-//   }}
+$.ajax({
+  url:'http://localhost:3000/gigs',
+  type:'post',
+  data: { gig: {
+    "title": $("input#gig-title").val(),
+    "description": $("input#gig-description").val(),
+    "time": $("input#gig-time").val(),
+    "cost": $("input#gig-cost").val(),
+  }}
 
 // }).done(function(data) {
 //   addGig(data);
