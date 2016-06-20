@@ -1,6 +1,8 @@
 var User = require('../models/user');
 
 function usersIndex(req, res) {
+
+  console.log(req.token);
   User.find(function(err, users) {
     if(err) return res.status(500).json({ message: err });
     return res.status(200).json({ users: users });
