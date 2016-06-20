@@ -25,9 +25,6 @@ cost: "£8"
 
 // GET ALL GIGS
 
-
-
-
 // function getGigs(){
 //   var ajax = $.get('http://localhost:3000/gigs')
 //   .done(function(data){
