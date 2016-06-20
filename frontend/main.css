@@ -1,0 +1,146 @@
+/* Utility */
+
+body {
+  margin: 0 auto;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  color: black;
+  letter-spacing: -1px;
+  background-color: green;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.shader {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 100vh;
+  background-image: -webkit-linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.6));
+  background-image: -o-linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.6));
+  background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.6));
+}
+
+.container {
+  padding: 30px;
+  color: #333;
+}
+
+.centered {
+  width: 100%;
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+}
+
+/* Typog */
+
+h1 {
+  font-family: 'Fjalla One', sans-serif;
+  letter-spacing: -3px;
+  font-size: 75px;
+  color: black;
+}
+
+h2 {
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 25px;
+  margin: 5px;
+  color: #333;
+}
+
+p {
+  font-weight: 300;
+  text-align: justify;
+  font-size: 15px;
+}
+
+h3 {
+  margin-top: 5px;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+h5 {
+  font-family: 'Fjalla One', sans-serif;
+  margin-bottom: -10px;
+  font-size: 22px;
+}
+
+/* Navbar */
+
+nav {
+  position: absolute;
+  color: black;
+  z-index: 4;
+  top: 0;
+  background: none;
+  width: 100%;
+  height: 30px;
+}
+li {
+  line-height: 30px;
+}
+
+.right-item {
+  float: right;
+  margin-right: 15px;
+}
+
+/* Sections */
+
+.homepage {
+  position: relative;
+  width: 100%;
+  color: #333;
+  height: 100vh;
+  background: url('images/the-best-background.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.about {
+  text-align: left;
+  height: 100vh;
+  color: #333;
+  width: 100%;
+}
+
+#map-canvas {
+width: 100%;
+height: 100vh;
+background-color: #CACACA;
+
+}
+
+
+
+/* Buttons */
+
+button {
+  padding: 4px 15px;
+  font-size: 10px;
+  font-weight: 500;
+  background: none;
+  border: none;
+  color: #fff;
+  border-radius: 2px;
+  cursor: pointer;
+  outline: none;
+
+  transition: background 0.5s; 
+}
+
+.facebook { background: #5772AC; }
+.facebook:hover { background: #3b5998; }
+
+
+
+.down {
+  font-size: 30px;
+}

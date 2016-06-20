@@ -4,6 +4,7 @@ var authenticationController = require('../controllers/authentication');
 var jwt                      = require('jsonwebtoken');
 var secret                   = require('./config').secret;
 
+
 // Middleware function here
 function checkForToken(req, res, next){
 
@@ -19,6 +20,7 @@ function checkForToken(req, res, next){
 
 }
 
+// USERS
 router.get('/users', checkForToken, usersController.index);
 
 router.route('/users/:id')
@@ -33,6 +35,23 @@ router.post('/register', authenticationController.register);
 // USER FOLLOW / UNFOLLOW
 router.get('/users/follow/:id');
 router.get('/users/unfollow/:id');
+
+
+// GIGS
+
+var gigsController = require('../controllers/gigsController');
+
+  router.route('/')
+    .get(gigsController.gigsIndex)
+   
+  router.route('/gigs')
+    .get(gigsController.gigsIndex)
+    .post(gigsController.gigsCreate)
+
+  router.route('/gigs/:id') 
+    .get(gigsController.gigsShow)
+    .patch(gigsController.gigsUpdate)
+    .delete(gigsController.gigsDelete)
 
 
 module.exports = router;
