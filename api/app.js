@@ -1,8 +1,7 @@
-<<<<<<< HEAD
 var express       = require('express');
 var app           = express();
 var morgan        = require('morgan');
-var port           = process.env.PORT || 8000;
+var port           = process.env.PORT || 3000;
 var mongoose       = require('mongoose');
 var methodOverride = require('method-override');
 var bodyParser     = require('body-parser');
