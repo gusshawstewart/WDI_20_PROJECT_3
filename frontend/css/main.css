@@ -138,6 +138,12 @@ li {
   z-index: 0;
 }
 
+#new-gig .form-group {
+
+ margin: 0px;
+ padding: 20px;
+}
+
 /* Search bar */
 
 

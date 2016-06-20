@@ -14,22 +14,6 @@
   <link rel="stylesheet" href="bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
   <link href="bower_components/bootstrap-formhelpers/dist/css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen">
   <link rel="stylesheet" href="css/main.css">
-
- 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAx7Yn9BPfq9meVMALPhnbaGeifwlMOwbY&libraries=places" charset="utf-8"></script>
-  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.min.js"></script>
-  <script src="bower_components/moment/moment.js"></script>
-  <script src="bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"></script>
-  <script src="bower_components/bootstrap-formhelpers/dist/js/bootstrap-formhelpers.min.js"></script>
-
-  <script src="js/gigs.js"></script>
-  <script src="js/user.js"></script>
-  <script src="js/map.js"></script>
-
-  <script src="js/app.js"></script>
  
 
 </head>
@@ -92,7 +76,7 @@
     <li><button type="button" class="btn" id='btn-signup' data-toggle="modal" data-target="#signUp"> Sign up </button></li>
     <li><button type="button" class="btn" id='btn-login' data-toggle="modal" data-target="#logIn"> Log in </button></li>
     <li><button type="button" class="btn" id='btn-create' data-toggle="modal" data-target="#submitGig"> Add new </button></li>
-    <li><button type="button" class="btn show-user" id='btn-create' data-toggle="modal" data-target="#showUser"> Hello, Test User </button></li>
+    <li><button type="button" class="btn show-user btn-create" id='btn-create' data-toggle="modal" data-target="#showUser"> Hello, Test User </button></li>
     <li><button></button></li>
   </ul>
 </nav>
@@ -229,52 +213,63 @@
 
 <!-- Start of gig modal -->
  <div id="submitGig" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+  <div class="modal-dialog" >
 
     <!-- Modal content-->
-    <div class="modal-content">
+    <div class="modal-content" id="map-modal">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Submit a gig</h4>
+        <h4 id='head-create' class="modal-title">Submit a gig</h4>
       </div>
-      <div class="modal-body">
 
-       <!-- ENTER A GIG FORM-->
-       <div id="create">
+     <!-- ENTER A GIG FORM-->
+     <div class="wrapper">
 
-         <form class="form-horizontal" role="form" id="new-gig">
+       <form class="form-horizontal" role="form" id="new-gig">
 
-           <div class="form-group">
-             <label for="title">Title:</label>
-             <input type="text" class="form-control" id="gig-title" placeholder="Title">
-           </div>
+         <div class="form-group">
+           <label for="title">Title:</label>
+           <input type="text" class="form-control" id="gig-title" placeholder="Title">
+         </div>
 
-           <div class="form-group">
-             <label for="pwd">Description:</label>
-             <br>
-             <textarea rows="4" cols="50" name="comment" form="new-gig" id="gig-description"placeholder="Info about the gig..."></textarea>
-           </div>
+         <div class="form-group">
+           <label for="pwd">Description:</label>
+           <br>
+           <textarea rows="4" cols="50" name="comment" form="new-gig" id="gig-description"placeholder="Info about the gig..."></textarea>
+         </div>
 
-           <div class="form-group" id='datetime'>
-             <label for="datetimepicker2">Time:</label>
-             <input type='text' class="form-control" id='datetimepicker2' />
-           </div>
+         <div class="form-group" id='datetime'>
+           <label for="datetimepicker2">Time:</label>
+           <input type='text' class="form-control" id='datetimepicker2' />
+         </div>
 
-           <div class="form-group">
-             <label for="sel1">Select list:</label>
-             <select class="form-control" id="gig-cost">
-               <option>£1</option>
-               <option>£2</option>
-               <option>£3</option>
-               <option>£4</option>
-             </select>
-           </div>
-           <div class="form-group">
-             <button type="submit" class="btn btn-default createGig"  data-dismiss="modal">Submit</button> 
-           </div>
-         </form>
-       </div>
-       <!-- END OF GIG FORM-->
+         <div class="form-group">
+           <label for="sel1">Select list:</label>
+           <select class="form-control" id="gig-cost">
+             <option>£1</option>
+             <option>£2</option>
+             <option>£3</option>
+             <option>£4</option>
+           </select>
+         </div>
+
+     
+
+         <div class="form-group">
+           <button type="submit" class="btn btn-default createGig"  data-dismiss="modal">Submit</button> 
+         </div>
+       </form>
+  
+     <!-- END OF GIG FORM-->
+     <div id="floating-panel">
+           <input id="address" type="textbox" value="Sydney, NSW">
+           <input id="submit-geocode" type="button" value="Geocode">
+         </div>
+      <div class="modal-body" id="maphere">
+
+          
+      </div>
+       
      </div>
      <div class="modal-footer">
       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -471,6 +466,22 @@
 
 </section>
 </div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAx7Yn9BPfq9meVMALPhnbaGeifwlMOwbY&libraries=places" charset="utf-8"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.min.js"></script>
+<script src="bower_components/moment/moment.js"></script>
+<script src="bower_components/eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker.js"></script>
+<script src="bower_components/bootstrap-formhelpers/dist/js/bootstrap-formhelpers.min.js"></script>
+
+<script src="js/gigs.js"></script>
+<script src="js/user.js"></script>
+<script src="js/map.js"></script>
+
+<script src="js/app.js"></script>
 
 </body>
 </html>

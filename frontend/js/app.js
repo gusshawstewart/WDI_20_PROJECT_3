@@ -7,6 +7,10 @@ $(document).ready(function(){
   //     beepOne.play();
   //   });
 
+  
+
+
+
   // getUsers();
    // $("form#new-user").on("submit", createUser);
    // $("form#new-gig").on("submit", createGig);
@@ -20,6 +24,8 @@ $(document).ready(function(){
    $("body").on("click", ".updateGig", updateGig);
    $("body").on("click", ".createSession", createSession);
    $("body").on("click", ".delete-gig", removeGig);
+   // $("body").on("click", "#head-create", initMap);
+
 
    // $("#user-index-button" ).on("click", toggleShowUsers);
   // $("#user-form-button" ).on("click", toggleUserForm);

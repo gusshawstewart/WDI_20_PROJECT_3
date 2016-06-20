@@ -2,13 +2,6 @@ var Gig  = require("../models/gig");
 
 
 function gigsIndex(req, res){
-  // var req = http.request(options, function(res) {
-  //     console.log(JSON.stringify(res.headers));
-  //   }
-  console.log("THIS IS HEADERS" + req.get(headerName));
-  // console.log(token);
-  // var ooo = localStorage.getItem(token);
-  // console.log(localStorage.getItem(token))
 
   Gig.find({}, function(err, gigs) {
     if (err) return res.status(404).send(err);
