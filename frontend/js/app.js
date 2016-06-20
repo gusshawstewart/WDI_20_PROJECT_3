@@ -19,11 +19,11 @@ $(document).ready(function(){
    $("body").on("click", ".createUser", createUser);
    $("body").on("click", ".updateGig", updateGig);
    $("body").on("click", ".createSession", createSession);
+   $("body").on("click", ".delete-gig", removeGig);
 
-
+   // $("#user-index-button" ).on("click", toggleShowUsers);
   // $("#user-form-button" ).on("click", toggleUserForm);
-  // $("#user-index-button" ).on("click", toggleShowUsers);
-  // $("body").on("click", ".delete-gig", removeGig);
+
 
    // $('body').off('click', '.show-gig').on('click', '.show-gig', showGig);
 

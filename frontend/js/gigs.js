@@ -21,7 +21,6 @@ description: "Test description2 Lorem ipsum dolor sit amet, natoque habitasse ac
 cost: "£8"
 }
 
-
 // GET ALL GIGS
 
 function getGigs(){
@@ -35,8 +34,6 @@ function getGigs(){
 }
 
 // CREATE GIG
-
-
 
 function createGig(){
   event.preventDefault();
@@ -53,23 +50,13 @@ $.ajax({
   }}
 }).done(function(data){
   addGig(data);
-  // toggleUserForm();
   $("input#gig-title").val(null),
   $("input#gig-description").val(null),
   $("input#gig-time").val(null),
   $("input#gig-cost").val(null)
 });
 
-// var testInputGig = {
-//     "title": $("input#gig-title").val(),
-//     "description": $("#gig-description").val(),
-//     "time": $("input#datetimepicker2").val(),
-//     "cost": $("select#gig-cost").val()
-// }
-// console.log(testInputGig.title + testInputGig.description + testInputGig.time + testInputGig.cost);
-// addGig(testInputGig);
 }
-
 
 // ADD A GIG TO PAGE
 
@@ -87,22 +74,9 @@ function addGig(gig){
   "</ul>" +
   "</tr> </td>"
 
-  // "<button id='edit-" + gig._id + "'>" + "Edit User</button>" +
-  // "<button id='delete-" + user._id + "'>" + "Delete User</button>" +
-
   $("#gigs-side-listing").prepend(gigIndex)
 }
 
-// REMOVE GIG
-
-function removeGig(){
-  event.preventDefault();
-  // $.ajax({
-  //   url:'http://localhost:3000/gigs/'+$(this).data().id,
-  //   type:'delete'
-  // });
-  $(this).parent().remove();
-}
 
 // SHOW GIG
 
@@ -118,7 +92,7 @@ function showGig(){
     "<li>" + gig.description + "</li>" +
     "<li>Time: " + gig.time + "</li>" +
     "<li>Cost: " + gig.cost + "</li>" +
-    "<br><a data-id='"+gig._id+"' class='delete' href='#'>Delete</a> |  <a href='#' data-dismiss='modal' data-toggle='modal' data-target='#editGig' class='edit-gig' data-id='"+gig._id+"'>Edit</a></div>";
+    "<br><a data-id='" + gig._id + "' data-dismiss='modal' class='delete-gig' href='#'>Delete</a> |  <a href='#' data-dismiss='modal' data-toggle='modal' data-target='#editGig' class='edit-gig' data-id='"+gig._id+"'>Edit</a></div>";
 
     $('#showgig-modal').prepend(gigShow);
   });
@@ -129,7 +103,10 @@ function showGig(){
 function editGig(){
   console.log('editing a gig');
   console.log('EDIT PASSED IS' + $(this).data().id);
+
   $('#submitGigUpdate').attr('data-id', $(this).data().id); 
+
+
   $.ajax({
     method: 'get',
     url: 'http://localhost:3000/gigs/'+$(this).data().id
@@ -143,6 +120,8 @@ function editGig(){
 
   });
 }
+
+//UPDATE A GIG
 
 var updateGig = function(){
   event.preventDefault();
@@ -162,4 +141,19 @@ var updateGig = function(){
     location.reload();
   });
 }
+
+
+// REMOVE GIG
+
+function removeGig(){
+  event.preventDefault();
+  console.log('removing gig');
+  $.ajax({
+    url:'http://localhost:3000/gigs/'+ $(this).data().id,
+    type:'delete'
+  })
+
+    location.reload();
+  }
+
 

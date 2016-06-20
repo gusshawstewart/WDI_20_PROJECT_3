@@ -47,7 +47,6 @@ function gigsUpdate(req, res){
 
 function gigsDelete(req, res){
   var id = req.params.id;
-
   Gig.remove({ _id: id }, function(err) {
     if (err) return res.status(500).send(err);
     res.status(200)
