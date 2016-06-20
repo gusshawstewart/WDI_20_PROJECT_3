@@ -9,7 +9,7 @@ var userSchema = mongoose.Schema({
   city: String,
   country: String,
   profile_photo: String,
-  gigs: {},
+  attending_gigs: {}
   // attending_gigs: {},
   // follower_ids: [{type: Schema.Types.ObjectId, ref: 'Follower'}]
 
