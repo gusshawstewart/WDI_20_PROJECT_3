@@ -104,19 +104,31 @@ if(token) {
 function createSession(){
 event.preventDefault();
 console.log('creating session' + $('#login-email').val() + $('#login-password').val());
+console.log("EXPECTED EMAIL:" + $('#login-email').val());
+// console.log("EXPECTED PW:" $('#login-password').val()));
 
-
-// $.post("http://localhost:3000/api/login", {
-//   email: $('#email').val(),
-//   password: $('#password').val()
+// $.post("http://localhost:3000/login", {
+//   email: $('#login-email').val(),
+//   password: $('#login-password').val()
 //  },
 
 // function(data) {
+//   console.log("running");
 //    window.localStorage.setItem('token', data.token);
 //    $.ajaxSetup({
 //      headers: { 'Authorisation': 'Bearer ' + data.token }
 //    });    
-//    });
+//   });
+
+  $.post("http://localhost:3000/login", {
+    email: $('#login-email').val(),
+    password: $('#login-password').val()
+   }).done(function(data) {
+     window.localStorage.setItem('token', data.token);
+     $.ajaxSetup({
+       headers: { 'Authorisation': 'Bearer ' + data.token }
+     });    
+  });
 };
 
  //logout
@@ -141,11 +153,12 @@ console.log("creating user");
 // $("input#reg-city").val(),
 // $("select#reg-country").val()
 // );
+console.log("YYYYYYYY" + $("input#reg-passwordconfirmation").val());
 
 $.ajax({
   url:'http://localhost:3000/register',
   type:'post',
-  data: { user: {
+  data: {
     email: $("input#reg-email").val(),
     password: $("input#reg-password").val(),
     passwordConfirmation: $("input#reg-passwordconfirmation").val(),
@@ -153,7 +166,7 @@ $.ajax({
     lastName: $("input#reg-lastname").val(),
     city: $("input#reg-city").val(),
     country: $("select#reg-country").val()
-  }}
+  }
 }).done(function(data) {
   // addUser(data);
   console.log(data);

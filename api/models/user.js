@@ -38,13 +38,16 @@ userSchema.set('toJSON', {
 });
 
 userSchema.virtual('password')
-  .set(function(password) {
+.set(function(password) {
     this._password = password;
+    console.log("YOU WANT TO CHECK PASS" + this._passwordConfirmation);
     this.passwordHash = bcrypt.hashSync(this._password, bcrypt.genSaltSync(8));
+    console.log("IS THIS OKAY????" + this.passwordHash);
   });
 
 userSchema.virtual('passwordConfirmation')
   .set(function(passwordConfirmation) {
+    console.log("YOU WANT TO CHECK" + this._passwordConfirmation)
     this._passwordConfirmation = passwordConfirmation;
   });
 
@@ -57,6 +60,23 @@ userSchema.path('passwordHash')
       return this.invalidate('passwordConfirmation', 'Passwords do not match');
     }
   });
+
+// hook to hash password before save
+userSchema.pre('save' , function(next){
+
+    if(!this.isModified('password') ) return next();
+    
+    if(this.passwordConfirmation && this.passwordConfirmation != this.password) {
+        var err = new Error('Password and confirmation do not match');
+        return next(err);
+    }
+
+    this.passwordHash = bcrypt.hashSync(this.password, bcrypt.genSaltSync(8), null);
+  
+    next();
+
+});
+
 
 userSchema.methods.validatePassword = function(password) {
   return bcrypt.compareSync(password, this.passwordHash);
