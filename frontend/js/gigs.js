@@ -162,8 +162,8 @@ function showGig(){
 // EDIT GIG
 
 function editGig(){
-  console.log('editing a gig');
-  console.log('EDIT PASSED IS' + $(this).data().id);
+  // console.log('editing a gig');
+  // console.log('EDIT PASSED IS' + $(this).data().id);
   $('#submitGigUpdate').attr('data-id', 1111); 
   $.ajax({
     method: 'get',
@@ -200,12 +200,13 @@ var updateGig = function(){
 var attendGig = function(){
 event.preventDefault();
 var attend({
-  "users": $("attend-gig").val(gig.attending)
-});
+  users: {
+    "attending-gigs": $(".attend-gig").val(),
+  }});
 $.ajax({
     method: 'patch',
     url: 'http://localhost:3000/gigs/'+$(this).data().id,
-    data: user
+    data: attend
   }).done(function(data){
     // not ideal
     location.reload();
