@@ -27,10 +27,6 @@ $(document).ready(function(){
     google.maps.event.trigger(inputMap, "resize");
     inputMap.setCenter(new google.maps.LatLng(51.506178,-0.088369)); 
   });
-
-
-
-
   }
 
 function geocodeAddress(geocoder, resultsMap) {
