@@ -1,7 +1,8 @@
 $(document).ready(function(){
-  addGig(testGig);
-  addGig(testGig2);
-  addGig(testGig2);
+  getGigs();
+  // addGig(testGig);
+  // addGig(testGig2);
+  // addGig(testGig2);
   })
 console.log("gig.js loaded");
 
@@ -24,14 +25,14 @@ cost: "£8"
 
 // GET ALL GIGS
 
-// function getGigs(){
-//   var ajax = $.get('http://localhost:3000/gigs')
-//   .done(function(data){
-//     $.each(data, function(index, gig){
-//       addGig(gig);
-//     });
-//   });
-// }
+function getGigs(){
+  var ajax = $.get('http://localhost:3000/gigs')
+  .done(function(data){
+    $.each(data, function(index, gig){
+      addGig(gig);
+    });
+  });
+}
 
 // CREATE GIG
 
@@ -117,7 +118,11 @@ function showGig(){
     "<li>" + gig.description + "</li>" +
     "<li>Time: " + gig.time + "</li>" +
     "<li>Cost: " + gig.cost + "</li>" +
-    "<br><a data-id='"+gig._id+"' class='delete' href='#'>Delete</a> |  <a href='#' data-dismiss='modal' data-toggle='modal' data-target='#editGig' class='edit-gig' data-id='"+gig._id+"'>Edit</a></div>";
+    "<br>" + 
+      "<a data-id='"+gig._id+"' class='delete' href='#'>Delete</a> |" +
+      "<a href='#' data-dismiss='modal' data-toggle='modal' data-target='#editGig' class='edit-gig' data-id='"+gig._id+"'>Edit</a> |" +
+      "<a href='#' data-dismiss='modal' data-toggle='modal' data-target='#attendGig' class='attend-gig' data-id='"+gig._id+"'>Attend</a> |" +
+      "</div>";
 
     $('#showgig-modal').prepend(gigShow);
   });
@@ -160,4 +165,11 @@ var updateGig = function(){
     // location.reload();
   });
 }
+
+
+
+
+
+
+
 

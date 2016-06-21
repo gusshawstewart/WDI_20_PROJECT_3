@@ -55,13 +55,26 @@ function showUser(){
   console.log('showing user');
   $('#showuser-modal').empty();
   var user = testUser;
+
+  // var owned_gigs = 
+  //   for (var i = 0; i < owned_gigs.length; i++) {
+  //     console.log(owned_gigs[i]);
+  // }
+
+  console.log(user.owned_gigs);
+
   var element =
   "<li> <img src='" + user.profilePic + "'></li>" +
   "<li>First Name: " + user.firstname + "</li>" +
   "<li>Last Name: " + user.lastname + "</li>" +
   "<li>City: " + user.city + "</li>" +
   "<li>Country: " + user.country + "</li>" + 
-  "<br><a data-id='"+user._id+"' class='delete' href='#'>Delete</a> |  <a href='#' class='edit-user' data-dismiss='modal' data-toggle='modal' data-target='#edit-user' data-id='"+user._id+"'>Edit</a></div>";
+  "<li>I'm attending: " + user.attending_gigs + "</li>" +
+  "<li>My gigs: " + user.owned_gigs + "</li>" +
+  "<br>"+
+    "<a data-id='"+user._id+"' class='delete' href='#'>Delete</a> |" +
+    "<a href='#' class='edit-user' data-dismiss='modal' data-toggle='modal' data-target='#edit-user' data-id='"+user._id+"'>Edit</a>"+
+    "</div>";
 
   $('#showuser-modal').prepend(element);
 }
@@ -87,19 +100,19 @@ function addUser(user){
 
   // "<button id='edit-" + gig._id + "'>" + "Edit User</button>" +
   // "<button id='delete-" + user._id + "'>" + "Delete User</button>" +
-  "</li>" 
+  // "</li>" 
 
   // $("#gigs-side-listing").prepend(gigIndex)
 }
-
 
 //check for login 
 var token = window.localStorage.getItem('token');
 if(token) {
  $.ajaxSetup({
-   headers: {'Authorisation': 'Bearer ' + data.token }
+   headers: {'Authorisation': 'Bearer ' + token }
  });
 }
+
 
 function createSession(){
 event.preventDefault();
@@ -222,14 +235,14 @@ var updateUser = function(){
  "city": $("input#edit-city").val(), 
  "country": $("select#edit-country").val()
   };
-  // $.ajax({
-  //   method: 'patch',
-  //   url: 'http://localhost:3000/users/'+$(this).data().id,
-  //   data: user
-  // }).done(function(data){
-  //   // not ideal
-  //   location.reload();
-  // });
+  $.ajax({
+    method: 'patch',
+    url: 'http://localhost:3000/users/'+$(this).data().id,
+    data: user
+  }).done(function(data){
+    // not ideal
+    location.reload();
+  });
 }
 
 
