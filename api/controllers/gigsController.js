@@ -32,10 +32,11 @@ function gigsIndex(req, res){
     
     for (var i = gigs.length - 1; i >= 0; i--) {
       
-      console.log(req.query.latitude);
-      console.log(req.query.longitude);
-      console.log("THE MOFO DISTANCE IS" + getDistanceFromLatLonInKm(req.query.latitude, req.query.longitude, gigs[i].lat, gigs[i].lng));
-
+      var distanceOfGig = getDistanceFromLatLonInKm(req.query.latitude, req.query.longitude, gigs[i].lat, gigs[i].lng);
+      var gigsToSort = []
+      var gigDistanceFromUser = {gig: gigs[i], distance: distanceOfGig}
+      gigsToSort.push(gigDistanceFromUser);
+      console.log("YYYYY" + gigsToSort[0].distance + gigsToSort[0].gig.title);
 
 
 
