@@ -2,7 +2,8 @@
 var gigInput = {
   coordinates: null,
   map: null,
-  userPosition: null,
+  userLtd: 51.506178,
+  userLng: -0.088369
 }
 
 function calculateDistance(){
@@ -30,11 +31,6 @@ var d = R * c;
 
 alert(d);
 }
-
-
-
-
-
 
 
 $(document).ready(function(){
@@ -83,9 +79,6 @@ function geocodeAddress(geocoder, resultsMap) {
         alert('Geocode was not successful for the following reason: ' + status);
       }
     });
-
-
-
 
 
 
@@ -144,8 +137,10 @@ searchBox.addListener('places_changed', function() {
 
   places.forEach(function(place) {
 
-    gigInput.userPosition = place.geometry.location
-    console.log("THIS IS THE COMPARED USER LOCATION" + gigInput.userPosition);
+    gigInput.userLtd = place.geometry.location.ltd()
+    gigInput.userLng = place.geometry.location.lng()
+
+    
     getGigs();
 
     var icon = {

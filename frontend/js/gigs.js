@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  // getGigs();
+  getGigs();
 
   })
 console.log("gig.js loaded");
@@ -12,7 +12,8 @@ $.ajax({
   url:'http://localhost:3000/gigs',
   type:'get',
   data: { 
-    latitude: gigInput.userPosition.lat(), 
+    latitude: gigInput.userLtd,
+    longitude: gigInput.userLng 
   }
   }).done(function(data){
     $.each(data, function(index, gig){
@@ -49,7 +50,7 @@ $.ajax({
     "description": $("input#gig-description").val(),
     "lat": gigInput.coordinates.lat(), 
     "lng": gigInput.coordinates.lng(), 
-    "time": $("input#gig-time").val(),
+    "datetime": $("input#datetimepicker2").val(),
     "cost": $("input#gig-cost").val()
   }}
 }).done(function(data){
