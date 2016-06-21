@@ -6,6 +6,11 @@ var secret = require('../config/config').secret;
 var User   = require('../models/user')
 
 
+function attend(req, res){
+
+console.log("reached attending function");
+}
+
 
 function gigsIndex(req, res){
 

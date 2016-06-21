@@ -96,7 +96,7 @@ function showGig(){
     "<li>" + gig.description + "</li>" +
     "<li>Time: " + gig.time + "</li>" +
     "<li>Cost: " + gig.cost + "</li>" +
-    "<br><a data-id='" + gig._id + "' data-dismiss='modal' class='delete-gig' href='#'>Delete</a> |  <a href='#' data-dismiss='modal' data-toggle='modal' data-target='#editGig' class='edit-gig' data-id='"+gig._id+"'>Edit</a>" +   "<a href='#' data-dismiss='modal' data-toggle='modal' data-target='#attendGig' class='attend-gig' data-id='"+gig._id+"'>Attend</a> |" +
+    "<br><a data-id='" + gig._id + "' data-dismiss='modal' class='delete-gig' href='#'>Delete</a> |  <a href='#' data-dismiss='modal' data-toggle='modal' data-target='#editGig' class='edit-gig' data-id='"+gig._id+"'>Edit</a>" +   "<a href='#' data-dismiss='modal' data-toggle='modal' data-target='#attendGig' class='attend-button' data-id='" + gig._id + "'>Attend</a> |" +
      "</div>";
 
     $('#showgig-modal').prepend(gigShow);
@@ -107,18 +107,11 @@ function showGig(){
 // EDIT GIG
 
 function editGig(){
-<<<<<<< HEAD
+
   // console.log('editing a gig');
   // console.log('EDIT PASSED IS' + $(this).data().id);
   $('#submitGigUpdate').attr('data-id', 1111); 
-=======
-  console.log('editing a gig');
-  console.log('EDIT PASSED IS' + $(this).data().id);
 
-  $('#submitGigUpdate').attr('data-id', $(this).data().id); 
-
-
->>>>>>> 4d3dd12113750b1690f7ec1bd52525f64a5f80b8
   $.ajax({
     method: 'get',
     url: 'http://localhost:3000/gigs/'+$(this).data().id
@@ -155,19 +148,20 @@ var updateGig = function(){
 }
 
 
-var attendGig = function(){
-event.preventDefault();
-var attend({
-  users: {
-    "attending-gigs": $(".attend-gig").val(),
-  }});
-$.ajax({
-    method: 'patch',
-    url: 'http://localhost:3000/gigs/'+$(this).data().id,
-    data: attend
-  }).done(function(data){
-    // not ideal
-}
+// var attendGig = function(){
+// event.preventDefault();
+// var attend({
+//   users: {
+//     "attending-gigs": $(".attend-gig").val(),
+//   }});
+// $.ajax({
+//     method: 'patch',
+//     url: 'http://localhost:3000/gigs/'+$(this).data().id,
+//     data: attend
+//   }).done(function(data){
+//     // not ideal
+// });
+// };  
 // REMOVE GIG
 
 function removeGig(){
@@ -183,19 +177,16 @@ function removeGig(){
   }
 
 
-// var attendGig = function(){
-// event.preventDefault();
-// var attend({
-//   "users": $("attend-gig").val(gig.attending)
-// });
-// $.ajax({
-//     method: 'patch',
-//     url: 'http://localhost:3000/gigs/'+$(this).data().id,
-//     data: user
-//   }).done(function(data){
-//     // not ideal
-//     location.reload();
-//   });
+var attendGig = function(){
+event.preventDefault();
 
-// }
+$.ajax({
+    type: 'post',
+    url: 'http://localhost:3000/gigs/' + $(this).data().id,
+  }).done(function(data){
+    // not ideal
+    location.reload();
+  });
+
+};
 

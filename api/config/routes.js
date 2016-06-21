@@ -54,7 +54,7 @@ var gigsController = require('../controllers/gigsController');
   router.route('/gigs/:id') 
     .get(gigsController.gigsShow)
     .patch(gigsController.gigsUpdate)
-    .delete(gigsController.gigsDelete);
+    .delete(gigsController.gigsDelete)
     // .post(gigsController.attend);
 
 
