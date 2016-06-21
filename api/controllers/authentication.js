@@ -1,6 +1,7 @@
 var jwt    = require('jsonwebtoken');
 var User   = require('../models/user');
 var secret = require('../config/config').secret;
+var jwtDecode = require('jwt-decode');
 
 function login(req, res) {
   console.log(req.body.password);
@@ -21,8 +22,6 @@ function register(req, res) {
   User.create(req.body, function(err, user) {
     console.log(err)
     if(err) return res.status(500).json({ message: err });
-
-    console.log("USER DETAILSSSSSSS" + user);
 
     return res.status(200).json({ message: "Thank you for registering", user});
   });

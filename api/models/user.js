@@ -9,9 +9,17 @@ var userSchema = mongoose.Schema({
   city: String,
   country: String,
   profile_photo: String,
-  gigs: {},
-  // attending_gigs: {},
-  // follower_ids: [{type: Schema.Types.ObjectId, ref: 'Follower'}]
+  attending_gigs: [{type: mongoose.Schema.ObjectId, ref: 'Gig'}],
+  owned_gigs: [{type: mongoose.Schema.ObjectId, ref: 'Gig'}]
+
+  // followers: [{
+  //     type: mongoose.Schema.Types.ObjectId, ref: 'User'
+  //   }],
+  //   redeem_token: {type: String, unique: true},
+  // following: [{
+  //     type: mongoose.Schema.Types.ObjectId, ref: 'User'
+  //   }],
+  //   redeem_token: {type: String, unique: true}  
 
 });
 

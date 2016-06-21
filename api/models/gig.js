@@ -6,10 +6,9 @@ description: String,
 datetime: { type: Date},
 lng: { type: String},
 lat: { type: String},
-cost: String
-// owner: { type: String, required: true },
-// attending: String
-// change attending, owner, and datetime
+cost: String,
+owner: [{type: mongoose.Schema.ObjectId, ref: 'User'}],
+attending: [{type: mongoose.Schema.ObjectId, ref: 'User'}]
 
 });
 

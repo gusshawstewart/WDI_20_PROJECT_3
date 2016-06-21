@@ -9,8 +9,7 @@ $(document).ready(function(){
 
 
   // getUsers();
-   // $("form#new-user").on("submit", createUser);
-   // $("form#new-gig").on("submit", createGig);
+  
    $('body').on('click', '.edit-gig', editGig);
    $("form#login").on("submit", createSession);
    $("body").on("click", ".show-user", showUser);
@@ -18,6 +17,7 @@ $(document).ready(function(){
    $("body").on("click", ".edit-user", editUser);
    $("body").on("click", ".createGig", createGig);
    $("body").on("click", ".createUser", createUser);
+   $("body").on("click", ".attend-gig", attendGig);
    $("body").on("click", ".updateGig", updateGig);
    $("body").on("click", ".createSession", createSession);
    $("body").on("click", ".delete-gig", removeGig);
