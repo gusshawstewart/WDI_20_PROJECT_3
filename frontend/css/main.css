@@ -134,6 +134,12 @@ li {
   margin-right: 15px;
 }
 
+/*Google map*/
+
+#floating-panel {
+  margin-bottom: 30px;
+}
+
 #map-canvas {
   z-index: 0;
 }
