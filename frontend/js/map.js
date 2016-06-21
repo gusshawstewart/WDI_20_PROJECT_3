@@ -1,10 +1,12 @@
+
+var gigInput = {
+  location: null
+}
+
 $(document).ready(function(){
 
   initMap();
 
-  var gigInput = {
-    location: null
-  }
 
   function initMap() {  console.log('initialising map');
 
@@ -33,6 +35,7 @@ $(document).ready(function(){
         resultsMap.setCenter(results[0].geometry.location);
         console.log("INSIDE THE FUNCTION LOCATION" + results[0].geometry.location)
         gigInput.location = results[0].geometry.location;
+
         var marker = new google.maps.Marker({
           map: resultsMap,
           position: results[0].geometry.location
@@ -113,54 +116,3 @@ searchBox.addListener('places_changed', function() {
 
 });
 
-
-// $.get("/cameras" , function(data){
-
-//   $(data.cameras).each(function(index, camera){
-
-//     var latlng = new google.maps.LatLng(51.519170 , -0.101879);
-
-//     var marker = new google.maps.Marker({
-//         position: latlng,
-//         map: map
-//     });
-
-//     create the info window
-//     var infowindow = new google.maps.InfoWindow({
-//         content: " gig example"
-//     });
-
-//     google.maps.event.addListener(marker, 'click', function() {
-//       infowindow.open(map, marker);
-//     });
-
-//   });
-
-// });
-
-// initialise map
-// var canvas = document.getElementById("map-canvas");
-
-// var mapOptions = {
-//   zoom:12,
-//   center: new google.maps.LatLng(51.506178,-0.088369),
-//   mapTypeId: google.maps.MapTypeId.ROADMAP
-// }
-
-// var map = new google.maps.Map(canvas , mapOptions);
-
-// navigator.geolocation.getCurrentPosition(function(position){
-
-//   var latlng = new google.maps.LatLng(position.coords.latitude , position.coords.longitude);
-
-//   var marker = new google.maps.Marker({
-//       position: latlng,
-//       map: map,
-//       icon: '/images/marker.png'
-//   });
-
-
-
-
-
-//  

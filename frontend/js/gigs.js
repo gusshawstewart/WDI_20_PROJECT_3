@@ -2,6 +2,8 @@ $(document).ready(function(){
   getGigs();
   // addGig(testGig2);
   // addGig(testGig2);
+
+
   })
 console.log("gig.js loaded");
 
@@ -37,7 +39,8 @@ function getGigs(){
 function createGig(){
   event.preventDefault();
   console.log('creating gig');
-  console.log('gigLocation')
+  console.log("gig input is" + gigInput.location);
+  
 
   console.log("THIS IS THE LOCATION:" + gigInput.location);
 

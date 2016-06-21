@@ -1,5 +1,8 @@
 $(document).ready(function(){
 
+
+  console.log("gig input is" + gigInput.location);
+  
   // var beepOne = $("#testMusic")[0];
   // $("#music-trigger")
   //   .mouseenter(function() {
