@@ -53,6 +53,7 @@ var gigsController = require('../controllers/gigsController');
     .get(gigsController.gigsShow)
     .patch(gigsController.gigsUpdate)
     .delete(gigsController.gigsDelete)
+    .post(gigsController.gigsAttend)
 
 
 module.exports = router;

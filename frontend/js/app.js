@@ -2,7 +2,7 @@ $(document).ready(function(){
 
 
   console.log("gig input is" + gigInput.location);
-  
+
   // var beepOne = $("#testMusic")[0];
   // $("#music-trigger")
   //   .mouseenter(function() {
@@ -24,6 +24,7 @@ $(document).ready(function(){
    $("body").on("click", ".updateGig", updateGig);
    $("body").on("click", ".createSession", createSession);
    $("body").on("click", ".delete-gig", removeGig);
+   $("body").on("click", ".attend-button", attendGig);
    // $("body").on("click", "#head-create", initMap);
 
 

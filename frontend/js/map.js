@@ -1,6 +1,6 @@
 
 var gigInput = {
-  location: null
+  coordinates: null
 }
 
 $(document).ready(function(){
@@ -33,9 +33,9 @@ $(document).ready(function(){
     geocoder.geocode({'address': address}, function(results, status) {
       if (status === google.maps.GeocoderStatus.OK) {
         resultsMap.setCenter(results[0].geometry.location);
-        console.log("INSIDE THE FUNCTION LOCATION" + results[0].geometry.location)
-        gigInput.location = results[0].geometry.location;
-
+        console.log("INSIDE THE FUNCTION LOCATION" + results[0].geometry.location.lat())
+        gigInput.coordinates = results[0].geometry.location;
+      
         var marker = new google.maps.Marker({
           map: resultsMap,
           position: results[0].geometry.location
@@ -87,30 +87,30 @@ searchBox.addListener('places_changed', function() {
   // For each place, get the icon, name and location.
   var bounds = new google.maps.LatLngBounds();
 
-  places.forEach(function(place) {
-    var icon = {
-      url: place.icon,
-      size: new google.maps.Size(71, 71),
-      origin: new google.maps.Point(0, 0),
-      anchor: new google.maps.Point(17, 34),
-      scaledSize: new google.maps.Size(25, 25)
-    };
+  // places.forEach(function(place) {
+  //   var icon = {
+  //     url: place.icon,
+  //     size: new google.maps.Size(71, 71),
+  //     origin: new google.maps.Point(0, 0),
+  //     anchor: new google.maps.Point(17, 34),
+  //     scaledSize: new google.maps.Size(25, 25)
+  //   };
 
-    // Create a marker for each place.
-    markers.push(new google.maps.Marker({
-      map: map,
-      icon: icon,
-      title: place.name,
-      position: place.geometry.location
-    }));
+  //   // Create a marker for each place.
+  //   markers.push(new google.maps.Marker({
+  //     map: map,
+  //     icon: icon,
+  //     title: place.name,
+  //     position: place.geometry.location
+  //   }));
 
-    if (place.geometry.viewport) {
-      // Only geocodes have viewport.
-      bounds.union(place.geometry.viewport);
-    } else {
-      bounds.extend(place.geometry.location);
-    }
-  });
+  //   if (place.geometry.viewport) {
+  //     // Only geocodes have viewport.
+  //     bounds.union(place.geometry.viewport);
+  //   } else {
+  //     bounds.extend(place.geometry.location);
+  //   }
+  // });
   map.fitBounds(bounds);
 });
 

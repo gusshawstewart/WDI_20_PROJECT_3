@@ -39,10 +39,11 @@ function getGigs(){
 function createGig(){
   event.preventDefault();
   console.log('creating gig');
-  console.log("gig input is" + gigInput.location);
+  console.log("gig LAT input is" + gigInput.coordinates.lat);
   
 
-  console.log("THIS IS THE LOCATION:" + gigInput.location);
+  console.log("THIS IS THE LOCATION:" + gigInput.coordinates);
+  console.log("THIS IS THE TYPE OF FILE:" + typeof gigInput.coordinates);
 
 $.ajax({
   url:'http://localhost:3000/gigs',
@@ -50,10 +51,13 @@ $.ajax({
   data: { gig: {
     "title": $("input#gig-title").val(),
     "description": $("input#gig-description").val(),
+    "lat": gigInput.coordinates.lat(), 
+    "lng": gigInput.coordinates.lng(), 
     "time": $("input#gig-time").val(),
     "cost": $("input#gig-cost").val()
   }}
 }).done(function(data){
+  console.log("gig input iNSIDE is"  + gigInput.coordinates);
   addGig(data);
   $("input#gig-title").val(null),
   $("input#gig-description").val(null),
@@ -82,7 +86,6 @@ function addGig(gig){
   $("#gigs-side-listing").prepend(gigIndex)
 }
 
-
 // SHOW GIG
 
 function showGig(){
@@ -97,7 +100,8 @@ function showGig(){
     "<li>" + gig.description + "</li>" +
     "<li>Time: " + gig.time + "</li>" +
     "<li>Cost: " + gig.cost + "</li>" +
-    "<br><a data-id='" + gig._id + "' data-dismiss='modal' class='delete-gig' href='#'>Delete</a> |  <a href='#' data-dismiss='modal' data-toggle='modal' data-target='#editGig' class='edit-gig' data-id='"+gig._id+"'>Edit</a></div>";
+    "<br><a data-id='" + gig._id + "' data-dismiss='modal' class='delete-gig' href='#'>Delete</a> |  <a href='#' data-dismiss='modal' data-toggle='modal' data-target='#editGig' class='edit-gig' data-id='"+gig._id+"'>Edit</a></div>" +
+    "<a data-id='" + gig._id + "' data-dismiss='modal' class='attend-button' href='#'>Attend</a>"
 
     $('#showgig-modal').prepend(gigShow);
   });
@@ -160,5 +164,28 @@ function removeGig(){
 
     location.reload();
   }
+
+
+//ATTENDING A GIG
+
+
+var attendGig = function(){
+event.preventDefault();
+console.log('attend gig');
+
+$.ajax({
+   type: 'post',
+   url: 'http://localhost:3000/gigs/' + $(this).data().id,
+ }).done(function(data){
+   // not ideal
+   location.reload();
+ });
+
+};
+
+
+
+
+
 
 

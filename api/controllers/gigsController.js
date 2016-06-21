@@ -1,4 +1,9 @@
 var Gig  = require("../models/gig");
+var authenticationController = require('../controllers/authentication');
+var Gig  = require("../models/gig");
+var jwtDecode = require('jwt-decode');
+var jwt    = require('jsonwebtoken');
+var secret = require('../config/config').secret;
 
 
 function gigsIndex(req, res){
@@ -12,7 +17,6 @@ function gigsIndex(req, res){
 
 function gigsCreate(req, res){
   var gig = new Gig(req.body.gig);
-
   gig.save(function(err, gig) {
     if (err) return res.status(500).send(err);
 
@@ -54,10 +58,18 @@ function gigsDelete(req, res){
   })
 }
 
+
+function gigsAttend(req, res){
+
+console.log("reached attending function");
+}
+
+
 module.exports = {
   gigsIndex:  gigsIndex,
   gigsCreate: gigsCreate,
   gigsShow:   gigsShow,
   gigsUpdate: gigsUpdate,
-  gigsDelete: gigsDelete
+  gigsDelete: gigsDelete,
+  gigsAttend: gigsAttend,
 }
