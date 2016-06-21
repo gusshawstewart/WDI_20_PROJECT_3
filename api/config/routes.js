@@ -51,11 +51,16 @@ var gigsController = require('../controllers/gigsController');
     .get(gigsController.gigsIndex)
     .post(gigsController.gigsCreate)
 
+  router.route('/gigs/attend/:id')  
+    .post(gigsController.gigsAttend)
+    .patch(gigsController.gigsUnAttend)
+
   router.route('/gigs/:id') 
     .get(gigsController.gigsShow)
     .patch(gigsController.gigsUpdate)
     .delete(gigsController.gigsDelete)
-    .post(gigsController.gigsAttend)
+
+
 
 
 module.exports = router;

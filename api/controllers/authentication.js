@@ -15,11 +15,6 @@ function login(req, res) {
     var token   = jwt.sign(payload, secret, {expiresIn: 60*60*24 });
 
 
-    // token = req.headers.authorisation;
-    // console.log(token);
-    //    var decoded = jwtDecode(token);
-    //    console.log(decoded);
-
     return res.status(200).json({ message: "Login successful", user: user , token: token });
   });
 

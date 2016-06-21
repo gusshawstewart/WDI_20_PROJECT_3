@@ -87,46 +87,43 @@ function gigsDelete(req, res){
 }
 
 function gigsAttend(req, res){
-  var gigId = req.params.id;
+  
   Gig.findById(req.params.id, function(err, gig) {
     if (err) return res.status(500).send(err);
     if (!gig) return res.status(404).send(err);
-
+    
+    var gigId = gig.id;
     var token = req.headers.authorisation;
     var decoded = jwtDecode(token);
+    var user_id = decoded._id
 
-    var _id = decoded._id
-    User.findByIdAndUpdate(_id, {$push: { attending_gigs: gigId }}, {new: true}, function(err, user) {
+    User.findByIdAndUpdate(user_id, {$push: { attending_gigs: gigId }}, {new: true}, function(err, user) {
       // console.log(user);
       res.status(200).send(gig);
     });
   });
-
-  // console.log("ATTENDING");
 }
 
-//   function unattendGig(req, res){
-//     var id = req.params.id;
-//     Gig.findById(req.params.id, function(err, gig) {
-//       if (err) return res.status(500).send(err);
-//       if (!gig) return res.status(404).send(err);
+function gigsUnAttend(req, res){
+  Gig.findById(req.params.id, function(err, gig) {
+    if (err) return res.status(500).send(err);
+    if (!gig) return res.status(404).send(err);
 
-//       token = req.headers.authorisation;
-//       var decoded = jwtDecode(token);
+    var gigId = gig.id;
+    var token = req.headers.authorisation;
+    var decoded = jwtDecode(token);
+    var user_id = decoded._id
+    console.log(user_id);
 
-//       User.findById({_id: decoded._id}, function(err, user){
-
-//         var gigIndex = user.attending_gigs.indexOf(gig);
-//         if (index > -1) {
-//             array.splice(gigIndex, 1);
-//         }
-
-//         res.status(200).send(gig);
-//       });
-    
-//     });
-
-// }
+    User.findByIdAndUpdate(user_id, {$pull: { "attending_gigs":gigId }},  
+         function(err) {
+          console.log
+          res.status(200).send(gig);
+        });
+  
+  });
+  console.log("UNATTEND <<<<<<<<<< WORKING");
+}
 
 module.exports = {
   gigsIndex:  gigsIndex,
@@ -134,5 +131,6 @@ module.exports = {
   gigsShow:   gigsShow,
   gigsUpdate: gigsUpdate,
   gigsDelete: gigsDelete,
-  gigsAttend: gigsAttend
+  gigsAttend: gigsAttend,
+  gigsUnAttend: gigsUnAttend
 }
