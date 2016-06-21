@@ -7,29 +7,47 @@ var secret = require('../config/config').secret;
 
 
 function gigsIndex(req, res){
+  res.userid = 1
+  console.log(res.userid);
 
-  console.log("HERE IS THE OONE" + req.query.latitude);
+  // console.log("HERE IS THE OONE" + req.query.latitude);
 
   // Gig.geoNear([1,3], { maxDistance : 5, spherical : true }, function(err, results, stats) {
   //    console.log(results);
   // });
 
-
-
-  Gig.find({datetime: {$gt: Date.now()}}, function(err, gigs) {
-    if (err) return res.status(404).send(err);
-
-    res.status(200).send(gigs);
+  Gig.find(function(err, gigs) {
+    if(err) return res.status(500).json({ message: err });
+    return  res.status(200).send(gigs);
   });
+
+
+  // Gig.find({datetime: {$gt: Date.now()}}, function(err, gigs) {
+  //   if (err) return res.status(404).send(err);
+
+  //   res.status(200).send(gigs);
+  // });
 }
 
 function gigsCreate(req, res){
-  var gig = new Gig(req.body.gig);
-  gig.save(function(err, gig) {
-    if (err) return res.status(500).send(err);
+ var gig = new Gig(req.body.gig);
 
-    res.status(201).send(gig)
-  })
+ // var gigId = gig._id;
+ // var token = req.headers.authorisation;
+ // var decoded = jwtDecode(token);
+ // var _id = decoded._id;
+ // gig.owner = _id;
+
+ // User.findByIdAndUpdate(_id, {$push: { owned_gigs: gigId }}, {new: true}, function(err, user) {
+ // });
+
+
+ gig.save(function(err, gig) {
+   if (err) return res.status(500).send(err);
+   console.log(gig);
+   res.status(201).send(gig)
+ });
+
 }
 
 function gigsShow(req, res){
