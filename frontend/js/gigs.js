@@ -2,23 +2,23 @@ $(document).ready(function(){
   getGigs();
   // addGig(testGig2);
   // addGig(testGig2);
-  })
+})
 console.log("gig.js loaded");
 
 var testGig = 
 {
-image: "images/test-flyer.jpeg",
-title: "Test title",
-description: "Test description Lorem ipsum dolor sit amet, natoque habitasse ac vulputate suspendisse pellentesque, adipiscing laoreet risus ac wisi purus dignissim, nec dictum turpis amet augue, conubia sit cras eu quam posuere", 
-cost: "£7"
+  image: "images/test-flyer.jpeg",
+  title: "Test title",
+  description: "Test description Lorem ipsum dolor sit amet, natoque habitasse ac vulputate suspendisse pellentesque, adipiscing laoreet risus ac wisi purus dignissim, nec dictum turpis amet augue, conubia sit cras eu quam posuere", 
+  cost: "£7"
 }
 
 var testGig2 = 
 {
-image: "images/test-flyer.jpeg",
-title: "Test title2",
-description: "Test description2 Lorem ipsum dolor sit amet, natoque habitasse ac vulputate suspendisse pellentesque, adipiscing laoreet risus ac wisi purus dignissim, nec dictum turpis amet augue, conubia sit cras eu quam posuere", 
-cost: "£8"
+  image: "images/test-flyer.jpeg",
+  title: "Test title2",
+  description: "Test description2 Lorem ipsum dolor sit amet, natoque habitasse ac vulputate suspendisse pellentesque, adipiscing laoreet risus ac wisi purus dignissim, nec dictum turpis amet augue, conubia sit cras eu quam posuere", 
+  cost: "£8"
 }
 
 // GET ALL GIGS
@@ -42,22 +42,22 @@ function createGig(){
   // console.log("THIS IS THE LOCATION:" + gigInput.location);
 
 
-$.ajax({
-  url:'http://localhost:3000/gigs',
-  type:'post',
-  data: { gig: {
-    "title": $("input#gig-title").val(),
-    "description": $("input#gig-description").val(),
-    "time": $("input#gig-time").val(),
-    "cost": $("input#gig-cost").val()
-  }}
-}).done(function(data){
-  addGig(data);
-  $("input#gig-title").val(null),
-  $("input#gig-description").val(null),
-  $("input#gig-time").val(null),
-  $("input#gig-cost").val(null)
-});
+  $.ajax({
+    url:'http://localhost:3000/gigs',
+    type:'post',
+    data: { gig: {
+      "title": $("input#gig-title").val(),
+      "description": $("input#gig-description").val(),
+      "time": $("input#gig-time").val(),
+      "cost": $("input#gig-cost").val()
+    }}
+  }).done(function(data){
+    addGig(data);
+    $("input#gig-title").val(null),
+    $("input#gig-description").val(null),
+    $("input#gig-time").val(null),
+    $("input#gig-cost").val(null)
+  });
 
 }
 
@@ -97,7 +97,7 @@ function showGig(){
     "<li>Time: " + gig.time + "</li>" +
     "<li>Cost: " + gig.cost + "</li>" +
     "<br><a data-id='" + gig._id + "' data-dismiss='modal' class='delete-gig' href='#'>Delete</a> |  <a href='#' data-dismiss='modal' data-toggle='modal' data-target='#editGig' class='edit-gig' data-id='"+gig._id+"'>Edit</a>" +   "<a href='#' data-dismiss='modal' data-toggle='modal' data-target='#attendGig' class='attend-gig' data-id='"+gig._id+"'>Attend</a> |" +
-     "</div>";
+    "</div>";
 
     $('#showgig-modal').prepend(gigShow);
   });
@@ -107,18 +107,16 @@ function showGig(){
 // EDIT GIG
 
 function editGig(){
-<<<<<<< HEAD
+
   // console.log('editing a gig');
   // console.log('EDIT PASSED IS' + $(this).data().id);
-  $('#submitGigUpdate').attr('data-id', 1111); 
-=======
+  // $('#submitGigUpdate').attr('data-id', 1111); 
+
   console.log('editing a gig');
   console.log('EDIT PASSED IS' + $(this).data().id);
 
   $('#submitGigUpdate').attr('data-id', $(this).data().id); 
 
-
->>>>>>> 4d3dd12113750b1690f7ec1bd52525f64a5f80b8
   $.ajax({
     method: 'get',
     url: 'http://localhost:3000/gigs/'+$(this).data().id
@@ -138,17 +136,17 @@ function editGig(){
 var updateGig = function(){
   event.preventDefault();
   var gig = {gig : {
- "title": $("input#edit-gig-title").val(),
- "description": $("#edit-gig-description").html(),
+   "title": $("input#edit-gig-title").val(),
+   "description": $("#edit-gig-description").html(),
  // $("input#edit-datetimepicker2").val(gig.datetime),
  "cost": $("input#edit-gig-cost").val()
-  }};
-  $.ajax({
-    method: 'patch',
-    url: 'http://localhost:3000/gigs/'+$(this).data().id,
-    data: gig
-  }).done(function(data){
-    console.log('got to the done');
+}};
+$.ajax({
+  method: 'patch',
+  url: 'http://localhost:3000/gigs/'+$(this).data().id,
+  data: gig
+}).done(function(data){
+  console.log('got to the done');
     // not ideal
     location.reload();
   });
@@ -156,18 +154,22 @@ var updateGig = function(){
 
 
 var attendGig = function(){
-event.preventDefault();
-var attend({
-  users: {
-    "attending-gigs": $(".attend-gig").val(),
-  }});
-$.ajax({
+  event.preventDefault();
+  var attend = ({
+    users: {
+      "attending-gigs": $(".attend-gig").val(),
+    }
+  });
+
+  $.ajax({
     method: 'patch',
     url: 'http://localhost:3000/gigs/'+$(this).data().id,
     data: attend
   }).done(function(data){
     // not ideal
+  });
 }
+
 // REMOVE GIG
 
 function removeGig(){
@@ -179,8 +181,8 @@ function removeGig(){
   })
 
 
-    location.reload();
-  }
+  location.reload();
+}
 
 
 // var attendGig = function(){

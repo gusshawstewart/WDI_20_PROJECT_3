@@ -142,20 +142,24 @@ console.log("creating user");
 // );
 console.log("YYYYYYYY" + $("input#reg-passwordconfirmation").val());
 
+var formData = new FormData();
+  formData.append("email", $("input#reg-email").val())
+  formData.append("password", $("input#reg-password").val())
+  formData.append("passwordConfirmation", $("input#reg-passwordconfirmation").val())
+  formData.append("firstName", $("input#reg-firstname").val())
+  formData.append("lastName", $("input#reg-lastname").val())
+  formData.append("city", $("input#reg-city").val())
+  formData.append("country", $("select#reg-country").val())
+  formData.append("profile_photo", $('#reg-profilephoto')[0].files[0]);
+
 $.ajax({
   url:'http://localhost:3000/register',
   type:'post',
-  data: {
-    email: $("input#reg-email").val(),
-    password: $("input#reg-password").val(),
-    passwordConfirmation: $("input#reg-passwordconfirmation").val(),
-    firstName: $("input#reg-firstname").val(),
-    lastName: $("input#reg-lastname").val(),
-    city: $("input#reg-city").val(),
-    country: $("select#reg-country").val()
-  }
+  data: formData,
+  cache: false,
+  contentType: false,
+  processData: false,
 }).done(function(data) {
-  // addUser(data);
   console.log(data);
   $("input#reg-email").val(null),
   $("input#reg-password").val(null),

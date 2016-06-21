@@ -1,4 +1,5 @@
 var User = require('../models/user');
+var multer = require('multer');
 
 function usersIndex(req, res) {
 

@@ -3,7 +3,8 @@ var usersController          = require('../controllers/users');
 var authenticationController = require('../controllers/authentication');
 var jwt                      = require('jsonwebtoken');
 var secret                   = require('./config').secret;
-
+var multer                   = require('multer');
+var upload                   = multer({ dest: './uploads' })
 
 // Middleware function here
 function checkForToken(req, res, next){
@@ -37,7 +38,7 @@ router.route('/users/:id')
   // .post(usersController.unattend);
 
 router.post('/login', authenticationController.login);
-router.post('/register', authenticationController.register);
+router.post('/register', upload.single("profile_photo"), authenticationController.register);
 
 
 // GIGS

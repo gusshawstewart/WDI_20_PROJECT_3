@@ -47,6 +47,8 @@ userSchema.set('toJSON', {
 
 userSchema.virtual('password')
 .set(function(password) {
+
+  console.log(password, "*****************************")
     this._password = password;
     console.log("YOU WANT TO CHECK PASS" + this._passwordConfirmation);
     this.passwordHash = bcrypt.hashSync(this._password, bcrypt.genSaltSync(8));
