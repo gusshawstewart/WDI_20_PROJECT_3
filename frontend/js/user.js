@@ -94,31 +94,18 @@ function addUser(user){
 
 
 //check for login 
-// var token = window.localStorage.getItem('token');
-// if(token) {
-//  $.ajaxSetup({
-//    headers: {'Authorisation': 'Bearer ' + data.token }
-//  });
-// }
+
+var token = window.localStorage.getItem('token');
+if(token) {
+ $.ajaxSetup({
+   headers: {'Authorisation': 'Bearer ' + token }
+ });
+}
+
 
 function createSession(){
 event.preventDefault();
 console.log('creating session' + $('#login-email').val() + $('#login-password').val());
-console.log("EXPECTED EMAIL:" + $('#login-email').val());
-// console.log("EXPECTED PW:" $('#login-password').val()));
-
-// $.post("http://localhost:3000/login", {
-//   email: $('#login-email').val(),
-//   password: $('#login-password').val()
-//  },
-
-// function(data) {
-//   console.log("running");
-//    window.localStorage.setItem('token', data.token);
-//    $.ajaxSetup({
-//      headers: { 'Authorisation': 'Bearer ' + data.token }
-//    });    
-//   });
 
   $.post("http://localhost:3000/login", {
     email: $('#login-email').val(),

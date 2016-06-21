@@ -6,8 +6,9 @@ var secret = require('../config/config').secret;
 var User   = require('../models/user')
 
 
+
 function gigsIndex(req, res){
-  console.log("hello");
+
   Gig.find({}, function(err, gigs) {
     if (err) return res.status(404).send(err);
 
@@ -70,7 +71,6 @@ function gigsUpdate(req, res){
 
 function gigsDelete(req, res){
   var id = req.params.id;
-
   Gig.remove({ _id: id }, function(err) {
     if (err) return res.status(500).send(err);
     res.status(200)

@@ -7,6 +7,7 @@ $(document).ready(function(){
   //     beepOne.play();
   //   });
 
+
   // getUsers();
   
    $('body').on('click', '.edit-gig', editGig);
@@ -16,14 +17,16 @@ $(document).ready(function(){
    $("body").on("click", ".edit-user", editUser);
    $("body").on("click", ".createGig", createGig);
    $("body").on("click", ".createUser", createUser);
-   $("body").on("click", ".attend-gig", attendGig);
+   // $("body").on("click", ".attend-gig", attendGig);
    $("body").on("click", ".updateGig", updateGig);
    $("body").on("click", ".createSession", createSession);
+   $("body").on("click", ".delete-gig", removeGig);
+   // $("body").on("click", "#head-create", initMap);
 
 
+   // $("#user-index-button" ).on("click", toggleShowUsers);
   // $("#user-form-button" ).on("click", toggleUserForm);
-  // $("#user-index-button" ).on("click", toggleShowUsers);
-  // $("body").on("click", ".delete-gig", removeGig);
+
 
    // $('body').off('click', '.show-gig').on('click', '.show-gig', showGig);
 
