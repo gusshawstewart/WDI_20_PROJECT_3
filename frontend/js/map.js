@@ -1,8 +1,41 @@
 
 var gigInput = {
   coordinates: null,
-  map: null
+  map: null,
+  userPosition: null,
 }
+
+function calculateDistance(){
+
+Number.prototype.toRad = function() {
+   return this * Math.PI / 180;
+}
+
+var lat2 = 42.741; 
+var lon2 = -71.3161; 
+var lat1 = 42.806911; 
+var lon1 = -71.290611; 
+
+var R = 6371; // km 
+//has a problem with the .toRad() method below.
+var x1 = lat2-lat1;
+var dLat = x1.toRad();  
+var x2 = lon2-lon1;
+var dLon = x2.toRad();  
+var a = Math.sin(dLat/2) * Math.sin(dLat/2) + 
+                Math.cos(lat1.toRad()) * Math.cos(lat2.toRad()) * 
+                Math.sin(dLon/2) * Math.sin(dLon/2);  
+var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+var d = R * c; 
+
+alert(d);
+}
+
+
+
+
+
+
 
 $(document).ready(function(){
 
@@ -27,6 +60,9 @@ $(document).ready(function(){
     google.maps.event.trigger(inputMap, "resize");
     inputMap.setCenter(new google.maps.LatLng(51.506178,-0.088369)); 
   });
+
+
+// end of initMap
   }
 
 function geocodeAddress(geocoder, resultsMap) {
@@ -47,6 +83,12 @@ function geocodeAddress(geocoder, resultsMap) {
         alert('Geocode was not successful for the following reason: ' + status);
       }
     });
+
+
+
+
+
+
   }
 
 
@@ -82,6 +124,9 @@ map.addListener('bounds_changed', function() {
 var markers = [];
 // Listen for the event fired when the user selects a prediction and retrieve
 // more details for that place.
+
+//THIS IS AN IMPORTANT PART HERE BELOW, THIS IS WHERE WE ARE GOING TO GET THE USER LOCATION AND THEN DO THE GET GIGS AJAX REQUEST ON EVERY MAP INPUT!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 searchBox.addListener('places_changed', function() {
   var places = searchBox.getPlaces();
   if (places.length == 0) {
@@ -98,6 +143,11 @@ searchBox.addListener('places_changed', function() {
   var bounds = new google.maps.LatLngBounds();
 
   places.forEach(function(place) {
+
+    gigInput.userPosition = place.geometry.location
+    console.log("THIS IS THE COMPARED USER LOCATION" + gigInput.userPosition);
+    getGigs();
+
     var icon = {
       url: place.icon,
       size: new google.maps.Size(71, 71),

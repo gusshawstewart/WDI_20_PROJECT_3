@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  getGigs();
+  // getGigs();
 
   })
 console.log("gig.js loaded");
@@ -7,14 +7,26 @@ console.log("gig.js loaded");
 // GET ALL GIGS
 
 function getGigs(){
-  var ajax = $.get('http://localhost:3000/gigs')
-  .done(function(data){
+ 
+$.ajax({
+  url:'http://localhost:3000/gigs',
+  type:'get',
+  data: { 
+    latitude: gigInput.userPosition.lat(), 
+  }
+  }).done(function(data){
     $.each(data, function(index, gig){
-      addGig(gig);
-    });
+    addGig(gig);
   });
+});
 
-
+  // console.log("GIGSSS" + gigInput.userPosition);
+  // var ajax = $.get('http://localhost:3000/gigs')
+  // .done(function(data){
+  //   $.each(data, function(index, gig){
+  //     addGig(gig);
+  //   });
+  // });
 
 }
 

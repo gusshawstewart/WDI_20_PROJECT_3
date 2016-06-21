@@ -8,7 +8,15 @@ var secret = require('../config/config').secret;
 
 function gigsIndex(req, res){
 
-  Gig.find({}, function(err, gigs) {
+  console.log("HERE IS THE OONE" + req.query.latitude);
+
+  // Gig.geoNear([1,3], { maxDistance : 5, spherical : true }, function(err, results, stats) {
+  //    console.log(results);
+  // });
+
+
+
+  Gig.find({datetime: {$gt: Date.now()}}, function(err, gigs) {
     if (err) return res.status(404).send(err);
 
     res.status(200).send(gigs);

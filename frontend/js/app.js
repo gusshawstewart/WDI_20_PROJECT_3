@@ -1,6 +1,5 @@
 $(document).ready(function(){
 
-
   console.log("gig input is" + gigInput.location);
 
   // var beepOne = $("#testMusic")[0];
@@ -11,7 +10,6 @@ $(document).ready(function(){
   //   });
 
 
-  // getUsers();
    // $("form#new-user").on("submit", createUser);
    // $("form#new-gig").on("submit", createGig);
    $('body').on('click', '.edit-gig', editGig);
@@ -26,15 +24,6 @@ $(document).ready(function(){
    $("body").on("click", ".delete-gig", removeGig);
    $("body").on("click", ".attend-button", attendGig);
    // $("body").on("click", "#head-create", initMap);
-
-
-   // $("#user-index-button" ).on("click", toggleShowUsers);
-  // $("#user-form-button" ).on("click", toggleUserForm);
-
-
-   // $('body').off('click', '.show-gig').on('click', '.show-gig', showGig);
-
-  // $('body').on('click', '#addProject', toggleAddProject);
 });
 
 $(document).ready(function(){
