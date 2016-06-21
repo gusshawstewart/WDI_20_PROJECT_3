@@ -2,7 +2,6 @@ $(document).ready(function(){
   addGig(testGig);
   addGig(testGig2);
   addGig(testGig2);
-  showGig();
   })
 console.log("gig.js loaded");
 
@@ -41,6 +40,7 @@ cost: "£8"
 function createGig(){
   event.preventDefault();
   console.log('creating gig');
+<<<<<<< HEAD
 
 // $.ajax({
 //   url:'http://localhost:3000/gigs',
@@ -68,6 +68,35 @@ var testInputGig = {
 }
 console.log(testInputGig.title + testInputGig.description + testInputGig.time + testInputGig.cost);
 addGig(testInputGig);
+=======
+
+$.ajax({
+  url:'http://localhost:3000/gigs',
+  type:'post',
+  data: { gig: {
+    "title": $("input#gig-title").val(),
+    "description": $("input#gig-description").val(),
+    "time": $("input#gig-time").val(),
+    "cost": $("input#gig-cost").val()
+  }}
+}).done(function(data){
+  addGig(data);
+  // toggleUserForm();
+  $("input#gig-title").val(null),
+  $("input#gig-description").val(null),
+  $("input#gig-time").val(null),
+  $("input#gig-cost").val(null)
+});
+
+// var testInputGig = {
+//     "title": $("input#gig-title").val(),
+//     "description": $("#gig-description").val(),
+//     "time": $("input#datetimepicker2").val(),
+//     "cost": $("select#gig-cost").val()
+// }
+// console.log(testInputGig.title + testInputGig.description + testInputGig.time + testInputGig.cost);
+// addGig(testInputGig);
+>>>>>>> 1d05a0827bc780efc229c3070fc9a69fdbe6a2c4
 }
 
 
@@ -107,6 +136,7 @@ function removeGig(){
 // SHOW GIG
 
 function showGig(){
+
  $('#showgig-modal').empty();
  $.ajax({
    method: 'GET',
@@ -126,49 +156,45 @@ function showGig(){
 
    $('#showgig-modal').prepend(gigShow);
  });
+
 }
 
 // EDIT GIG
 
 function editGig(){
   console.log('editing a gig');
-  // $.ajax({
-  //   method: 'get',
-  //   url: 'http://localhost:3000/gigs/'+$(this).data().id
-  // }).done(function(user){
-  //   $("input#edit-name").val(user.name),
-  //   $("input#edit-github").val(user.github),
-  //   $("input#edit-bio").val(user.bio),
-  //   $("input#edit-portfolio").val(user.portfolio)
-  //   $('form#edit-user').slideDown()
-  // });
-  var gig = testGig;
+  console.log('EDIT PASSED IS' + $(this).data().id);
+  $('#submitGigUpdate').attr('data-id', 1111); 
+  $.ajax({
+    method: 'get',
+    url: 'http://localhost:3000/gigs/'+$(this).data().id
+  }).done(function(gig){
+    $("input#edit-gig-title").val(gig.title);
+    $("#edit-gig-description").html(gig.description);
+    // $("input#edit-datetimepicker2").val(gig.datetime),
+    $("input#edit-gig-cost").val(gig.cost);
+    // $('#submitGigUpdate').data('id', $(this).data().id);
+    // $('#edit-gig').on('submit', updateGig);
 
-  $("input#edit-gig-title").val(gig.title),
-  $("#edit-gig-description").html(gig.description),
-  // $("input#edit-datetimepicker2").val(gig.datetime),
-  $("input#edit-gig-cost").val(gig.cost)
-
-
-  $('#edit-gig').on('submit', updateGig);
+  });
 }
 
 var updateGig = function(){
   event.preventDefault();
-  var gig= {
- "title": $("input#edit-gig-title").val(gig.title),
- "description": $("#edit-gig-description").html(gig.description),
+  var gig = {gig : {
+ "title": $("input#edit-gig-title").val(),
+ "description": $("#edit-gig-description").html(),
  // $("input#edit-datetimepicker2").val(gig.datetime),
- "cost": $("input#edit-gig-cost").val(gig.cost)
-  };
-  // $.ajax({
-  //   method: 'patch',
-  //   url: 'http://localhost:3000/users/'+$(this).data().id,
-  //   data: user
-  // }).done(function(data){
-  //   // not ideal
-  //   location.reload();
-  // });
+ "cost": $("input#edit-gig-cost").val()
+  }};
+  $.ajax({
+    method: 'patch',
+    url: 'http://localhost:3000/gigs/'+$(this).data().id,
+    data: gig
+  }).done(function(data){
+    // not ideal
+    // location.reload();
+  });
 }
 
 var attendGig = function(){

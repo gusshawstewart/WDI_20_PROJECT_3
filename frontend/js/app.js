@@ -1,21 +1,25 @@
 $(document).ready(function(){
 
-  var beepOne = $("#testMusic")[0];
-  $("#music-trigger")
-    .mouseenter(function() {
-      console.log('audio');
-      beepOne.play();
-    });
+  // var beepOne = $("#testMusic")[0];
+  // $("#music-trigger")
+  //   .mouseenter(function() {
+  //     console.log('audio');
+  //     beepOne.play();
+  //   });
 
   // getUsers();
   
    $('body').on('click', '.edit-gig', editGig);
    $("form#login").on("submit", createSession);
    $("body").on("click", ".show-user", showUser);
+   $("body").on("click", ".show-gig", showGig);
    $("body").on("click", ".edit-user", editUser);
-   // $("body").on("click", ".createGig", createGig);
+   $("body").on("click", ".createGig", createGig);
    $("body").on("click", ".createUser", createUser);
    $("body").on("click", ".attend-gig", attendGig);
+   $("body").on("click", ".updateGig", updateGig);
+   $("body").on("click", ".createSession", createSession);
+
 
   // $("#user-form-button" ).on("click", toggleUserForm);
   // $("#user-index-button" ).on("click", toggleShowUsers);

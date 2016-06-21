@@ -15,9 +15,9 @@ var gig1 = new Gig({
  cost: "3",
  owner: "Bob of Bob",
  attending: "yes"
-})
+});
 
 gig1.save(function(err, gig) {
  if (err) return console.log(err);
  console.log("Gig saved! ", gig);
-})
+});

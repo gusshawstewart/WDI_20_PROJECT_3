@@ -28,11 +28,12 @@ function usersDelete(req, res) {
   });
 }
 
-// function usersFollow(req, res){
-//   User.findById(req.params.id, function(err, user) {
+
+
+// function unAttendGig(req, res){
+//   User.findById({id: token.id}, function(err, user) {
 //     if(err) return res.status(500).json({ message: err });
-//     return res.status(200).json({ user: user });
-//     // user.followers.push(followed_user);
+//     return res.status(200).json({ user: user });   
 //   });
 // }
 
@@ -51,6 +52,7 @@ module.exports = {
   show: usersShow,
   update: usersUpdate,
   delete: usersDelete
-  // follow: userFollow,
+  // attend: attendGig
+  // unattend: unAttendGig
   // unfollow: usersUnfollow
 };
