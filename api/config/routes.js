@@ -18,19 +18,23 @@ function checkForToken(req, res, next){
       req.user = user;
       next();
     });
+
 }
+
 
 // USERS
 // router.get('/users', checkForToken, usersController.index);
 router.get('/users', usersController.index);
+
+
 
 router.route('/users/:id')
   .all(checkForToken)
   .get(usersController.show)
   .put(usersController.update)
   .delete(usersController.delete)
-  .post(usersController.attend)
-  .post(usersController.unattend);
+  
+  // .post(usersController.unattend);
 
 router.post('/login', authenticationController.login);
 router.post('/register', authenticationController.register);
@@ -50,7 +54,8 @@ var gigsController = require('../controllers/gigsController');
   router.route('/gigs/:id') 
     .get(gigsController.gigsShow)
     .patch(gigsController.gigsUpdate)
-    .delete(gigsController.gigsDelete)
+    .delete(gigsController.gigsDelete);
+    // .post(gigsController.attend);
 
 
 module.exports = router;
