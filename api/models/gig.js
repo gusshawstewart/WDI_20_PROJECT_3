@@ -12,19 +12,23 @@ attending: [{type: mongoose.Schema.ObjectId, ref: 'User'}]
 
 });
 
-// gigSchema.pre('remove', function(next){
-//   this.model('User').remove({ attending_gigs: this._id}, next);
-// });
+gigSchema.pre('remove', function(next){
+    this.model('User').update(
+        {owned_gigs: this._id}, 
+        {$pull: {owned_gigs: this._id}}, 
+        {multi: true},
+        next
+    );
+});
 
-// Gig.pre('remove', function(next){
-//   this.model('User').remove({ owned_gigs: this._id}, next);
-// });
-
-// Person.pre('remove', function(next) {
-//     // Remove all the assignment docs that reference the removed person.
-//     this.model('Assignment').remove({ person: this._id }, next);
-// });
-
+gigSchema.pre('remove', function(next){
+    this.model('User').update(
+        {attending_gigs: this._id}, 
+        {$pull: {attending_gigs: this._id}}, 
+        {multi: true},
+        next
+    );
+});
 
 
 module.exports = mongoose.model('Gig', gigSchema);

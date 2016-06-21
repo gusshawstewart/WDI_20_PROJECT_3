@@ -61,27 +61,20 @@ function gigsUpdate(req, res){
 
 function gigsDelete(req, res){
 
-  // Gig.findById(req.params.id, function(err, gig) {
-
-  // var gigId = gig._id;
-  // var token = req.headers.authorisation;
-  // var decoded = jwtDecode(token);
-  // var user_id = decoded._id
-  // console.log(gigId);
-
-  // User.findByIdAndUpdate(user_id, {$pull: { "owned_gigs":gigId }},  
-  //      function(err) {
-  //       console.log
-  //       res.status(200).send(gig);
-  //     });
-
-  // });
-
   var id = req.params.id;
-  Gig.remove({ _id: id }, function(err) {
-    if (err) return res.status(500).send(err);
-    res.status(200)
+
+  gig = Gig.findById({ _id: id }, function(err, gig){
+
+    gig.remove({}, function(err) {
+      if (err) return res.status(500).send(err);
+      res.status(200)
+    });
+
   });
+
+ 
+
+// Gig.remove({ _id: id },
 
 }
 
