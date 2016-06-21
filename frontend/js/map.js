@@ -32,7 +32,6 @@ var d = R * c;
 alert(d);
 }
 
-
 $(document).ready(function(){
 
   initMap();

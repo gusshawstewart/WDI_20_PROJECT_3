@@ -9,7 +9,6 @@ $(document).ready(function(){
   //     beepOne.play();
   //   });
 
-
    // $("form#new-user").on("submit", createUser);
    // $("form#new-gig").on("submit", createGig);
    $('body').on('click', '.edit-gig', editGig);

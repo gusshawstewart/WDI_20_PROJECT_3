@@ -7,19 +7,46 @@ var secret = require('../config/config').secret;
 
 
 function gigsIndex(req, res){
-  res.userid = 1
-  console.log(res.userid);
 
-  // console.log("HERE IS THE OONE" + req.query.latitude);
 
-  // Gig.geoNear([1,3], { maxDistance : 5, spherical : true }, function(err, results, stats) {
-  //    console.log(results);
-  // });
+  function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+    var R = 6371; // Radius of the earth in km
+    var dLat = deg2rad(lat2-lat1);  // deg2rad below
+    var dLon = deg2rad(lon2-lon1); 
+    var a = 
+      Math.sin(dLat/2) * Math.sin(dLat/2) +
+      Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+      Math.sin(dLon/2) * Math.sin(dLon/2); 
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+    var d = R * c; // Distance in km
+    return d;
+  }
+
+  function deg2rad(deg) {
+    return deg * (Math.PI/180)
+  }
+
 
   Gig.find(function(err, gigs) {
     if(err) return res.status(500).json({ message: err });
+    
+    for (var i = gigs.length - 1; i >= 0; i--) {
+      
+      console.log(req.query.latitude);
+      console.log(req.query.longitude);
+      console.log("THE MOFO DISTANCE IS" + getDistanceFromLatLonInKm(req.query.latitude, req.query.longitude, gigs[i].lat, gigs[i].lng));
+
+
+
+
+    }
+    
     return  res.status(200).send(gigs);
   });
+
+
+ 
+
 
 
   // Gig.find({datetime: {$gt: Date.now()}}, function(err, gigs) {
