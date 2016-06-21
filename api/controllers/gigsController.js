@@ -27,20 +27,26 @@ function gigsIndex(req, res){
   }
 
 
-  Gig.find(function(err, gigs) {
+  Gig.find({datetime: {$gt: Date.now()}}, function(err, gigs) {
     if(err) return res.status(500).json({ message: err });
-    
+    var gigsToSort = []
+
     for (var i = gigs.length - 1; i >= 0; i--) {
       
       var distanceOfGig = getDistanceFromLatLonInKm(req.query.latitude, req.query.longitude, gigs[i].lat, gigs[i].lng);
-      var gigsToSort = []
+
       var gigDistanceFromUser = {gig: gigs[i], distance: distanceOfGig}
+      console.log("one is" + gigDistanceFromUser.distance)
       gigsToSort.push(gigDistanceFromUser);
-      console.log("YYYYY" + gigsToSort[0].distance + gigsToSort[0].gig.title);
-
-
 
     }
+
+    var sorted = gigsToSort.sort(
+         function(a, b) {
+             return a.distance - b.distance
+         }  
+     ) 
+    console.log(sorted);
     
     return  res.status(200).send(gigs);
   });

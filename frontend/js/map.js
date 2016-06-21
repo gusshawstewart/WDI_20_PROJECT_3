@@ -136,9 +136,11 @@ searchBox.addListener('places_changed', function() {
 
   places.forEach(function(place) {
 
-    gigInput.userLtd = place.geometry.location.ltd()
-    gigInput.userLng = place.geometry.location.lng()
+    console.log("PPPPP" + place.geometry.location.ltd())
 
+    // gigInput.userLtd = place.geometry.location.ltd
+    // gigInput.userLng = place.geometry.location.lng
+    // console.log("UUUUUU" + place.geometry.location.ltd())
     
     getGigs();
 
