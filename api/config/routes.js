@@ -29,7 +29,7 @@ router.get('/users', usersController.index);
 
 
 router.route('/users/:id')
-  .all(checkForToken)
+  // .all(checkForToken)
   .get(usersController.show)
   .put(usersController.update)
   .delete(usersController.delete)
@@ -54,8 +54,8 @@ var gigsController = require('../controllers/gigsController');
   router.route('/gigs/:id') 
     .get(gigsController.gigsShow)
     .patch(gigsController.gigsUpdate)
-    .delete(gigsController.gigsDelete);
-    // .post(gigsController.attend);
+    .delete(gigsController.gigsDelete)
+    .post(gigsController.gigsAttend)
 
 
 module.exports = router;

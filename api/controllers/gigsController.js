@@ -5,27 +5,52 @@ var jwt    = require('jsonwebtoken');
 var secret = require('../config/config').secret;
 var User   = require('../models/user')
 
-
 function gigsIndex(req, res){
-  console.log("hello");
+
   Gig.find({}, function(err, gigs) {
     if (err) return res.status(404).send(err);
-
     res.status(200).send(gigs);
   });
 }
 
+// THIS WILL MAKE THE LOGGED IN USER THE OWNER
 function gigsCreate(req, res){
   var gig = new Gig(req.body.gig);
 
   gig.save(function(err, gig) {
-    if (err) return res.status(500).send(err);
 
+    token = req.headers.authorisation;
+    var decoded = jwtDecode(token);
+    console.log(decoded);
+    var id = decoded.id
+    console.log(id);
+
+    User.findById({_id: decoded._id}, function(err, user){
+      // user.owned_gigs.push("TEST");
+      console.log("OWNER IS: " + user);
+
+    });
+
+    if (err) return res.status(500).send(err);
     res.status(201).send(gig)
-  })
+  });
 }
 
 function gigsShow(req, res){
+
+ console.log("req IIIIIS:" + req.params.id);
+ var id = req.params.id;
+ Gig.findById(req.params.id, function(err, gig) {
+   if (err) return res.status(500).send(err);
+   if (!gig) return res.status(404).send(err);
+
+   res.status(200).send(gig);
+ })
+}
+
+function gigsUpdate(req, res){
+  var id = req.params.id;
+
   console.log("req IIIIIS:" + req.params.id);
   var id = req.params.id;
   Gig.findById(req.params.id, function(err, gig) {
@@ -36,74 +61,81 @@ function gigsShow(req, res){
 
     token = req.headers.authorisation;
     var decoded = jwtDecode(token);
-    console.log(decoded._id);
+    console.log("DECODED: " + decoded);
   });
 }
 
-function gigsUpdate(req, res){
-  console.log("yo editing")
-  var id = req.params.id;
-  console.log("UPDATED REQ BODY IS" + req.body.gig)
+// function gigsUpdate(req, res){
+//   console.log("yo editing")
+//   var id = req.params.id;
+//   console.log("UPDATED REQ BODY IS" + req.body.gig)
 
-  Gig.findByIdAndUpdate({ _id: id }, req.body.gig, function(err, gig){
-    console.log(err);
-    if (err) return res.status(500).send(err);
-    if (!gig) return res.status(404).send(err);
+//   Gig.findByIdAndUpdate({ _id: id }, req.body.gig, function(err, gig){
+//     console.log(err);
+//     if (err) return res.status(500).send(err);
+//     if (!gig) return res.status(404).send(err);
 
-    res.status(200).send(gig);
-  })
-}
+//     res.status(200).send(gig);
+//   })
+// }
 
 function gigsDelete(req, res){
   var id = req.params.id;
-
   Gig.remove({ _id: id }, function(err) {
     if (err) return res.status(500).send(err);
     res.status(200)
   })
 }
 
-function attendGig(req, res){
+function gigsAttend(req, res){
   var id = req.params.id;
   Gig.findById(req.params.id, function(err, gig) {
     if (err) return res.status(500).send(err);
     if (!gig) return res.status(404).send(err);
 
     token = req.headers.authorisation;
+    console.log(token);
     var decoded = jwtDecode(token);
+    console.log(decoded);
 
     User.findById({_id: decoded._id}, function(err, user){
-
-      user.attending_gigs.push("TEST");
+      // console.log("GIG SHOULD BE PUSHED");
+      console.log(user);
+      // var pushedGigs = user.attending_gigs;
+      // console.log(pushedGigs);
+      // pushedGigs.push("TEST");
+      // console.log(pushedGigs);
       res.status(200).send(gig);
 
     });
   
   });
+
+  console.log("ATTENDING");
 }
 
-  function unattendGig(req, res){
-    var id = req.params.id;
-    Gig.findById(req.params.id, function(err, gig) {
-      if (err) return res.status(500).send(err);
-      if (!gig) return res.status(404).send(err);
+//   function unattendGig(req, res){
+//     var id = req.params.id;
+//     Gig.findById(req.params.id, function(err, gig) {
+//       if (err) return res.status(500).send(err);
+//       if (!gig) return res.status(404).send(err);
 
-      token = req.headers.authorisation;
-      var decoded = jwtDecode(token);
+//       token = req.headers.authorisation;
+//       var decoded = jwtDecode(token);
 
-      User.findById({_id: decoded._id}, function(err, user){
+//       User.findById({_id: decoded._id}, function(err, user){
 
-        var gigIndex = user.attending_gigs.indexOf(gig);
-        if (index > -1) {
-            array.splice(gigIndex, 1);
-        }
+//         var gigIndex = user.attending_gigs.indexOf(gig);
+//         if (index > -1) {
+//             array.splice(gigIndex, 1);
+//         }
 
-        res.status(200).send(gig);
-      });
+//         res.status(200).send(gig);
+//       });
     
-    });
+//     });
 
-}
+// }
 
 module.exports = {
   gigsIndex:  gigsIndex,
@@ -111,5 +143,5 @@ module.exports = {
   gigsShow:   gigsShow,
   gigsUpdate: gigsUpdate,
   gigsDelete: gigsDelete,
-  // attend: attendGig
+  gigsAttend: gigsAttend
 }

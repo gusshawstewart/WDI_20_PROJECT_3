@@ -12,6 +12,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+#search {
+  z-index: 1040 !important;
+}
 
 .shader {
   position: absolute;
@@ -136,6 +139,12 @@ li {
 
 #map-canvas {
   z-index: 0;
+}
+
+#new-gig .form-group {
+
+ margin: 0px;
+ padding: 20px;
 }
 
 /* Search bar */
@@ -303,4 +312,5 @@ padding: 10px;
 .modal-body {
   padding: 60px;
 }
+
 

@@ -1,8 +1,8 @@
 $(document).ready(function(){
   getGigs();
+
   // addGig(testGig);
-  // addGig(testGig2);
-  // addGig(testGig2);
+
   })
 console.log("gig.js loaded");
 
@@ -22,7 +22,6 @@ description: "Test description2 Lorem ipsum dolor sit amet, natoque habitasse ac
 cost: "£8"
 }
 
-
 // GET ALL GIGS
 
 function getGigs(){
@@ -36,11 +35,13 @@ function getGigs(){
 
 // CREATE GIG
 
-
-
 function createGig(){
   event.preventDefault();
   console.log('creating gig');
+  console.log('gigLocation')
+
+  // console.log("THIS IS THE LOCATION:" + gigInput.location);
+
 
 $.ajax({
   url:'http://localhost:3000/gigs',
@@ -53,23 +54,13 @@ $.ajax({
   }}
 }).done(function(data){
   addGig(data);
-  // toggleUserForm();
   $("input#gig-title").val(null),
   $("input#gig-description").val(null),
   $("input#gig-time").val(null),
   $("input#gig-cost").val(null)
 });
 
-// var testInputGig = {
-//     "title": $("input#gig-title").val(),
-//     "description": $("#gig-description").val(),
-//     "time": $("input#datetimepicker2").val(),
-//     "cost": $("select#gig-cost").val()
-// }
-// console.log(testInputGig.title + testInputGig.description + testInputGig.time + testInputGig.cost);
-// addGig(testInputGig);
 }
-
 
 // ADD A GIG TO PAGE
 
@@ -87,45 +78,29 @@ function addGig(gig){
   "</ul>" +
   "</tr> </td>"
 
-  // "<button id='edit-" + gig._id + "'>" + "Edit User</button>" +
-  // "<button id='delete-" + user._id + "'>" + "Delete User</button>" +
-
   $("#gigs-side-listing").prepend(gigIndex)
 }
 
-// REMOVE GIG
-
-function removeGig(){
-  event.preventDefault();
-  // $.ajax({
-  //   url:'http://localhost:3000/gigs/'+$(this).data().id,
-  //   type:'delete'
-  // });
-  $(this).parent().remove();
-}
 
 // SHOW GIG
 
 function showGig(){
-  $('#showgig-modal').empty();
-  $.ajax({
-    method: 'GET',
-    url: 'http://localhost:3000/gigs/'+ $(this).data().id
-  }).done(function(gig){
-    var gigShow =
-    "<li> <img src='" + gig.image + "'></li>" +
-    "<li>" + gig.title + "</li>" +
-    "<li>" + gig.description + "</li>" +
-    "<li>Time: " + gig.time + "</li>" +
-    "<li>Cost: " + gig.cost + "</li>" +
-    "<br>" + 
-      "<a data-id='"+gig._id+"' class='delete' href='#'>Delete</a> |" +
-      "<a href='#' data-dismiss='modal' data-toggle='modal' data-target='#editGig' class='edit-gig' data-id='"+gig._id+"'>Edit</a> |" +
-      "<a href='#' data-dismiss='modal' data-toggle='modal' data-target='#attendGig' class='attend-gig' data-id='"+gig._id+"'>Attend</a> |" +
-      "</div>";
+ $('#showgig-modal').empty();
+ $.ajax({
+   method: 'GET',
+   url: 'http://localhost:3000/gigs/'+ $(this).data().id
+ }).done(function(gig){
+   var gigShow =
+   "<li> <img src='" + gig.image + "'></li>" +
+   "<li>" + gig.title + "</li>" +
+   "<li>" + gig.description + "</li>" +
+   "<li>Time: " + gig.time + "</li>" +
+   "<li>Cost: " + gig.cost + "</li>" +
+   "<br><a data-id='" + gig._id + "' data-dismiss='modal' class='delete-gig' href='#'>Delete</a> |  <a href='#' data-dismiss='modal' data-toggle='modal' data-target='#editGig' class='edit-gig' data-id='"+gig._id+"'>Edit</a></div>" +
+   "<a data-id='" + gig._id + "' data-dismiss='modal' class='attend-button' href='#'>Attend</a>"
 
-    $('#showgig-modal').prepend(gigShow);
-  });
+   $('#showgig-modal').prepend(gigShow);
+ });
 }
 
 // EDIT GIG
@@ -133,7 +108,10 @@ function showGig(){
 function editGig(){
   console.log('editing a gig');
   console.log('EDIT PASSED IS' + $(this).data().id);
-  $('#submitGigUpdate').attr('data-id', 1111); 
+
+  $('#submitGigUpdate').attr('data-id', $(this).data().id); 
+
+
   $.ajax({
     method: 'get',
     url: 'http://localhost:3000/gigs/'+$(this).data().id
@@ -148,6 +126,8 @@ function editGig(){
   });
 }
 
+//UPDATE A GIG
+
 var updateGig = function(){
   event.preventDefault();
   var gig = {gig : {
@@ -161,15 +141,42 @@ var updateGig = function(){
     url: 'http://localhost:3000/gigs/'+$(this).data().id,
     data: gig
   }).done(function(data){
+    console.log('got to the done');
     // not ideal
-    // location.reload();
+    location.reload();
   });
 }
 
 
 
+// REMOVE GIG
+
+function removeGig(){
+  event.preventDefault();
+  console.log('removing gig');
+  $.ajax({
+    url:'http://localhost:3000/gigs/'+ $(this).data().id,
+    type:'delete'
+  })
+
+    location.reload();
+  }
 
 
+  //ATTENDING A GIG
 
 
+  var attendGig = function(){
+  event.preventDefault();
+  console.log('attend gig');
+
+  $.ajax({
+    type: 'post',
+    url: 'http://localhost:3000/gigs/' + $(this).data().id,
+  }).done(function(data){
+    // not ideal
+    location.reload();
+  });
+
+  };
 

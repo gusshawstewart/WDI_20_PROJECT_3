@@ -1,5 +1,48 @@
 $(document).ready(function(){
 
+  initMap();
+
+  var gigInput = {
+    location: null
+  }
+
+  function initMap() {  console.log('initialising map');
+
+    var map = new google.maps.Map(document.getElementById('maphere'), {
+      zoom: 8,
+      center: new google.maps.LatLng(51.506178,-0.088369)
+    });
+    var geocoder = new google.maps.Geocoder();
+
+    document.getElementById('submit-geocode').addEventListener('click', function() {
+      geocodeAddress(geocoder, map);
+    }
+    );
+
+  $("#submitGig").on("shown.bs.modal", function(e) {
+    console.log("MAP IS" + map)
+    google.maps.event.trigger(map, "resize");
+    map.setCenter(new google.maps.LatLng(51.506178,-0.088369)); 
+  });
+  }
+
+  function geocodeAddress(geocoder, resultsMap) {
+    var address = document.getElementById('address').value;
+    geocoder.geocode({'address': address}, function(results, status) {
+      if (status === google.maps.GeocoderStatus.OK) {
+        resultsMap.setCenter(results[0].geometry.location);
+        console.log("INSIDE THE FUNCTION LOCATION" + results[0].geometry.location)
+        gigInput.location = results[0].geometry.location;
+        var marker = new google.maps.Marker({
+          map: resultsMap,
+          position: results[0].geometry.location
+        });
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
+  }
+
 // initialise map
   var canvas = document.getElementById("map-canvas");
 
@@ -8,9 +51,8 @@ $(document).ready(function(){
     center: new google.maps.LatLng(51.506178,-0.088369),
     mapTypeId: google.maps.MapTypeId.ROADMAP,
         styles: [{"elementType":"geometry","stylers":[{"hue":"#ff4400"},{"saturation":-68},{"lightness":-4},{"gamma":0.72}]},{"featureType":"road","elementType":"labels.icon"},{"featureType":"landscape.man_made","elementType":"geometry","stylers":[{"hue":"#0077ff"},{"gamma":3.1}]},{"featureType":"water","stylers":[{"hue":"#00ccff"},{"gamma":0.44},{"saturation":-33}]},{"featureType":"poi.park","stylers":[{"hue":"#44ff00"},{"saturation":-23}]},{"featureType":"water","elementType":"labels.text.fill","stylers":[{"hue":"#007fff"},{"gamma":0.77},{"saturation":65},{"lightness":99}]},{"featureType":"water","elementType":"labels.text.stroke","stylers":[{"gamma":0.11},{"weight":5.6},{"saturation":99},{"hue":"#0091ff"},{"lightness":-86}]},{"featureType":"transit.line","elementType":"geometry","stylers":[{"lightness":-48},{"hue":"#ff5e00"},{"gamma":1.2},{"saturation":-23}]},{"featureType":"transit","elementType":"labels.text.stroke","stylers":[{"saturation":-64},{"hue":"#ff9100"},{"lightness":16},{"gamma":0.47},{"weight":2.7}]}]
-    
-
   }
+
 
 var map = new google.maps.Map(canvas , mapOptions);
 
@@ -71,27 +113,28 @@ searchBox.addListener('places_changed', function() {
 
 });
 
+
 // $.get("/cameras" , function(data){
 
-  // $(data.cameras).each(function(index, camera){
+//   $(data.cameras).each(function(index, camera){
 
-    // var latlng = new google.maps.LatLng(51.519170 , -0.101879);
+//     var latlng = new google.maps.LatLng(51.519170 , -0.101879);
 
-    // var marker = new google.maps.Marker({
-    //     position: latlng,
-    //     map: map
-    // });
+//     var marker = new google.maps.Marker({
+//         position: latlng,
+//         map: map
+//     });
 
-    // create the info window
-    // var infowindow = new google.maps.InfoWindow({
-    //     content: " gig example"
-    // });
+//     create the info window
+//     var infowindow = new google.maps.InfoWindow({
+//         content: " gig example"
+//     });
 
-    // google.maps.event.addListener(marker, 'click', function() {
-    //   infowindow.open(map, marker);
-    // });
+//     google.maps.event.addListener(marker, 'click', function() {
+//       infowindow.open(map, marker);
+//     });
 
-  // });
+//   });
 
 // });
 
@@ -116,8 +159,8 @@ searchBox.addListener('places_changed', function() {
 //       icon: '/images/marker.png'
 //   });
 
-// });
 
 
 
- 
+
+//  
