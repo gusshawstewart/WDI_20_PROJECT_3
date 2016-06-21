@@ -16,24 +16,23 @@ function gigsIndex(req, res){
 // THIS WILL MAKE THE LOGGED IN USER THE OWNER
 function gigsCreate(req, res){
   var gig = new Gig(req.body.gig);
+  var gigId = gig._id;
+  console.log(gigId);
+
+  var token = req.headers.authorisation;
+  var decoded = jwtDecode(token);
+
+  var _id = decoded._id
+  User.findByIdAndUpdate(_id, {$push: { owned_gigs: gigId }}, {new: true}, function(err, user) {
+
+    console.log(user);
+  });
 
   gig.save(function(err, gig) {
-
-    token = req.headers.authorisation;
-    var decoded = jwtDecode(token);
-    console.log(decoded);
-    var id = decoded.id
-    console.log(id);
-
-    User.findById({_id: decoded._id}, function(err, user){
-      // user.owned_gigs.push("TEST");
-      console.log("OWNER IS: " + user);
-
-    });
-
     if (err) return res.status(500).send(err);
     res.status(201).send(gig)
   });
+
 }
 
 function gigsShow(req, res){
@@ -88,30 +87,22 @@ function gigsDelete(req, res){
 }
 
 function gigsAttend(req, res){
-  var id = req.params.id;
+  var gigId = req.params.id;
   Gig.findById(req.params.id, function(err, gig) {
     if (err) return res.status(500).send(err);
     if (!gig) return res.status(404).send(err);
 
-    token = req.headers.authorisation;
-    console.log(token);
+    var token = req.headers.authorisation;
     var decoded = jwtDecode(token);
-    console.log(decoded);
 
-    User.findById({_id: decoded._id}, function(err, user){
-      // console.log("GIG SHOULD BE PUSHED");
-      console.log(user);
-      // var pushedGigs = user.attending_gigs;
-      // console.log(pushedGigs);
-      // pushedGigs.push("TEST");
-      // console.log(pushedGigs);
+    var _id = decoded._id
+    User.findByIdAndUpdate(_id, {$push: { attending_gigs: gigId }}, {new: true}, function(err, user) {
+      // console.log(user);
       res.status(200).send(gig);
-
     });
-  
   });
 
-  console.log("ATTENDING");
+  // console.log("ATTENDING");
 }
 
 //   function unattendGig(req, res){
