@@ -1,27 +1,8 @@
 $(document).ready(function(){
   getGigs();
-  // addGig(testGig2);
-  // addGig(testGig2);
-
 
   })
 console.log("gig.js loaded");
-
-var testGig = 
-{
-image: "images/test-flyer.jpeg",
-title: "Test title",
-description: "Test description Lorem ipsum dolor sit amet, natoque habitasse ac vulputate suspendisse pellentesque, adipiscing laoreet risus ac wisi purus dignissim, nec dictum turpis amet augue, conubia sit cras eu quam posuere", 
-cost: "£7"
-}
-
-var testGig2 = 
-{
-image: "images/test-flyer.jpeg",
-title: "Test title2",
-description: "Test description2 Lorem ipsum dolor sit amet, natoque habitasse ac vulputate suspendisse pellentesque, adipiscing laoreet risus ac wisi purus dignissim, nec dictum turpis amet augue, conubia sit cras eu quam posuere", 
-cost: "£8"
-}
 
 // GET ALL GIGS
 
@@ -32,6 +13,9 @@ function getGigs(){
       addGig(gig);
     });
   });
+
+
+
 }
 
 // CREATE GIG
@@ -84,6 +68,16 @@ function addGig(gig){
   "</tr> </td>"
 
   $("#gigs-side-listing").prepend(gigIndex)
+
+  // {lat: 51.506178, lng: -0.088369};
+
+  var currentLatLng = {lat: gig.lat, lng: gig.lng};
+  var marker = new google.maps.Marker({
+          position: currentLatLng,
+          map: gigInput.map
+      });
+
+
 }
 
 // SHOW GIG

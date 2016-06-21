@@ -1,6 +1,7 @@
 
 var gigInput = {
-  coordinates: null
+  coordinates: null,
+  map: null
 }
 
 $(document).ready(function(){
@@ -10,25 +11,25 @@ $(document).ready(function(){
 
   function initMap() {  console.log('initialising map');
 
-    var map = new google.maps.Map(document.getElementById('maphere'), {
+    var inputMap = new google.maps.Map(document.getElementById('maphere'), {
       zoom: 8,
       center: new google.maps.LatLng(51.506178,-0.088369)
     });
     var geocoder = new google.maps.Geocoder();
 
     document.getElementById('submit-geocode').addEventListener('click', function() {
-      geocodeAddress(geocoder, map);
+      geocodeAddress(geocoder, inputMap);
     }
     );
 
   $("#submitGig").on("shown.bs.modal", function(e) {
-    console.log("MAP IS" + map)
-    google.maps.event.trigger(map, "resize");
-    map.setCenter(new google.maps.LatLng(51.506178,-0.088369)); 
+    console.log("MAP IS" + inputMap)
+    google.maps.event.trigger(inputMap, "resize");
+    inputMap.setCenter(new google.maps.LatLng(51.506178,-0.088369)); 
   });
   }
 
-  function geocodeAddress(geocoder, resultsMap) {
+function geocodeAddress(geocoder, resultsMap) {
     var address = document.getElementById('address').value;
     geocoder.geocode({'address': address}, function(results, status) {
       if (status === google.maps.GeocoderStatus.OK) {
@@ -58,6 +59,7 @@ $(document).ready(function(){
 
 
 var map = new google.maps.Map(canvas , mapOptions);
+gigInput.map = map;
 
 // Create the search box and link it to the UI element.
 var input = document.getElementById('pac-input');
@@ -87,30 +89,31 @@ searchBox.addListener('places_changed', function() {
   // For each place, get the icon, name and location.
   var bounds = new google.maps.LatLngBounds();
 
-  // places.forEach(function(place) {
-  //   var icon = {
-  //     url: place.icon,
-  //     size: new google.maps.Size(71, 71),
-  //     origin: new google.maps.Point(0, 0),
-  //     anchor: new google.maps.Point(17, 34),
-  //     scaledSize: new google.maps.Size(25, 25)
-  //   };
+  places.forEach(function(place) {
+    var icon = {
+      url: place.icon,
+      size: new google.maps.Size(71, 71),
+      origin: new google.maps.Point(0, 0),
+      anchor: new google.maps.Point(17, 34),
+      scaledSize: new google.maps.Size(25, 25)
+    };
 
-  //   // Create a marker for each place.
-  //   markers.push(new google.maps.Marker({
-  //     map: map,
-  //     icon: icon,
-  //     title: place.name,
-  //     position: place.geometry.location
-  //   }));
+    // Create a marker for each place.
+    markers.push(new google.maps.Marker({
+      map: map,
+      icon: icon,
+      title: place.name,
+      position: place.geometry.location
+    }));
 
-  //   if (place.geometry.viewport) {
-  //     // Only geocodes have viewport.
-  //     bounds.union(place.geometry.viewport);
-  //   } else {
-  //     bounds.extend(place.geometry.location);
-  //   }
-  // });
+    if (place.geometry.viewport) {
+      // Only geocodes have viewport.
+      bounds.union(place.geometry.viewport);
+    } else {
+      bounds.extend(place.geometry.location);
+    }
+  });
+
   map.fitBounds(bounds);
 });
 
