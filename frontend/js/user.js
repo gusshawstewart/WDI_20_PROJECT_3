@@ -111,6 +111,7 @@ var token = window.localStorage.getItem('token');
 if(token) {
  $.ajaxSetup({
    headers: {'Authorisation': 'Bearer ' + token }
+
  });
 }
 
@@ -136,9 +137,6 @@ console.log('creating session' + $('#login-email').val() + $('#login-password').
    console.log('logged out');
  });
 
- // $.get("http://localhost:3000/api/users", function(users){
- //   console.log(users);
- // });
 
 
 function createUser(){
@@ -152,7 +150,6 @@ console.log("creating user");
 // $("input#reg-city").val(),
 // $("select#reg-country").val()
 // );
-console.log("YYYYYYYY" + $("input#reg-passwordconfirmation").val());
 
 $.ajax({
   url:'http://localhost:3000/register',

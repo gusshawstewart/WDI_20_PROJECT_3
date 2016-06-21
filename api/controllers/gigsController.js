@@ -1,9 +1,9 @@
 var authenticationController = require('../controllers/authentication');
-var Gig  = require("../models/gig");
-var jwtDecode = require('jwt-decode');
-var jwt    = require('jsonwebtoken');
-var secret = require('../config/config').secret;
-var User   = require('../models/user')
+var Gig                      = require("../models/gig");
+var jwtDecode                = require('jwt-decode');
+var jwt                      = require('jsonwebtoken');
+var secret                   = require('../config/config').secret;
+var User                     = require('../models/user');
 
 function gigsIndex(req, res){
 
@@ -35,14 +35,31 @@ function gigsCreate(req, res){
 
 function gigsShow(req, res){
 
- console.log("req IIIIIS:" + req.params.id);
- var id = req.params.id;
- Gig.findById(req.params.id, function(err, gig) {
-   if (err) return res.status(500).send(err);
-   if (!gig) return res.status(404).send(err);
+  // var token = req.headers.authorisation;
+  // var decoded = jwtDecode(token);
+  // var user_id = decoded._id;
 
-   res.status(200).send(gig);
- })
+  // var current_user = User.findById(user_id, function(err, user){
+  //     console.log(user._id);
+
+      var id = req.params.id;
+      Gig.findById(req.params.id, function(err, gig) {
+        if (err) return res.status(500).send(err);
+        if (!gig) return res.status(404).send(err);
+
+        // res.status(200).write(gig);
+        // res.end();
+
+        res.status(200).send(gig);
+
+        // res.status(200).send(user);
+      // });
+
+    });
+
+  
+
+
 }
 
 function gigsUpdate(req, res){
@@ -62,7 +79,6 @@ function gigsUpdate(req, res){
 function gigsDelete(req, res){
 
   var id = req.params.id;
-
   gig = Gig.findById({ _id: id }, function(err, gig){
 
     gig.remove({}, function(err) {
@@ -110,10 +126,8 @@ function gigsUnAttend(req, res){
 
     var gigId = gig.id;
     
-
     User.findByIdAndUpdate(user_id, {$pull: { "attending_gigs":gigId }},  
          function(err) {
-          console.log
           res.status(200).send(gig);
         });
 

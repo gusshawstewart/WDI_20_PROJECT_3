@@ -1,4 +1,9 @@
-var User = require('../models/user');
+var authenticationController = require('../controllers/authentication');
+var Gig                      = require("../models/gig");
+var jwtDecode                = require('jwt-decode');
+var jwt                      = require('jsonwebtoken');
+var secret                   = require('../config/config').secret;
+var User                     = require('../models/user');
 
 function usersIndex(req, res) {
 
@@ -30,6 +35,20 @@ function usersDelete(req, res) {
   });
 }
 
+function currentuser(req, res){
+
+  var token = req.headers.authorisation;
+  var decoded = jwtDecode(token);
+  var user_id = decoded._id;
+
+  User.findById(user_id, function(err, user){
+      console.log(user._id);
+
+    return res.status(200).json({ currentUser: user });
+
+  });
+}
+
 
 
 // function unAttendGig(req, res){
@@ -53,8 +72,6 @@ module.exports = {
   index: usersIndex,
   show: usersShow,
   update: usersUpdate,
-  delete: usersDelete
-  // attend: attendGig
-  // unattend: unAttendGig
-  // unfollow: usersUnfollow
+  delete: usersDelete,
+  currentuser: currentuser
 };

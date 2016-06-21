@@ -21,10 +21,10 @@ function checkForToken(req, res, next){
 
 }
 
-
 // USERS
 // router.get('/users', checkForToken, usersController.index);
 router.get('/users', usersController.index);
+router.get('/currentuser', usersController.currentuser);
 
 
 
