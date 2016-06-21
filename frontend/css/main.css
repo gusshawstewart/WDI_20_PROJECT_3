@@ -12,6 +12,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+#search {
+  z-index: 1040 !important;
+}
 
 .shader {
   position: absolute;
@@ -303,4 +306,5 @@ padding: 10px;
 .modal-body {
   padding: 60px;
 }
+
 

@@ -12,6 +12,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+#search {
+  z-index: 1040 !important;
+}
+
 .shader {
   position: absolute;
   z-index: 1;
@@ -143,4 +147,9 @@ button {
 
 .down {
   font-size: 30px;
+}
+
+#pac-input {
+  position: relative;
+  z-index: 100;
 }

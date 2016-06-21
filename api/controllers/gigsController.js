@@ -20,14 +20,14 @@ function gigsCreate(req, res){
 }
 
 function gigsShow(req, res){
-  var id = req.params.id;
+ console.log("req IIIIIS:" + req.params.id);
+ var id = req.params.id;
+ Gig.findById(req.params.id, function(err, gig) {
+   if (err) return res.status(500).send(err);
+   if (!gig) return res.status(404).send(err);
 
-  Gig.findById({ _id: id }).populate("title").exec(function(err, gig) {
-    if (err) return res.status(500).send(err);
-    if (!gig) return res.status(404).send(err);
-
-    res.status(200).send(gig);
-  })
+   res.status(200).send(gig);
+ })
 }
 
 function gigsUpdate(req, res){

@@ -125,7 +125,7 @@
 
      <div class="form-group">
        <label for="pwd-confirmation">Password confirmation:</label>
-       <input type="passwordConfirmation" class="form-control" name="passwordConfirmation" id="reg-passwordconfirmation" placeholder="Password confirmation">
+       <input type="password" class="form-control" name="passwordConfirmation" id="reg-passwordconfirmation" placeholder="Password confirmation">
      </div>
 
      <div class="form-group">
@@ -194,14 +194,14 @@
             <div class="form-group">
               <label for="email">Email:</label>
 
-              <input type="email" class="form-control" id="login-email" placeholder="Enter email">
+              <input type="email" class="form-control" id="login-email" name="email" placeholder="Enter email">
 
             </div>
 
             <div class="form-group">
               <label for="pwd">Password:</label>
 
-              <input type="password" class="form-control" id="login-password" placeholder="Enter password">
+              <input type="password" class="form-control" id="login-password" name="password" placeholder="Enter password">
 
             </div>
 
@@ -211,7 +211,7 @@
                 </div>
             </div>
             <div class="form-group">
-              <button type="submit" class="btn btn-default" >Submit</button> 
+              <button type="submit" class="btn btn-default createSession" >Submit</button> 
             </div>
           </form>
 
@@ -256,11 +256,9 @@
            </div>
 
            <div class="form-group">
-             <label for="pwd">Location:</label>
-             <br>
-            <input type="text" class="form-control" id="search" placeholder="Write the location">
+             <label for="title">Title:</label>
+             <input type="text" class="form-control" id="gig-title" placeholder="Title">
            </div>
-
 
            <div class="form-group" id='datetime'>
              <label for="datetimepicker2">Time:</label>
@@ -363,7 +361,7 @@
              </select>
            </div>
            <div class="form-group">
-             <button type="submit" class="btn btn-default" data-dismiss="modal">Submit</button> 
+             <button type="submit" id="submitGigUpdate" class="btn btn-default updateGig" data-dismiss="modal">Submit</button> 
            </div>
          </form>
        </div>
@@ -472,9 +470,62 @@
 <!-- End of Sign Up Modal -->
 
 <!-- GOGGLE MAP -->
-<input id="search" class="controls" type="text" placeholder="Search Box">
+<!-- <input id="search" class="controls" type="text" placeholder="Search Box"> -->
 <div id="map-canvas">
 </div>
+
+<!-- Start of gig modal -->
+<input id="search" class="controls" type="text" placeholder="Search Box">
+
+       <!-- ENTER A GIG FORM-->
+        <div class="container">
+
+         <form class="form-horizontal" role="form" id="new-gig">
+
+           <div class="form-group">
+             <label for="title">Title:</label>
+             <input type="text" class="form-control" id="gig-title" placeholder="Title">
+           </div>
+
+           <div class="form-group">
+             <label for="pwd">Description:</label>
+             <br>
+             <textarea rows="4" cols="50" name="comment" form="new-gig" id="gig-description"placeholder="Info about the gig..."></textarea>
+           </div>
+
+
+          <div class="form-group">
+        <input id="search"  type="text" placeholder="Search Box">
+        </div>
+
+
+           <div class="form-group" id='datetime'>
+             <label for="datetimepicker2">Time:</label>
+             <input type='text' class="form-control" id='datetimepicker2' />
+           </div>
+
+           <div class="form-group">
+             <label for="sel1">Select list:</label>
+             <select class="form-control" id="gig-cost">
+               <option>£1</option>
+               <option>£2</option>
+               <option>£3</option>
+               <option>£4</option>
+             </select>
+           </div>
+           <div class="form-group">
+             <button type="submit" class="btn btn-default createGig"  data-dismiss="modal">Submit</button> 
+           </div>
+         </form>
+
+         </div>
+       <!-- END OF GIG FORM-->
+
+
+      
+  
+    
+<!-- End of gig modal -->
 
 </section>
 </div>

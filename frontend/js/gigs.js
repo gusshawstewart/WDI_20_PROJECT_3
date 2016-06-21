@@ -107,30 +107,25 @@ function removeGig(){
 // SHOW GIG
 
 function showGig(){
-  // $.ajax({
-  //   method: 'GET',
-  //   url: 'http://localhost:3000/gigs/'+$(this).data().id
-  // }).done(function(gig){
-  //   var gigShow =
-  //   "<li> <img src='" + gig.image + "'></li>" +
-  //   "<li>" + gig.title + "</li>" +
-  //   "<li>" + gig.description + "</li>" +
-  //   "<li>Time: " + gig.time + "</li>" +
-  //   "<li>Cost: " + gig.cost + "</li>" +
+ $('#showgig-modal').empty();
+ $.ajax({
+   method: 'GET',
+   url: 'http://localhost:3000/gigs/'+ $(this).data().id
+ }).done(function(gig){
+   var gigShow =
+   "<li> <img src='" + gig.image + "'></li>" +
+   "<li>" + gig.title + "</li>" +
+   "<li>" + gig.description + "</li>" +
+   "<li>Time: " + gig.time + "</li>" +
+   "<li>Cost: " + gig.cost + "</li>" +
+   "<br>" + 
+     "<a data-id='"+gig._id+"' class='delete' href='#'>Delete</a> |" +
+     "<a href='#' data-dismiss='modal' data-toggle='modal' data-target='#editGig' class='edit-gig' data-id='"+gig._id+"'>Edit</a> |" +
+     "<a href='#' data-dismiss='modal' data-toggle='modal' data-target='#attendGig' class='attend-gig' data-id='"+gig._id+"'>Attend</a> |" +
+     "</div>";
 
-  //   $('#showgig-modal').prepend(gigShow);
-  // });
-  console.log('showGig');
-  var gig = testGig;
-  var gigShow =
-  "<li> <img src='" + gig.image + "'></li>" +
-  "<li>" + gig.title + "</li>" +
-  "<li>" + gig.description + "</li>" +
-  "<li>Time: " + gig.time + "</li>" +
-  "<li>Cost: " + gig.cost + "</li>" + 
-  "<br><a data-id='"+gig._id+"' class='delete' href='#'>Delete</a> |  <a href='#' data-dismiss='modal' data-toggle='modal' data-target='#editGig' class='edit-gig' data-id='"+gig._id+"'>Edit</a></div>";
-
-  $('#showgig-modal').prepend(gigShow);
+   $('#showgig-modal').prepend(gigShow);
+ });
 }
 
 // EDIT GIG
@@ -176,3 +171,18 @@ var updateGig = function(){
   // });
 }
 
+var attendGig = function(){
+event.preventDefault();
+var attend({
+  "users": $("attend-gig").val(gig.attending)
+});
+$.ajax({
+    method: 'patch',
+    url: 'http://localhost:3000/gigs/'+$(this).data().id,
+    data: user
+  }).done(function(data){
+    // not ideal
+    location.reload();
+  });
+
+}
