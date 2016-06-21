@@ -7,9 +7,6 @@ $(document).ready(function(){
   //     beepOne.play();
   //   });
 
-  
-
-
 
   // getUsers();
    // $("form#new-user").on("submit", createUser);

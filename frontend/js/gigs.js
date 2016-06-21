@@ -27,7 +27,6 @@ function getGigs(){
   var ajax = $.get('http://localhost:3000/gigs')
   .done(function(data){
     $.each(data, function(index, gig){
-      console.log(gig);
       addGig(gig);
     });
   });
@@ -38,6 +37,9 @@ function getGigs(){
 function createGig(){
   event.preventDefault();
   console.log('creating gig');
+  console.log('gigLocation')
+
+  console.log("THIS IS THE LOCATION:" + gigInput.location);
 
 $.ajax({
   url:'http://localhost:3000/gigs',
