@@ -17,16 +17,14 @@ function gigsIndex(req, res){
 function gigsCreate(req, res){
   var gig = new Gig(req.body.gig);
   var gigId = gig._id;
-  console.log(gigId);
-
   var token = req.headers.authorisation;
   var decoded = jwtDecode(token);
+  var _id = decoded._id;
+  gig.owner = _id;
 
-  var _id = decoded._id
   User.findByIdAndUpdate(_id, {$push: { owned_gigs: gigId }}, {new: true}, function(err, user) {
-
-    console.log(user);
   });
+
 
   gig.save(function(err, gig) {
     if (err) return res.status(500).send(err);
@@ -57,72 +55,76 @@ function gigsUpdate(req, res){
     if (!gig) return res.status(404).send(err);
 
     res.status(200).send(gig);
-
-    token = req.headers.authorisation;
-    var decoded = jwtDecode(token);
-    console.log("DECODED: " + decoded);
   });
 }
 
-// function gigsUpdate(req, res){
-//   console.log("yo editing")
-//   var id = req.params.id;
-//   console.log("UPDATED REQ BODY IS" + req.body.gig)
-
-//   Gig.findByIdAndUpdate({ _id: id }, req.body.gig, function(err, gig){
-//     console.log(err);
-//     if (err) return res.status(500).send(err);
-//     if (!gig) return res.status(404).send(err);
-
-//     res.status(200).send(gig);
-//   })
-// }
 
 function gigsDelete(req, res){
+
+  // Gig.findById(req.params.id, function(err, gig) {
+
+  // var gigId = gig._id;
+  // var token = req.headers.authorisation;
+  // var decoded = jwtDecode(token);
+  // var user_id = decoded._id
+  // console.log(gigId);
+
+  // User.findByIdAndUpdate(user_id, {$pull: { "owned_gigs":gigId }},  
+  //      function(err) {
+  //       console.log
+  //       res.status(200).send(gig);
+  //     });
+
+  // });
+
   var id = req.params.id;
   Gig.remove({ _id: id }, function(err) {
     if (err) return res.status(500).send(err);
     res.status(200)
-  })
+  });
+
 }
 
 function gigsAttend(req, res){
   
-  Gig.findById(req.params.id, function(err, gig) {
+  var token = req.headers.authorisation;
+  var decoded = jwtDecode(token);
+  var user_id = decoded._id
+
+  Gig.findByIdAndUpdate(req.params.id, {$push: { attending: user_id }}, {new: true},
+    function(err, gig) {
     if (err) return res.status(500).send(err);
     if (!gig) return res.status(404).send(err);
     
     var gigId = gig.id;
-    var token = req.headers.authorisation;
-    var decoded = jwtDecode(token);
-    var user_id = decoded._id
+    
 
     User.findByIdAndUpdate(user_id, {$push: { attending_gigs: gigId }}, {new: true}, function(err, user) {
-      // console.log(user);
       res.status(200).send(gig);
     });
   });
 }
 
 function gigsUnAttend(req, res){
-  Gig.findById(req.params.id, function(err, gig) {
+
+  var token = req.headers.authorisation;
+  var decoded = jwtDecode(token);
+  var user_id = decoded._id
+
+  Gig.findByIdAndUpdate(req.params.id, {$pull: { "attending":user_id }}, function(err, gig) {
     if (err) return res.status(500).send(err);
     if (!gig) return res.status(404).send(err);
 
     var gigId = gig.id;
-    var token = req.headers.authorisation;
-    var decoded = jwtDecode(token);
-    var user_id = decoded._id
-    console.log(user_id);
+    
 
     User.findByIdAndUpdate(user_id, {$pull: { "attending_gigs":gigId }},  
          function(err) {
           console.log
           res.status(200).send(gig);
         });
-  
+
   });
-  console.log("UNATTEND <<<<<<<<<< WORKING");
 }
 
 module.exports = {
