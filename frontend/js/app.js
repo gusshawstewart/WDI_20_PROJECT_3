@@ -17,7 +17,7 @@ $(document).ready(function(){
    $("body").on("click", ".edit-user", editUser);
    $("body").on("click", ".createGig", createGig);
    $("body").on("click", ".createUser", createUser);
-   $("body").on("click", ".attend-gig", attendGig);
+   // $("body").on("click", ".attend-gig", attendGig);
    $("body").on("click", ".updateGig", updateGig);
    $("body").on("click", ".createSession", createSession);
    $("body").on("click", ".delete-gig", removeGig);

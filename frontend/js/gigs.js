@@ -39,16 +39,7 @@ function createGig(){
   console.log('creating gig');
   console.log('gigLocation')
 
-  console.log("THIS IS THE LOCATION:" + gigInput.location);
-
-var testInputGig = {
-    "title": $("input#gig-title").val(),
-    "description": $("#gig-description").val(),
-    "time": $("input#datetimepicker2").val(),
-    "cost": $("select#gig-cost").val(),
-}
-console.log(testInputGig.title + testInputGig.description + testInputGig.time + testInputGig.cost);
-addGig(testInputGig);
+  // console.log("THIS IS THE LOCATION:" + gigInput.location);
 
 
 $.ajax({
@@ -171,19 +162,19 @@ function removeGig(){
   }
 
 
-var attendGig = function(){
-event.preventDefault();
-var attend({
-  "users": $("attend-gig").val(gig.attending)
-});
-$.ajax({
-    method: 'patch',
-    url: 'http://localhost:3000/gigs/'+$(this).data().id,
-    data: user
-  }).done(function(data){
-    // not ideal
-    location.reload();
-  });
+// var attendGig = function(){
+// event.preventDefault();
+// var attend({
+//   "users": $("attend-gig").val(gig.attending)
+// });
+// $.ajax({
+//     method: 'patch',
+//     url: 'http://localhost:3000/gigs/'+$(this).data().id,
+//     data: user
+//   }).done(function(data){
+//     // not ideal
+//     location.reload();
+//   });
 
-}
+// }
 
