@@ -63,47 +63,47 @@ function gigsDelete(req, res){
   })
 }
 
-// function attendGig(req, res){
-//   var id = req.params.id;
-//   Gig.findById(req.params.id, function(err, gig) {
-//     if (err) return res.status(500).send(err);
-//     if (!gig) return res.status(404).send(err);
+function attendGig(req, res){
+  var id = req.params.id;
+  Gig.findById(req.params.id, function(err, gig) {
+    if (err) return res.status(500).send(err);
+    if (!gig) return res.status(404).send(err);
 
-//     token = req.headers.authorisation;
-//     var decoded = jwtDecode(token);
+    token = req.headers.authorisation;
+    var decoded = jwtDecode(token);
 
-//     User.findById({_id: decoded._id}, function(err, user){
+    User.findById({_id: decoded._id}, function(err, user){
 
-//       user.attending_gigs.push("TEST");
-//       res.status(200).send(gig);
+      user.attending_gigs.push("TEST");
+      res.status(200).send(gig);
 
-//     });
+    });
   
-//   });
-// }
+  });
+}
 
-//   function unattendGig(req, res){
-//     var id = req.params.id;
-//     Gig.findById(req.params.id, function(err, gig) {
-//       if (err) return res.status(500).send(err);
-//       if (!gig) return res.status(404).send(err);
+  function unattendGig(req, res){
+    var id = req.params.id;
+    Gig.findById(req.params.id, function(err, gig) {
+      if (err) return res.status(500).send(err);
+      if (!gig) return res.status(404).send(err);
 
-//       token = req.headers.authorisation;
-//       var decoded = jwtDecode(token);
+      token = req.headers.authorisation;
+      var decoded = jwtDecode(token);
 
-//       User.findById({_id: decoded._id}, function(err, user){
+      User.findById({_id: decoded._id}, function(err, user){
 
-//         var gigIndex = user.attending_gigs.indexOf(gig);
-//         if (index > -1) {
-//             array.splice(gigIndex, 1);
-//         }
+        var gigIndex = user.attending_gigs.indexOf(gig);
+        if (index > -1) {
+            array.splice(gigIndex, 1);
+        }
 
-//         res.status(200).send(gig);
-//       });
+        res.status(200).send(gig);
+      });
     
-//     });
+    });
 
-// }
+}
 
 module.exports = {
   gigsIndex:  gigsIndex,
