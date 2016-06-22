@@ -19,7 +19,14 @@ function login(req, res) {
 }
 
 function register(req, res) {
-  User.create(req.body, function(err, user) {
+  console.log(req.file.path, "******************************");
+
+  var user = new User(req.body);
+  // PROFILE PHOTO UPLOADER PATH
+  user.profile_photo = req.file.path
+  user.save(function(err, user) {
+
+    console.log(user);
     console.log(err)
     if(err) return res.status(500).json({ message: err });
 
