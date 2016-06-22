@@ -10,6 +10,8 @@ navigator.geolocation.getCurrentPosition(function(position){
       icon: 'images/marker.png'
   });
 
+  markers.push(marker);
+
   var startCircle = new google.maps.Circle({
        strokeColor: 'grey',
        strokeOpacity: 0.8,
@@ -18,8 +20,9 @@ navigator.geolocation.getCurrentPosition(function(position){
        fillOpacity: 0.35,
        map: gigInput.map,
        center: latlng,
-       radius: 3000
+       radius: 4000
      });
+
   gigInput.circle = startCircle;
 
   }, function(err){console.log("failed" + err)}, {timeout: 5000});
@@ -53,24 +56,6 @@ $(document).ready(function(){
  
 $('.navmenu').offcanvas({toggle: true, autohide: false, disableScrolling: false, canvas: 'map-canvas'})
 
-// $('#burger').click(function(){
-//   $('#sidemenu').offcanvas('toggle');
-// })
-
-// $("#btn-create").click(function(e){
-//   e.preventDefault();
-//   showDiv('#create'); 
-// });
-
-// $("#btn-signup").click(function(e){
-//   e.preventDefault();
-//   showDiv('#register'); 
-// });
-
-// $("#btn-login").click(function(e){
-//   e.preventDefault();
-//   showDiv('#session'); 
-// });
 
 //SHOW THE RELEVANT DIV AND HIDE OTHERS
 
@@ -83,20 +68,6 @@ for (var i = 0; i < divArray.length; i++) {
   $(name).css('display', 'block');
 }
 }
-
-// function showDiv(name) {
-// var divArray = ['#create', '#register', '#login'];
-// // var toRemove = divArray.indexOf(name);
-// // divArray.splice(toRemove, 1);
-// for (var i = 0; i < divArray.length; i++) {
-//   $(divArray[i]).slideUp("fast");
-// }
-// setTimeout(function(){
-//   // $("#show").html(" ");
-//   // $("#projects").html(" ");
-//   $(name).()
-// }, 500);
-// }
 
 //Datepicker
 

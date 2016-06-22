@@ -6,6 +6,8 @@ var gigInput = {
   circle: null
 }
 
+var markers = []
+
 $(document).ready(function(){
   initMap();
 })
@@ -91,28 +93,47 @@ function geocodeAddress(geocoder, resultsMap) {
 
 //DRAGGING A MAP
 //**************
-        google.maps.event.addListener(map, 'dragend', function() {
-         
-         var newCenter = map.getCenter();
-         
-         gigInput.circle.setMap(null);
+  google.maps.event.addListener(map, 'dragend', function() {
 
-         var dragCircle = new google.maps.Circle({
-              strokeColor: 'grey',
-              strokeOpacity: 0.8,
-              strokeWeight: 2,
-              fillColor: 'rgba(0,255,127,0.5)',
-              fillOpacity: 0.35,
-              map: gigInput.map,
-              center: newCenter,
-              radius: 3000
-            });
+    var newCenter = map.getCenter();
 
-         gigInput.circle = dragCircle;
+    //set new center marker
+    markers.forEach(function(marker) {
+      marker.setMap(null);
+    });
+    
+    var marker = new google.maps.Marker({
+        position: newCenter,
+        map: gigInput.map,
+        icon: 'images/marker.png'
+    });
 
-         getGigs();
+    markers.push(marker);
 
-        });
+   //updating global object properties
+   gigInput.userLat = newCenter.lat()
+   gigInput.userLng = newCenter.lng()
+
+   gigInput.circle.setMap(null);
+
+   var dragCircle = new google.maps.Circle({
+        strokeColor: 'grey',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: 'rgba(0,255,127,0.5)',
+        fillOpacity: 0.35,
+        map: gigInput.map,
+        center: newCenter,
+        radius: 4000
+      });
+
+   gigInput.circle = dragCircle;
+
+   //updating frontend
+   $("#gigs-side-listing").empty();
+   getGigs();
+
+  });
 
 //SEARCH BOX EVENT LISTENER
 //*************************
@@ -127,12 +148,12 @@ searchBox.addListener('places_changed', function() {
   markers.forEach(function(marker) {
     marker.setMap(null);
   });
-  markers = [];
 
   // For each place, get the icon, name and location.
   var bounds = new google.maps.LatLngBounds();
   var place = places[0]
 
+  //updating global object properties
   gigInput.userLat = place.geometry.location.lat
   gigInput.userLng = place.geometry.location.lng
 
@@ -151,7 +172,7 @@ searchBox.addListener('places_changed', function() {
         map: gigInput.map,
         // center: new google.maps.LatLng(place.geometry.location),
         center: place.geometry.location,
-        radius: 3000
+        radius: 4000
       })
 
   gigInput.circle = searchCircle;

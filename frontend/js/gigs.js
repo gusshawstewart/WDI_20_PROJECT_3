@@ -62,12 +62,14 @@ $.ajax({
 function addGig(gig){
 
   //add marker to map
-
+     // Clear out the old markers.
+    
     var currentLatLng = {lat: gig.lat, lng: gig.lng};
     var marker = new google.maps.Marker({
             position: currentLatLng,
             map: gigInput.map
         });
+    markers.push(marker);
 
   // add map info window
     var infowindow = new google.maps.InfoWindow({
@@ -89,7 +91,7 @@ function addGig(gig){
   "<li> Description: " + gig.description + "</li>" +
   "<li> Cost: " + gig.cost + "</li>" +
   // "<a data-id='"+gig._id+"' class='show' href='#'>Show</a>" 
-  "<a href='#' data-toggle='modal' data-target='#showGig' data-id='" + gig._id + "' class='show-gig'>Show</a>" + "<button id='showOnMap'>show</button>"
+  "<a href='#' data-toggle='modal' data-target='#showGig' data-id='" + gig._id + "' class='show-gig'>Show</a>" +
   "</ul>" +
   "</tr> </td>"
 
