@@ -18,16 +18,7 @@ $('#reg-gigphoto').fileupload({
         }
     });
 
-// GET ALL GIGS
 
-function getGigs(){
-  var ajax = $.get('http://localhost:3000/gigs')
-  .done(function(data){
-    $.each(data, function(index, gig){
-      addGig(gig);
-    });
-  });
-}
 
 // CREATE GIG
 function createGig(){
@@ -198,29 +189,6 @@ $.ajax({
   });
 }
 
-
-
-var attendGig = function(){
-  event.preventDefault();
-  var attend = ({
-    users: {
-      "attending-gigs": $(".attend-gig").val(),
-    }
-  });
-
-  $.ajax({
-    method: 'patch',
-    url: 'http://localhost:3000/gigs/'+$(this).data().id,
-    data: attend
-  }).done(function(data){
-
-    location.reload();
-  });
-}
-
-
-
-
 // REMOVE GIG
 function removeGig(){
   event.preventDefault();
@@ -230,6 +198,7 @@ function removeGig(){
   })
     location.reload();
   }
+
 
 //ATTEND A GIG
 var attendGig = function(){
@@ -243,7 +212,6 @@ var attendGig = function(){
   });
 
 };
-
 //UN-ATTEND A GIG
 var UnAttendGig = function(){
   event.preventDefault();
@@ -257,5 +225,3 @@ var UnAttendGig = function(){
   });
 
 }
-
-

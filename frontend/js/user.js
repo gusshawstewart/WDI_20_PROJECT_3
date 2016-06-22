@@ -199,15 +199,15 @@ $.ajax({
   $("select#reg-country").val(null)
 });
 
-$.post("http://localhost:3000/login", {
-  email: $('#login-email').val(),
-  password: $('#login-password').val()
- }).done(function(data) {
-   window.localStorage.setItem('token', data.token);
-   $.ajaxSetup({
-     headers: { 'Authorisation': 'Bearer ' + data.token }
-   }); 
-});
+// $.post("http://localhost:3000/login", {
+//   email: $('#login-email').val(),
+//   password: $('#login-password').val()
+//  }).done(function(data) {
+//    window.localStorage.setItem('token', data.token);
+//    $.ajaxSetup({
+//      headers: { 'Authorisation': 'Bearer ' + data.token }
+//    }); 
+// });
 
 }
 

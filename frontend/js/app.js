@@ -24,16 +24,6 @@ $(document).ready(function(){
    $("body").on("click", ".createSession", createSession);
    $("body").on("click", ".delete-gig", removeGig);
 
-   // $("body").on("click", "#head-create", initMap);
-
-
-   // $("#user-index-button" ).on("click", toggleShowUsers);
-  // $("#user-form-button" ).on("click", toggleUserForm);
-
-
-   // $('body').off('click', '.show-gig').on('click', '.show-gig', showGig);
-
-  // $('body').on('click', '#addProject', toggleAddProject);
 });
 
 $(document).ready(function(){
