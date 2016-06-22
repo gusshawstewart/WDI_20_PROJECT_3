@@ -11,7 +11,6 @@ $(document).ready(function(){
     "</button>" +
     "<li><button type='button' class='btn' id='burger'> Sidebar </button></li>" +
     "<li><button type='button' class='btn' id='btn-create' data-toggle='modal' data-target='#submitGig'> Add new </button></li>" +
-    "<li><button type='button' class='btn show-user btn-create' id='btn-create' data-toggle='modal' data-target='#showUser'> Hello, Test User </button></li>" +
     "<li><button type='button' class='btn' id='btn-logout' data-toggle='modal' data-target='#logOut'> Log Out </button></li>" +
   "</ul>";
 
@@ -56,6 +55,11 @@ $(document).ready(function(){
 
       $('#navbar').prepend(navLoggedIn);
       $('.navLoggedOut').hide();
+
+      var ajax = $.get('http://localhost:3000/currentUser')
+       .done(function(user){
+        $('.navLoggedIn').prepend("<li><button type='button' class='btn show-user btn-create' id='btn-create' data-toggle='modal' data-target='#showUser'> Hello, " + user.currentUser.firstName + "</button></li>") 
+      });
 
     }else {
       $('#navbar').prepend(navLoggedOut);

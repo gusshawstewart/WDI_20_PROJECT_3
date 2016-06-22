@@ -4,7 +4,6 @@ var authenticationController = require('../controllers/authentication');
 var jwt                      = require('jsonwebtoken');
 var secret                   = require('./config').secret;
 
-
 // Middleware function here
 function checkForToken(req, res, next){
 

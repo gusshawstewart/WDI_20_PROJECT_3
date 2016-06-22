@@ -16,15 +16,14 @@ function gigsIndex(req, res){
 // THIS WILL MAKE THE LOGGED IN USER THE OWNER
 function gigsCreate(req, res){
   var gig = new Gig(req.body.gig);
+
   var gigId = gig._id;
   var token = req.headers.authorisation;
   var decoded = jwtDecode(token);
   var _id = decoded._id;
   gig.owner = _id;
 
-  User.findByIdAndUpdate(_id, {$push: { owned_gigs: gigId }}, {new: true}, function(err, user) {
-  });
-
+  User.findByIdAndUpdate(_id, {$push: { owned_gigs: gigId }}, {new: true}, function(err, user) {});
 
   gig.save(function(err, gig) {
     if (err) return res.status(500).send(err);
@@ -35,21 +34,14 @@ function gigsCreate(req, res){
 
 function gigsShow(req, res){
 
-  // var token = req.headers.authorisation;
-  // var decoded = jwtDecode(token);
-  // var user_id = decoded._id;
+  var id = req.params.id;
+  Gig.findById(req.params.id, function(err, gig) {
+    if (err) return res.status(500).send(err);
+    if (!gig) return res.status(404).send(err);
 
-  // var current_user = User.findById(user_id, function(err, user){
-  //     console.log(user._id);
+    res.status(200).send(gig);
 
-      var id = req.params.id;
-      Gig.findById(req.params.id, function(err, gig) {
-        if (err) return res.status(500).send(err);
-        if (!gig) return res.status(404).send(err);
-
-        res.status(200).send(gig);
-
-    });
+  });
 
 }
 
@@ -66,7 +58,6 @@ function gigsUpdate(req, res){
   });
 }
 
-
 function gigsDelete(req, res){
 
   var id = req.params.id;
@@ -78,7 +69,6 @@ function gigsDelete(req, res){
     });
 
   });
-
 }
 
 function gigsAttend(req, res){
@@ -114,13 +104,11 @@ function gigsUnAttend(req, res){
     var gigId = gig.id;
     
     User.findByIdAndUpdate(user_id, {$pull: { "attending_gigs":gigId }},  
-         function(err) {
-          res.status(200).send(gig);
-        });
-
+     function(err) {
+      res.status(200).send(gig);
+     });
   });
 }
-
 
 module.exports = {
   gigsIndex:  gigsIndex,
