@@ -47,18 +47,9 @@ function gigsShow(req, res){
         if (err) return res.status(500).send(err);
         if (!gig) return res.status(404).send(err);
 
-        // res.status(200).write(gig);
-        // res.end();
-
         res.status(200).send(gig);
 
-        // res.status(200).send(user);
-      // });
-
     });
-
-  
-
 
 }
 
@@ -87,10 +78,6 @@ function gigsDelete(req, res){
     });
 
   });
-
- 
-
-// Gig.remove({ _id: id },
 
 }
 
@@ -133,6 +120,7 @@ function gigsUnAttend(req, res){
 
   });
 }
+
 
 module.exports = {
   gigsIndex:  gigsIndex,

@@ -78,48 +78,59 @@ function addGig(gig){
 function showGig(){
  $('#showgig-modal').empty();
 
-
-
  $.ajax({
    method: 'GET',
    url: 'http://localhost:3000/gigs/'+ $(this).data().id
  }).done(function(gig){
+
    var gigShow =
    "<li> <img src='" + gig.image + "'></li>" +
    "<li>" + gig.title + "</li>" +
    "<li>" + gig._id + "</li>" +
    "<li>" + gig.description + "</li>" +
    "<li>Time: " + gig.time + "</li>" +
-   "<li>Cost: " + gig.cost + "</li>" +
-   "<br><a data-id='" + gig._id + "' data-dismiss='modal' class='delete-gig' href='#'>Delete</a> |  <a href='#' data-dismiss='modal' data-toggle='modal' data-target='#editGig' class='edit-gig' data-id='"+gig._id+"'>Edit</a></div>" 
-   
+   "<li>Cost: " + gig.cost + "</li>";
 
-   // "<a data-id='" + gig._id + "' data-dismiss='modal' class='attend-button buttons' href='#'>Attend</a>" +
-   // "<a data-id='" + gig._id + "' data-dismiss='modal' class='unattend-button buttons' href='#'>Not attending</a>"
+   var gigEditDelete =  
+   "<br><a data-id='" + gig._id + "' data-dismiss='modal' class='delete-gig' href='#'>Delete</a> | "+ 
+   "<a href='#' data-dismiss='modal' data-toggle='modal' data-target='#editGig' class='edit-gig' data-id='"+gig._id+"'>Edit</a></div>";
+
+   var gigAttending = 
+   "<a data-id='" + gig._id + "' data-dismiss='modal' class='unattend-button buttons' href='#'>Not attending</a>";
+
+   var gigNotAttending = 
+   "<a data-id='" + gig._id + "' data-dismiss='modal' class='attend-button buttons' href='#'>Attend</a>";
+   // "<br><a data-id='" + gig._id + "' data-dismiss='modal' class='delete-gig' href='#'>Delete</a> |  <a href='#' data-dismiss='modal' data-toggle='modal' data-target='#editGig' class='edit-gig' data-id='"+gig._id+"'>Edit</a></div>" 
 
    $('#showgig-modal').prepend(gigShow);
 
-     var ajax = $.get('http://localhost:3000/currentuser')
+     var ajax = $.get('http://localhost:3000/currentUser')
       .done(function(user){
-        // console.log(user);
        $('#showgig-modal').append("<li>USER: " + user.currentUser._id + "</li>");
      
-     toggleAttend();
+      toggleAttend();
+      toggleEdit();
 
        function toggleAttend(){
         var gigArray = gig.attending;
-        console.log("GIGARRAY" + gigArray);
         var currentUser = user.currentUser._id
-        console.log(currentUser);
-        if($.inArray(user.currentUser._id, gigArray) != -1){
-          $('#showgig-modal').append("<a data-id='" + gig._id + "' data-dismiss='modal' class='unattend-button buttons' href='#'>Not attending</a>");
-         }else{
-          $('#showgig-modal').append("<a data-id='" + gig._id + "' data-dismiss='modal' class='attend-button buttons' href='#'>Attend</a>");
-         }
-
+          if($.inArray(currentUser, gigArray) != -1){
+            $('#showgig-modal').append(gigAttending);
+           }else{
+            $('#showgig-modal').append(gigNotAttending);
+           }
        }
 
-       });
+// IF OWNER, ADD EDIT AND DELETE BUTTONS
+      function toggleEdit(){
+        var gigOwner = gig.owner;
+        var currentUser = user.currentUser._id;
+          if(gigOwner == currentUser){
+            $('#showgig-modal').append(gigEditDelete);
+          }
+      }
+
+    });
 
  });
 }
@@ -128,11 +139,7 @@ function showGig(){
 // EDIT GIG
 
 function editGig(){
-  console.log('editing a gig');
-  console.log('EDIT PASSED IS' + $(this).data().id);
-
   $('#submitGigUpdate').attr('data-id', $(this).data().id); 
-
 
   $.ajax({
     method: 'get',
@@ -163,8 +170,6 @@ var updateGig = function(){
     url: 'http://localhost:3000/gigs/'+$(this).data().id,
     data: gig
   }).done(function(data){
-    console.log('got to the done');
-    // not ideal
     location.reload();
   });
 }
@@ -173,29 +178,21 @@ var updateGig = function(){
 // REMOVE GIG
 function removeGig(){
   event.preventDefault();
-  console.log('removing gig');
   $.ajax({
     url:'http://localhost:3000/gigs/'+ $(this).data().id,
     type:'delete'
   })
-
     location.reload();
   }
 
 //ATTENDING A GIG
 var attendGig = function(){
   event.preventDefault();
-  console.log('attend gig');
 
   $.ajax({
     type: 'post',
     url: 'http://localhost:3000/gigs/attend/' + $(this).data().id,
   }).done(function(data){
-    toggleAttending();
-
-    $('.attend-button')[0].style.display = "none"
-
-    // not ideal
     location.reload();
   });
 
@@ -215,12 +212,10 @@ var UnAttendGig = function(){
 
 };
 
-
 function getGigs(){
 
-  var ajax = $.get('http://localhost:3000/currentuser')
+  var ajax = $.get('http://localhost:3000/currentUser')
    .done(function(user){
-    console.log(user);
    });
 
   var ajax = $.get('http://localhost:3000/gigs')

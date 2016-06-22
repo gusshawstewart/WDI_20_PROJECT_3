@@ -24,21 +24,16 @@ function checkForToken(req, res, next){
 // USERS
 // router.get('/users', checkForToken, usersController.index);
 router.get('/users', usersController.index);
-router.get('/currentuser', usersController.currentuser);
-
-
+router.get('/currentUser', usersController.currentUser);
 
 router.route('/users/:id')
   // .all(checkForToken)
   .get(usersController.show)
   .put(usersController.update)
   .delete(usersController.delete)
-  
-  // .post(usersController.unattend);
 
 router.post('/login', authenticationController.login);
 router.post('/register', authenticationController.register);
-
 
 // GIGS
 

@@ -35,7 +35,7 @@ function usersDelete(req, res) {
   });
 }
 
-function currentuser(req, res){
+function currentUser(req, res){
 
   var token = req.headers.authorisation;
   var decoded = jwtDecode(token);
@@ -49,29 +49,10 @@ function currentuser(req, res){
   });
 }
 
-
-
-// function unAttendGig(req, res){
-//   User.findById({id: token.id}, function(err, user) {
-//     if(err) return res.status(500).json({ message: err });
-//     return res.status(200).json({ user: user });   
-//   });
-// }
-
-// function usersUnfollow(req, res){
-//   User.findById(req.params.id, function(err, user) {
-//     if(err) return res.status(500).json({ message: err });
-//     return res.status(200).json({ user: user });
-
-//     // user.following.splice(followed_user);
-//   });
-// }
-
-
 module.exports = {
   index: usersIndex,
   show: usersShow,
   update: usersUpdate,
   delete: usersDelete,
-  currentuser: currentuser
+  currentUser: currentUser 
 };
