@@ -29,24 +29,24 @@ $(document).ready(function(){
  
 $('.navmenu').offcanvas({toggle: true, autohide: false, disableScrolling: false, canvas: 'map-canvas'})
 
-$('#burger').click(function(){
-  $('#sidemenu').offcanvas('toggle');
-})
+// $('#burger').click(function(){
+//   $('#sidemenu').offcanvas('toggle');
+// })
 
-$("#btn-create").click(function(e){
-  e.preventDefault();
-  showDiv('#create'); 
-});
+// $("#btn-create").click(function(e){
+//   e.preventDefault();
+//   showDiv('#create'); 
+// });
 
-$("#btn-signup").click(function(e){
-  e.preventDefault();
-  showDiv('#register'); 
-});
+// $("#btn-signup").click(function(e){
+//   e.preventDefault();
+//   showDiv('#register'); 
+// });
 
-$("#btn-login").click(function(e){
-  e.preventDefault();
-  showDiv('#session'); 
-});
+// $("#btn-login").click(function(e){
+//   e.preventDefault();
+//   showDiv('#session'); 
+// });
 
 //SHOW THE RELEVANT DIV AND HIDE OTHERS
 

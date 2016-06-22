@@ -69,7 +69,27 @@ $.ajax({
 // ADD A GIG TO PAGE
 
 function addGig(gig){
-  console.log(gig);
+
+  //add marker to map
+
+    var currentLatLng = {lat: gig.lat, lng: gig.lng};
+    var marker = new google.maps.Marker({
+            position: currentLatLng,
+            map: gigInput.map
+        });
+
+  // add map info window
+    var infowindow = new google.maps.InfoWindow({
+        content: "<p>" + gig.title + "</p><hr><p>" + gig.description + "</p><hr><a href='#' data-toggle='modal' data-target='#showGig' data-id='" + gig._id + "' class='show-gig'>Show</a>"
+    });
+
+  //open info window on click
+    google.maps.event.addListener(marker, 'click', function() {
+      infowindow.open(gigInput.map, marker);
+    });
+
+
+
   var gigIndex =
   "<tr id='music-trigger'><td>" +
   "<ul id='gigs-side-listing'>" +
@@ -79,19 +99,23 @@ function addGig(gig){
   "<li> Description: " + gig.description + "</li>" +
   "<li> Cost: " + gig.cost + "</li>" +
   // "<a data-id='"+gig._id+"' class='show' href='#'>Show</a>" 
-  "<a href='#' data-toggle='modal' data-target='#showGig' data-id='" + gig._id + "' class='show-gig'>Show</a>" + 
+  "<a href='#' data-toggle='modal' data-target='#showGig' data-id='" + gig._id + "' class='show-gig'>Show</a>" + "<button id='showOnMap'>show</button>"
   "</ul>" +
   "</tr> </td>"
 
   $("#gigs-side-listing").prepend(gigIndex)
 
-  // {lat: 51.506178, lng: -0.088369};
 
-  var currentLatLng = {lat: gig.lat, lng: gig.lng};
-  var marker = new google.maps.Marker({
-          position: currentLatLng,
-          map: gigInput.map
-      });
+  $("#music-trigger")
+    .mouseenter(function() {
+     marker.setIcon('images/target-marker.png')
+
+      console.log('audio');
+    });
+
+    $("#music-trigger").mouseleave(function(){
+      marker.setIcon('images/marker.png')
+    });
 
 
 }

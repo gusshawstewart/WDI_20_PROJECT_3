@@ -17,7 +17,6 @@ function checkForToken(req, res, next){
       req.user = user;
       next();
     })
-
 }
 
 // USERS

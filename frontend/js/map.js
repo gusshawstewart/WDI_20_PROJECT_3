@@ -56,7 +56,6 @@ $(document).ready(function(){
     inputMap.setCenter(new google.maps.LatLng(51.506178,-0.088369)); 
   });
 
-
 // end of initMap
   }
 
@@ -78,16 +77,11 @@ function geocodeAddress(geocoder, resultsMap) {
         alert('Geocode was not successful for the following reason: ' + status);
       }
     });
-
-
-
   }
 
 
-
-
-
-// initialise map
+// GIG INDEX MAP
+// !!!!!!!!!!!!!
   var canvas = document.getElementById("map-canvas");
 
   var mapOptions = {
@@ -101,6 +95,7 @@ function geocodeAddress(geocoder, resultsMap) {
 
 
 var map = new google.maps.Map(canvas , mapOptions);
+//!!!assignment for future use of this map elsewhere
 gigInput.map = map;
 
 // Create the search box and link it to the UI element.
@@ -164,9 +159,35 @@ searchBox.addListener('places_changed', function() {
     } else {
       bounds.extend(place.geometry.location);
     }
+
+    //putting circle on map
+    var cityCircle = new google.maps.Circle({
+         strokeColor: 'grey',
+         strokeOpacity: 0.8,
+         strokeWeight: 2,
+         fillColor: 'rgba(0,255,127,0.5)',
+         fillOpacity: 0.35,
+         map: map,
+         center: place.geometry.location,
+         radius: 1000
+       });
+
   });
 
+//limiting google map zoom on search
+
+              
+               
+
+  map.initialZoom = true;
+
+
+//centering map after search
   map.fitBounds(bounds);
+  map.setZoom(14);
+
+
+
 });
 
 });
