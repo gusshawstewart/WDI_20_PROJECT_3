@@ -26,7 +26,7 @@ app.use(methodOverride(function(req, res){
 }));
 app.use(routes);
 
-  // configure upload middleware
+  // configure upload middleware for file upload
   upload.configure({
       uploadDir: __dirname + '/public/uploads',
       uploadUrl: '/uploads',

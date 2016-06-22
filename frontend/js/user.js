@@ -51,72 +51,10 @@ function showUser(){
       $('#showuser-modal').prepend(userShow);
     });
 
-  // }
-
-  // $.ajax({
-  //   method: 'GET',
-  //   url: 'http://localhost:3000/users/'+$(this).data().id
-  // }).done(function(user){
-  //   var userShow =
-  //   "<li> <img src='" + user.profile-pic + "'></li>" +
-  //   "<li>" + user.title + "</li>" +
-  //   "<li>" + user.description + "</li>" +
-  //   "<li>Time: " + user.time + "</li>" +
-  //   "<li>Cost: " + user.cost + "</li>" +
-
-  //   $('#showgig-modal').prepend(gigShow);
-  // });
+  }
 
 
 
-  // var testUser = 
-  // {
-  // email: "bob@bob",
-  // firstname: "Bob", 
-  // lastname: "Smith",
-  // profilePic: "images/user.jpg",
-  // city: "London",
-  // country: "United Kingdom"
-  // }
-  // console.log('showing user');
-  // $('#showuser-modal').empty();
-  // var user = testUser;
-  // var element =
-  // "<li> <img src='" + user.profilePic + "'></li>" +
-  // "<li>First Name: " + user.firstname + "</li>" +
-  // "<li>Last Name: " + user.lastname + "</li>" +
-  // "<li>City: " + user.city + "</li>" +
-  // "<li>Country: " + user.country + "</li>" + 
-  // "<br><a data-id='"+user._id+"' class='delete' href='#'>Delete</a> |  <a href='#' class='edit-user' data-dismiss='modal' data-toggle='modal' data-target='#edit-user' data-id='"+user._id+"'>Edit</a></div>";
-
-  // $('#showuser-modal').prepend(element);
-}
-
-
-// ADD A USER TO PAGE
-
-function addUser(user){
-
-  // var userIndex =
-  // "<li> <img src='" + gig.image + "'></li>" +
-  // "<li> Title: " + gig.title + "</li>" + 
-  // "<li> Description: " + gig.description + "</li>" +
-  // "<li> Cost: " + gig.cost + "</li>" +
-  // "<button id='show-" + gig._id + "'>" + "Show gig</button>"
-
-  // var user_show =
-  // "<li> <img src='" + user.image + "'></li>" +
-  // "<li>" + user.firstname + "</li>" +
-  // "<li>" + user.lastname + "</li>" +
-  // "<li>Time: " + user.time + "</li>" +
-  // "<li>Cost: " + gig.cost + "</li>" +
-
-  // "<button id='edit-" + gig._id + "'>" + "Edit User</button>" +
-  // "<button id='delete-" + user._id + "'>" + "Delete User</button>" +
-  // "</li>" 
-
-  // $("#gigs-side-listing").prepend(gigIndex)
-}
 
 
 //check for login 
@@ -144,28 +82,11 @@ console.log('creating session' + $('#login-email').val() + $('#login-password').
   });
 };
 
- //logout
- $('#logout').click(function(){
-   window.localStorage.removeItem('token');
-   console.log('logged out');
- });
-
- // $.get("http://localhost:3000/api/users", function(users){
- //   console.log(users);
- // });
-
 
 function createUser(){
 event.preventDefault();
 console.log("creating user");
-// console.log(
-// $("input#reg-email").val(),
-// $("input#reg-password").val(),
-// $("input#reg-firstname").val(),
-// $("input#reg-lastname").val(),
-// $("input#reg-city").val(),
-// $("select#reg-country").val()
-// );
+
 console.log("YYYYYYYY" + $("input#reg-passwordconfirmation").val());
 
 var formData = new FormData();
@@ -201,15 +122,6 @@ $.ajax({
 
 function editUser(){
 
-  var testUser = 
-  {
-  email: "bob@bob",
-  firstname: "Bob", 
-  lastname: "Smith",
-  profilePic: "images/user.jpeg",
-  city: "London",
-  country: "GB"
-  }
   
   console.log('editing a user');
   // $.ajax({
@@ -240,14 +152,14 @@ var updateUser = function(){
  "city": $("input#edit-city").val(), 
  "country": $("select#edit-country").val()
   };
-  // $.ajax({
-  //   method: 'patch',
-  //   url: 'http://localhost:3000/users/'+$(this).data().id,
-  //   data: user
-  // }).done(function(data){
-  //   // not ideal
-  //   location.reload();
-  // });
+  $.ajax({
+    method: 'patch',
+    url: 'http://localhost:3000/users/'+$(this).data().id,
+    data: user
+  }).done(function(data){
+    // not ideal
+    location.reload();
+  });
 }
 
 

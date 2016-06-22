@@ -1,8 +1,8 @@
 $(document).ready(function(){
   getGigs();
-  // addGig(testGig2);
-  // addGig(testGig2);
+ 
 })
+
 console.log("gig.js loaded");
 
 $('#reg-gigphoto').fileupload({
@@ -19,22 +19,6 @@ $('#reg-gigphoto').fileupload({
         }
     });
 
-var testGig = 
-{
-  image: "images/test-flyer.jpeg",
-  title: "Test title",
-  description: "Test description Lorem ipsum dolor sit amet, natoque habitasse ac vulputate suspendisse pellentesque, adipiscing laoreet risus ac wisi purus dignissim, nec dictum turpis amet augue, conubia sit cras eu quam posuere", 
-  cost: "£7"
-}
-
-var testGig2 = 
-{
-  image: "images/test-flyer.jpeg",
-  title: "Test title2",
-  description: "Test description2 Lorem ipsum dolor sit amet, natoque habitasse ac vulputate suspendisse pellentesque, adipiscing laoreet risus ac wisi purus dignissim, nec dictum turpis amet augue, conubia sit cras eu quam posuere", 
-  cost: "£8"
-}
-
 // GET ALL GIGS
 
 function getGigs(){
@@ -50,17 +34,7 @@ function getGigs(){
 
 function createGig(){
   event.preventDefault();
-  console.log('creating gig');
 
-  // console.log("THIS IS THE LOCATION:" + gigInput.location);
-  // var formData = $("#new-gig").serialize();
-    // formData.append("description", $("input#gig-description").val())
-    // formData.append("time", $("input#gig-time").val())
-    // formData.append("cost", $("input#gig-cost").val())
-    // formData.append("lastName", $("input#reg-lastname").val())
-    // formData.append("city", $("input#reg-city").val())
-    // formData.append("country", $("select#reg-country").val())
-    // formData.append("gig_photo", $('#reg-gigphoto')[0].files[0]);
 
 // check it this works without photo. 
   $.ajax({
@@ -73,6 +47,8 @@ function createGig(){
       "time": $("input#gig-time").val(),
       "cost": $("input#gig-cost").val(),
       "gig_photo" : $("#reg-gigphoto-image").data('filename')
+      // UPLOAD SONG
+      // "gig_track" : $("#reg-gigtrack").data('filename')
     }}
   }).done(function(data){
     console.log(data);
@@ -117,7 +93,7 @@ function showGig(){
     // added data.gig before
     var gigShow =
 
-    "<li> <img src='" + data.gig.gig_photo + "'></li>" +
+    // "<li> <img src='" + data.gig.gig_photo + "'></li>" +
     "<li>" + data.gig.title + "</li>" +
     "<li>" + data.gig.description + "</li>" +
     "<li>Time: " + data.gig.time + "</li>" +
