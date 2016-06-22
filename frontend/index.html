@@ -28,7 +28,7 @@
  -->
   <!-- SIDEBAR -->
   <nav id='sidemenu' class="navmenu navmenu-default navmenu-fixed-left offcanvas col-sm-2" role="navigation">
-    <a class="navmenu-brand" href="#">LineUp</a>
+    <a id="testAjax" class="navmenu-brand" href="#">LineUp</a>
 
     <div id="custom-search-input">
       <div class="input-group col-md-12">
@@ -254,8 +254,6 @@
             <div id="reg-gigphoto-image"></div>
           </div>
 
-     
-
          <div class="form-group">
            <button type="submit" class="btn btn-default createGig"  data-dismiss="modal">Submit</button> 
          </div>
@@ -263,12 +261,10 @@
   
      <!-- END OF GIG FORM-->
      <div id="floating-panel">
-           <input id="address" type="textbox" value="Sydney, NSW">
-           <input id="submit-geocode" type="button" value="Geocode">
+           <input id="address" type="textbox">
+           <input id="submit-geocode" type="button" value="Search">
          </div>
-      <div class="modal-body" id="maphere">
-
-          
+      <div class="modal-body" id="maphere">         
       </div>
        
      </div>
@@ -460,7 +456,7 @@
 <!-- End of Sign Up Modal -->
 
 <!-- GOGGLE MAP -->
-<input id="search" class="controls" type="text" placeholder="Search Box">
+<input id="pac-input" class="controls" type="text" placeholder="Search Box">
 <div id="map-canvas">
 </div>
 

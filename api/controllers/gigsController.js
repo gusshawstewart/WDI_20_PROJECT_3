@@ -34,15 +34,11 @@ function gigsIndex(req, res){
 
     for (var i = gigs.length - 1; i >= 0; i--) {
       
-      var distanceOfGig = getDistanceFromLatLonInKm(req.query.latitude, req.query.longitude, gigs[i].lat, gigs[i].lng);
+      var distanceOfGig = 0.62137119 * getDistanceFromLatLonInKm(req.query.latitude, req.query.longitude, gigs[i].lat, gigs[i].lng);
 
-      if (distanceOfGig < 4) {
+      if (distanceOfGig < 2.65) {
 
-      gigs[i].distance = distanceOfGig
-
-      console.log("DDIII" + distanceOfGig)
-
-      var gigDistanceFromUser = {gig: gigs[i], distance: distanceOfGig}
+      var gigDistanceFromUser = {gig: gigs[i], distance: Math.round(distanceOfGig*2)/2}
       gigsToSort.push(gigDistanceFromUser);
     }
     }
@@ -51,8 +47,6 @@ function gigsIndex(req, res){
              return b.distance - a.distance
          }  
      ) 
-    // keep this commented out for now
-    // sorted[0].gig.distance = sorted[0].distance
     return res.status(200).send(sorted);
 
   });

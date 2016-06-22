@@ -23,13 +23,17 @@ function initMap() {  console.log('initialising map');
     });
     var geocoder = new google.maps.Geocoder();
 
+    var searchBox = document.getElementById('address');
+    var autocomplete = new google.maps.places.Autocomplete(searchBox);
+
+
     document.getElementById('submit-geocode').addEventListener('click', function() {
-      geocodeAddress(geocoder, inputMap);
+      geocodeAddress(searchBox, inputMap);
     }
     );
 
   $("#submitGig").on("shown.bs.modal", function(e) {
-    console.log("MAP IS" + inputMap)
+
     google.maps.event.trigger(inputMap, "resize");
     inputMap.setCenter(new google.maps.LatLng(51.506178,-0.088369)); 
   });
@@ -38,12 +42,10 @@ function initMap() {  console.log('initialising map');
 
 function geocodeAddress(geocoder, resultsMap) {
     var address = document.getElementById('address').value;
-    var searchBox = document.getElementById('address');
-    var autocomplete = new google.maps.places.Autocomplete(searchBox);
+
     geocoder.geocode({'address': address}, function(results, status) {
       if (status === google.maps.GeocoderStatus.OK) {
         resultsMap.setCenter(results[0].geometry.location);
-        console.log("INSIDE THE FUNCTION LOCATION" + results[0].geometry.location.lat())
         gigInput.coordinates = results[0].geometry.location;
       
         var marker = new google.maps.Marker({
