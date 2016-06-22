@@ -63,11 +63,15 @@ function showGig(){
    url: 'http://localhost:3000/gigs/'+ $(this).data().id
  }).done(function(gig){
 
+   var gigDate = gig.datetime.substring(0, 10);
+   var gigTime = gig.datetime.substring(11, 16);
+
    var gigShow =
    "<li> <img src='" + gig.image + "'></li>" +
    "<li>" + gig.title + "</li>" +
    "<li>" + gig.description + "</li>" +
-   "<li>Time: " + gig.datetime + "</li>" +
+   "<li>Date: " + gigDate + "</li>" +
+   "<li>Time: " + gigTime + "</li>" +
    "<li>Cost: " + gig.cost + "</li>";
 
    var gigEditDelete =  
