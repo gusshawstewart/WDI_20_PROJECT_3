@@ -234,13 +234,13 @@
 
          <div class="form-group">
            <label for="title">Title:</label>
-           <input type="text" class="form-control" id="gig-title" placeholder="Title">
+           <input type="text" class="form-control" name="title" id="gig-title" placeholder="Title">
          </div>
 
          <div class="form-group">
            <label for="pwd">Description:</label>
            <br>
-           <textarea rows="4" cols="50" name="comment" form="new-gig" id="gig-description"placeholder="Info about the gig..."></textarea>
+           <textarea rows="4" cols="50" name="comment" form="new-gig" id="gig-description" placeholder="Info about the gig..."></textarea>
          </div>
 
 
@@ -259,6 +259,12 @@
              <option>£4</option>
            </select>
          </div>
+
+          <div class="form-group">
+            <label for="gig_photo">Gig Picture</label>
+            <input id="reg-gigphoto" type="file" name="files[]" data-url="http://localhost:3000/upload">
+            <div id="reg-gigphoto-image"></div>
+          </div>
 
      
 
@@ -476,6 +482,9 @@
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="bower_components/blueimp-file-upload/js/vendor/jquery.ui.widget.js"></script>
+<script src="bower_components/blueimp-file-upload/js/jquery.iframe-transport.js"></script>
+<script src="bower_components/blueimp-file-upload/js/jquery.fileupload.js"></script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAx7Yn9BPfq9meVMALPhnbaGeifwlMOwbY&libraries=places" charset="utf-8"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
