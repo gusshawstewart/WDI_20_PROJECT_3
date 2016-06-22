@@ -12,7 +12,7 @@ $.ajax({
   url:'http://localhost:3000/gigs',
   type:'get',
   data: { 
-    latitude: gigInput.userLtd,
+    latitude: gigInput.userLat,
     longitude: gigInput.userLng 
   }
   }).done(function(data){
@@ -23,14 +23,6 @@ $.ajax({
   });
 });
 
-  // console.log("GIGSSS" + gigInput.userPosition);
-  // var ajax = $.get('http://localhost:3000/gigs')
-  // .done(function(data){
-  //   $.each(data, function(index, gig){
-  //     addGig(gig);
-  //   });
-  // });
-
 }
 
 // CREATE GIG
@@ -39,7 +31,6 @@ function createGig(){
   event.preventDefault();
   console.log('creating gig');
   console.log("gig LAT input is" + gigInput.coordinates.lat);
-  
 
   console.log("THIS IS THE LOCATION:" + gigInput.coordinates);
   console.log("THIS IS THE TYPE OF FILE:" + typeof gigInput.coordinates);
@@ -87,7 +78,6 @@ function addGig(gig){
     google.maps.event.addListener(marker, 'click', function() {
       infowindow.open(gigInput.map, marker);
     });
-
 
 
   var gigIndex =
@@ -185,7 +175,6 @@ var updateGig = function(){
   });
 }
 
-
 // REMOVE GIG
 
 function removeGig(){
@@ -216,8 +205,6 @@ $.ajax({
  });
 
 };
-
-
 
 
 

@@ -1,6 +1,30 @@
 $(document).ready(function(){
 
-  console.log("gig input is" + gigInput.location);
+//current position
+
+navigator.geolocation.getCurrentPosition(function(position){
+  var latlng = new google.maps.LatLng(position.coords.latitude , position.coords.longitude);
+  var marker = new google.maps.Marker({
+      position: latlng,
+      map: gigInput.map,
+      icon: 'images/marker.png'
+  });
+
+  var startCircle = new google.maps.Circle({
+       strokeColor: 'grey',
+       strokeOpacity: 0.8,
+       strokeWeight: 2,
+       fillColor: 'rgba(0,255,127,0.5)',
+       fillOpacity: 0.35,
+       map: gigInput.map,
+       center: latlng,
+       radius: 3000
+     });
+  gigInput.circle = startCircle;
+
+  }, function(err){console.log("failed" + err)}, {timeout: 5000});
+
+console.log("gig input is" + gigInput.location);
 
   // var beepOne = $("#testMusic")[0];
   // $("#music-trigger")

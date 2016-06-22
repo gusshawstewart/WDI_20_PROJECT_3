@@ -26,7 +26,6 @@ function gigsIndex(req, res){
     return deg * (Math.PI/180)
   }
 
-
   Gig.find({datetime: {$gt: Date.now()}}, function(err, gigs) {
     if(err) return res.status(500).json({ message: err });
     var gigsToSort = []
