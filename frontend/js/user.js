@@ -79,23 +79,47 @@ var token = window.localStorage.getItem('token');
 // SHOW USER
 function showUser(){
 //using hard coded user id in url link
+var ajax = $.get('http://localhost:3000/currentUser')
+ .done(function(user){
+
     $('#showuser-modal').empty();
     $.ajax({
       method: 'GET',
-      url: 'http://localhost:3000/users/'+ $(this).data()._id
+      url: 'http://localhost:3000/users/' + user.currentUser._id
+      // + $(this).data()._id
       // + $(this).data().id
     }).done(function(data){
       console.log("ajax is listening");
+
+      var editUser = "<li><a href='#' class='edit-user' data-dismiss='modal' data-toggle='modal' data-target='#edit-user' data-id='"+user.currentUser._id+"'>Edit</a></div></li>";
+
       var userShow =
-      "<li> <img src='../api/" + data.user.profile_photo + "'></li>" +
-      "<li>First Name: " + data.user.firstName + "</li>"+
-      "<li>Last Name: " + data.user.lastName + "</li>" +
-      "<li>City: " + data.user.city + "</li>" +
-      "<li>Country: " + data.user.country + "</li>" + 
-    "<br><a data-id='"+data.user._id+"' class='delete' href='#'>Delete</a> |  <a href='#' class='edit-user' data-dismiss='modal' data-toggle='modal' data-target='#edit-user' data-id='"+data.user._id+"'>Edit</a></div>";
+      "<li> <img src='../api/uploads/" + user.profile_photo + "'></li>" +
+      "<li>First Name: " + user.currentUser.firstName + "</li>"+
+      "<li>Last Name: " + user.currentUser.lastName + "</li>" +
+      "<li>City: " + user.currentUser.city + "</li>" +
+      "<li>Country: " + user.currentUser.country + "</li>";
 
       $('#showuser-modal').prepend(userShow);
+
+      function toggleEdit(){
+        var currentUser = user.currentUser._id;
+          if(currentUser){
+            $('#showuser-modal').append(editUser);
+          }
+      }
+
+      toggleEdit();
     });
+
+    // function toggleEdit(){
+    //   var currentUser = user.currentUser._id;
+    //     if(currentUser){
+          $('#showuser-modal').append(editDelete);
+    //     }
+    // }
+
+  });
 }
 
 // // REGISTER

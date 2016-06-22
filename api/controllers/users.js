@@ -18,9 +18,16 @@ function usersIndex(req, res) {
 }
 
 function usersShow(req, res) {
-  User.findById(req.params.id, function(err, user) {
-    if(err) return res.status(500).json({ message: err });
-    return res.status(200).json({ user: user });
+
+  var token = req.headers.authorisation;
+  var decoded = jwtDecode(token);
+  var user_id = decoded._id;
+
+  User.findById(user_id, function(err, user){
+      console.log(user._id);
+
+    return res.status(200).json({ currentUser: user });
+
   });
 }
 
