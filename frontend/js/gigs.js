@@ -1,6 +1,5 @@
 $(document).ready(function(){
   getGigs();
-  // addGig(testGig)
   })
 
 // CREATE GIG
@@ -22,6 +21,7 @@ $.ajax({
 
 }
 
+// ADD GIGS TO PAGE
 function getGigs(){
 
   var ajax = $.get('http://localhost:3000/currentUser')
