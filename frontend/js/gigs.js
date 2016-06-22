@@ -16,8 +16,9 @@ $.ajax({
     longitude: gigInput.userLng 
   }
   }).done(function(data){
-    $.each(data, function(index, gig){
-    addGig(gig);
+    $.each(data, function(index, sortedArrayOfObjects){
+
+    addGig(sortedArrayOfObjects.gig);
   });
 });
 

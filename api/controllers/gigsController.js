@@ -35,6 +35,7 @@ function gigsIndex(req, res){
       
       var distanceOfGig = getDistanceFromLatLonInKm(req.query.latitude, req.query.longitude, gigs[i].lat, gigs[i].lng);
 
+      
       var gigDistanceFromUser = {gig: gigs[i], distance: distanceOfGig}
       console.log("one is" + gigDistanceFromUser.distance)
       gigsToSort.push(gigDistanceFromUser);
@@ -48,19 +49,10 @@ function gigsIndex(req, res){
      ) 
     console.log(sorted);
     
-    return  res.status(200).send(gigs);
+    return  res.status(200).send(sorted);
   });
 
 
- 
-
-
-
-  // Gig.find({datetime: {$gt: Date.now()}}, function(err, gigs) {
-  //   if (err) return res.status(404).send(err);
-
-  //   res.status(200).send(gigs);
-  // });
 }
 
 function gigsCreate(req, res){
@@ -94,7 +86,6 @@ function gigsShow(req, res){
     res.status(200).send(gig);
   })
 }
-
 
 function gigsUpdate(req, res){
   console.log("yo editing")
