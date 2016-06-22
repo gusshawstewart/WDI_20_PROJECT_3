@@ -22,6 +22,7 @@ function register(req, res) {
   console.log(req.file.path, "******************************");
 
   var user = new User(req.body);
+  // PROFILE PHOTO UPLOADER PATH
   user.profile_photo = req.file.path
   user.save(function(err, user) {
 

@@ -30,7 +30,8 @@ router.get('/users', usersController.index);
 
 
 router.route('/users/:id')
-  .all(checkForToken)
+// switched off the tokens for the time being to test
+  // .all(checkForToken)
   .get(usersController.show)
   .put(usersController.update)
   .delete(usersController.delete)
@@ -38,6 +39,7 @@ router.route('/users/:id')
   // .post(usersController.unattend);
 
 router.post('/login', authenticationController.login);
+// PROFILE PHOTO UPLOADER
 router.post('/register', upload.single("profile_photo"), authenticationController.register);
 
 

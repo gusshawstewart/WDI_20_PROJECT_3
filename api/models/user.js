@@ -8,6 +8,7 @@ var userSchema = mongoose.Schema({
   passwordHash: String,
   city: String,
   country: String,
+  // PROFILE PHOTO USING AN UNDERSCORE
   profile_photo: String,
   attending_gigs: [{type: mongoose.Schema.ObjectId, ref: 'Gig'}],
   owned_gigs: [{type: mongoose.Schema.ObjectId, ref: 'Gig'}]
