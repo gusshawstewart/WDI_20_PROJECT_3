@@ -16,9 +16,10 @@ $.ajax({
     longitude: gigInput.userLng 
   }
   }).done(function(data){
-    $.each(data, function(index, sortedArrayOfObjects){
+    $.each(data, function(index, sortedArrayOfObjectElement){
+    sortedArrayOfObjectElement.gig.distance = sortedArrayOfObjectElement.distance
+    addGig(sortedArrayOfObjectElement.gig);
 
-    addGig(sortedArrayOfObjects.gig);
   });
 });
 
@@ -68,11 +69,12 @@ $.ajax({
 // ADD A GIG TO PAGE
 
 function addGig(gig){
-
+  console.log(gig);
   var gigIndex =
   "<tr id='music-trigger'><td>" +
   "<ul id='gigs-side-listing'>" +
   "<li> <img src='" + gig.image + "'></li>" +
+  "<li>Distance:" + gig.distance + "</li>" + 
   "<li> Title: " + gig.title + "</li>" + 
   "<li> Description: " + gig.description + "</li>" +
   "<li> Cost: " + gig.cost + "</li>" +
