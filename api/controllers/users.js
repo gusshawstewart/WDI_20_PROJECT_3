@@ -1,9 +1,12 @@
+
 var authenticationController = require('../controllers/authentication');
 var Gig                      = require("../models/gig");
 var jwtDecode                = require('jwt-decode');
 var jwt                      = require('jsonwebtoken');
 var secret                   = require('../config/config').secret;
 var User                     = require('../models/user');
+var multer                   = require('multer');
+
 
 function usersIndex(req, res) {
 

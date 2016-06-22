@@ -17,7 +17,14 @@ function login(req, res) {
 }
 
 function register(req, res) {
-  User.create(req.body, function(err, user) {
+
+  // User.create(req.body, function(err, user) {
+
+  var user = new User(req.body);
+  // PROFILE PHOTO UPLOADER PATH
+  user.profile_photo = req.file.path
+  user.save(function(err, user) {
+
     if(err) return res.status(500).json({ message: err });
 
     return res.status(200).json({ message: "Thank you for registering", user});

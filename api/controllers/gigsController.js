@@ -5,6 +5,7 @@ var jwt                      = require('jsonwebtoken');
 var secret                   = require('../config/config').secret;
 var User                     = require('../models/user');
 
+
 function gigsIndex(req, res){
 
   Gig.find({}, function(err, gigs) {

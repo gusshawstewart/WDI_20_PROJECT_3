@@ -21,7 +21,7 @@ $(document).ready(function(){
    $("body").on("click", ".attend-button", attendGig);
    $("body").on("click", ".unattend-button", UnAttendGig);
    $("body").on("click", ".updateGig", updateGig);
-   // $("body").on("click", ".createSession", createSession);
+   $("body").on("click", ".createSession", createSession);
    $("body").on("click", ".delete-gig", removeGig);
 
    // $("body").on("click", "#head-create", initMap);
