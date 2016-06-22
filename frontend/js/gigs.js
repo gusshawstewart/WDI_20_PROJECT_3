@@ -2,6 +2,7 @@ $(document).ready(function(){
   getGigs();
 
 });
+
 console.log("gig.js loaded");
 
 $('#reg-gigphoto').fileupload({
@@ -14,19 +15,32 @@ $('#reg-gigphoto').fileupload({
 
             $("#reg-gigphoto-image").append(image);
             $("#reg-gigphoto-image").data('filename'  , file.name);
-
         }
     });
 
 // GET ALL GIGS
 
 function getGigs(){
-  var ajax = $.get('http://localhost:3000/gigs')
-  .done(function(data){
-    $.each(data, function(index, gig){
-      addGig(gig);
-    });
+
+var ajax = $.get('http://localhost:3000/currentUser')
+ .done(function(user){
+ });
+ 
+$.ajax({
+  url:'http://localhost:3000/gigs',
+  type:'get',
+  data: { 
+    latitude: gigInput.userLat,
+    longitude: gigInput.userLng 
+  }
+  }).done(function(data){
+    $.each(data, function(index, sortedArrayOfObjectElement){
+    sortedArrayOfObjectElement.gig.distance = sortedArrayOfObjectElement.distance
+    addGig(sortedArrayOfObjectElement.gig);
+
   });
+});
+
 }
 
 // CREATE GIG
@@ -41,7 +55,9 @@ function createGig(){
     data: { gig: {
       "title": $("input#gig-title").val(),
       "description": $("#gig-description").val(),
-      "time": $("input#gig-time").val(),
+      "lat": gigInput.coordinates.lat(), 
+      "lng": gigInput.coordinates.lng(), 
+      "datetime": $("input#datetimepicker2").val(),
       "cost": $("input#gig-cost").val(),
       "gig_photo" : $("#reg-gigphoto-image").data('filename')
     }}
@@ -56,41 +72,62 @@ function createGig(){
 
 }
 
-// ADD GIGS TO PAGE
-function getGigs(){
-
-  var ajax = $.get('http://localhost:3000/currentUser')
-   .done(function(user){
-   });
-
-  var ajax = $.get('http://localhost:3000/gigs')
-  .done(function(data){
-    $.each(data, function(index, gig){
-      addGig(gig);
-    });
-  });
-
-}
-
 // ADD A GIG TO PAGE
 function addGig(gig){
+
+  //add marker to map
+     // Clear out the old markers.
+    
+    var currentLatLng = {lat: gig.lat, lng: gig.lng};
+    var marker = new google.maps.Marker({
+            position: currentLatLng,
+            map: gigInput.map
+        });
+    markers.push(marker);
+
+  // add map info window
+    var infowindow = new google.maps.InfoWindow({
+        content: "<p>" + gig.title + "</p><hr><p>" + gig.description + "</p><hr><a href='#' data-toggle='modal' data-target='#showGig' data-id='" + gig._id + "' class='show-gig'>Show</a>"
+    });
+
+  //open info window on click
+    google.maps.event.addListener(marker, 'click', function() {
+      infowindow.open(gigInput.map, marker);
+    });
+
 
   var gigIndex =
   "<tr id='music-trigger'><td>" +
   "<ul id='gigs-side-listing'>" +
   "<li> <img src='http://localhost:3000/uploads/thumbnail/" + gig.gig_photo + "'></li>" +
+  "<li>Distance:" + gig.distance + "</li>" + 
   "<li> Title: " + gig.title + "</li>" + 
   "<li> Description: " + gig.description + "</li>" +
   "<li> Cost: " + gig.cost + "</li>" +
-  "<a href='#' data-toggle='modal' data-target='#showGig' data-id='" + gig._id + "' class='show-gig'>Show</a>" + 
+  // "<a data-id='"+gig._id+"' class='show' href='#'>Show</a>" 
+  "<a href='#' data-toggle='modal' data-target='#showGig' data-id='" + gig._id + "' class='show-gig'>Show</a>" +
   "</ul>" +
   "</tr> </td>"
 
   $("#gigs-side-listing").prepend(gigIndex)
+
+  $("#music-trigger")
+    .mouseenter(function() {
+     marker.setIcon('images/target-marker.png')
+
+      console.log('audio');
+    });
+
+    $("#music-trigger").mouseleave(function(){
+      marker.setIcon('images/marker.png')
+    });
+
+
 }
 
 // SHOW GIG
 function showGig(){
+
  $('#showgig-modal').empty();
 
  $.ajax({
@@ -149,6 +186,7 @@ function showGig(){
       toggleEdit();
     });
  });
+
 }
 
 // EDIT GIG
@@ -219,8 +257,6 @@ var attendGig = function(){
 }
 
 
-
-
 // REMOVE GIG
 function removeGig(){
   event.preventDefault();
@@ -257,5 +293,7 @@ var UnAttendGig = function(){
   });
 
 }
+
+
 
 

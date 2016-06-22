@@ -1,5 +1,33 @@
 $(document).ready(function(){
 
+//current position
+
+navigator.geolocation.getCurrentPosition(function(position){
+  var latlng = new google.maps.LatLng(position.coords.latitude , position.coords.longitude);
+  var marker = new google.maps.Marker({
+      position: latlng,
+      map: gigInput.map,
+      icon: 'images/marker.png'
+  });
+
+  markers.push(marker);
+
+  var startCircle = new google.maps.Circle({
+       strokeColor: 'grey',
+       strokeOpacity: 0.8,
+       strokeWeight: 2,
+       fillColor: 'rgba(0,255,127,0.5)',
+       fillOpacity: 0.35,
+       map: gigInput.map,
+       center: latlng,
+       radius: 4000
+     });
+
+  gigInput.circle = startCircle;
+
+  }, function(err){console.log("failed" + err)}, {timeout: 5000});
+
+console.log("gig input is" + gigInput.location);
 
   // var beepOne = $("#testMusic")[0];
   // $("#music-trigger")
@@ -7,9 +35,6 @@ $(document).ready(function(){
   //     console.log('audio');
   //     beepOne.play();
   //   });
-
-
-  // getUsers();
 
    $('body').on('click', '.edit-gig', editGig);
    $("form#login").on("submit", createSession);
@@ -23,41 +48,31 @@ $(document).ready(function(){
    $("body").on("click", ".updateGig", updateGig);
    $("body").on("click", ".createSession", createSession);
    $("body").on("click", ".delete-gig", removeGig);
-
-   // $("body").on("click", "#head-create", initMap);
-
-
-   // $("#user-index-button" ).on("click", toggleShowUsers);
-  // $("#user-form-button" ).on("click", toggleUserForm);
-
-
-   // $('body').off('click', '.show-gig').on('click', '.show-gig', showGig);
-
-  // $('body').on('click', '#addProject', toggleAddProject);
 });
 
 $(document).ready(function(){
- 
-$('.navmenu').offcanvas({toggle: true, autohide: false, disableScrolling: false, canvas: 'map-canvas'})
+  $('.navmenu').offcanvas({toggle: true, autohide: false, disableScrolling: false, canvas: 'map-canvas'})
 
-$('#burger').click(function(){
-  $('#sidemenu').offcanvas('toggle');
-})
+  $('#burger').click(function(){
+   $('#sidemenu').offcanvas('toggle');
+  })
 
-$("#btn-create").click(function(e){
-  e.preventDefault();
-  showDiv('#create'); 
-});
+  $("#btn-create").click(function(e){
+   e.preventDefault();
+   showDiv('#create'); 
+  });
 
-$("#btn-signup").click(function(e){
-  e.preventDefault();
-  showDiv('#register'); 
-});
+  $("#btn-signup").click(function(e){
+   e.preventDefault();
+   showDiv('#register'); 
+  });
 
-$("#btn-login").click(function(e){
-  e.preventDefault();
-  showDiv('#session'); 
-});
+  $("#btn-login").click(function(e){
+   e.preventDefault();
+   showDiv('#session'); 
+  });
+
+
 
 //SHOW THE RELEVANT DIV AND HIDE OTHERS
 
@@ -70,20 +85,6 @@ function showDiv(name) {
     $(name).css('display', 'block');
 }
 }
-
-// function showDiv(name) {
-// var divArray = ['#create', '#register', '#login'];
-// // var toRemove = divArray.indexOf(name);
-// // divArray.splice(toRemove, 1);
-// for (var i = 0; i < divArray.length; i++) {
-//   $(divArray[i]).slideUp("fast");
-// }
-// setTimeout(function(){
-//   // $("#show").html(" ");
-//   // $("#projects").html(" ");
-//   $(name).()
-// }, 500);
-// }
 
 //Datepicker
 
