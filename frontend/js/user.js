@@ -10,7 +10,7 @@ $(document).ready(function(){
   "</ul>";
 
   var navLoggedOut = 
-  "<ul class='nav navbar-nav navbar-right col-sm-8 navLoggedOut'>" +
+  "<ul class='nav navbar-nav navbar-right navLoggedOut'>" +
       "<li><button type='button' class='btn' id='burger'> Sidebar </button></li>" +
       "<li><button type='button' class='btn' id='btn-signup' data-toggle='modal' data-target='#signUp'> Sign up </button></li>" +
       "<li><button type='button' class='btn' id='btn-login' data-toggle='modal' data-target='#logIn'> Log in </button></li>" +
@@ -85,7 +85,7 @@ var ajax = $.get('http://localhost:3000/currentUser')
       var editUser = "<li><a href='#' class='edit-user' data-dismiss='modal' data-toggle='modal' data-target='#edit-user' data-id='"+user.currentUser._id+"'>Edit</a></div></li>";
 
       var userShow =
-      "<li> <img src='../api/uploads/" + user.profile_photo + "'></li>" +
+      "<li> <img src='../api/" + user.profile_photo + "'></li>" +
       "<li>First Name: " + user.currentUser.firstName + "</li>"+
       "<li>Last Name: " + user.currentUser.lastName + "</li>" +
       "<li>City: " + user.currentUser.city + "</li>" +

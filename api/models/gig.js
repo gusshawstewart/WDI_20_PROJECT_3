@@ -1,9 +1,9 @@
 var mongoose = require("mongoose");
 
 var gigSchema = mongoose.Schema({
-title:{ type: String},
+title: String,
 description: String,
-datetime: { type: Date},
+datetime: Date,
 lat: Number,
 lng: Number,
 cost: String,

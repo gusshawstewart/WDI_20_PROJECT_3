@@ -47,16 +47,16 @@ function usersDelete(req, res) {
 
 function currentUser(req, res){
 
-  // var token = req.headers.authorisation;
-  // var decoded = jwtDecode(token);
-  // var user_id = decoded._id;
+  var token = req.headers.authorisation;
+  var decoded = jwtDecode(token);
+  var user_id = decoded._id;
 
-  // User.findById(user_id, function(err, user){
-  //     console.log(user._id);
+  User.findById(user_id, function(err, user){
+      console.log(user._id);
 
-  //   return res.status(200).json({ currentUser: user });
+    return res.status(200).json({ currentUser: user });
 
-  // });
+  });
 }
 
 module.exports = {

@@ -1,7 +1,6 @@
 $(document).ready(function(){
   getGigs();
 
-
 });
 
 console.log("gig.js loaded");
@@ -19,13 +18,15 @@ $('#reg-gigphoto').fileupload({
         }
     });
 
-
-
 function getGigs(){
+ var token = window.localStorage.getItem('token');
+   if(token) {
 
-var ajax = $.get('http://localhost:3000/currentUser')
- .done(function(user){
- });
+   var ajax = $.get('http://localhost:3000/currentUser')
+    .done(function(user){
+    });
+
+}
  
 $.ajax({
   url:'http://localhost:3000/gigs',
@@ -60,8 +61,8 @@ function createGig(){
       "lat": gigInput.coordinates.lat(), 
       "lng": gigInput.coordinates.lng(), 
       "datetime": $("input#datetimepicker2").val(),
-      "cost": $("input#gig-cost").val(),
-      "gig_photo" : $("#reg-gigphoto-image").data('filename')
+      "cost": $("input#gig-cost").val()
+      // "gig_photo" : $("#reg-gigphoto-image").data('filename')
       // UPLOAD SONG
       // "gig_track" : $("#reg-gigtrack").data('filename')
     }}

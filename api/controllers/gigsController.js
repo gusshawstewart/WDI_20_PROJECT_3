@@ -55,7 +55,9 @@ function gigsIndex(req, res){
 }
 
 // THIS WILL MAKE THE LOGGED IN USER THE OWNER
+
 function gigsCreate(req, res){
+  console.log("REQ BODY GIG" + req.body.gig)
  var gig = new Gig(req.body.gig);
 
   var gigId = gig._id;
@@ -67,7 +69,10 @@ function gigsCreate(req, res){
   User.findByIdAndUpdate(_id, {$push: { owned_gigs: gigId }}, {new: true}, function(err, user) {});
 
   gig.save(function(err, gig) {
+    console.log("THIS IS THE ERRRRRRROR" + err)
+    console.log("THIS IS THE GIG" + gig)
     if (err) return res.status(500).send(err);
+
     res.status(201).send(gig)
   });
 
