@@ -35,7 +35,7 @@ router.route('/users/:id')
 router.post('/login', authenticationController.login);
 
 // PROFILE PHOTO UPLOADER
-// router.post('/register', upload.single("profile_photo"), authenticationController.register);
+router.post('/register', upload.single("profile_photo"), authenticationController.register);
 
 // GIGS
 

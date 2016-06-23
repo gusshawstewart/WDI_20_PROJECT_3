@@ -20,10 +20,14 @@ $('#reg-gigphoto').fileupload({
     });
 
 function getGigs(){
+var token = window.localStorage.getItem('token');
+  if(token) {
 
-var ajax = $.get('http://localhost:3000/currentUser')
- .done(function(user){
- });
+  var ajax = $.get('http://localhost:3000/currentUser')
+   .done(function(user){
+   });
+
+}
  
 $.ajax({
   url:'http://localhost:3000/gigs',
@@ -99,17 +103,15 @@ function addGig(gig){
 
 
   var gigIndex =
-  "<tr id='music-trigger'><td>" +
+  "<tr id='music-trigger'><td id='table-style'>" +
   "<ul id='gigs-side-listing'>" +
   "<li> <img src='http://localhost:3000/uploads/thumbnail/" + gig.gig_photo + "'></li>" +
-  "<li>Distance:" + gig.distance + "</li>" + 
+  "<li>Distance: " + gig.distance + "ml</li>" + 
   "<li> Title: " + gig.title + "</li>" + 
   "<li> Description: " + gig.description + "</li>" +
   "<li> Cost: " + gig.cost + "</li>" +
   // "<a data-id='"+gig._id+"' class='show' href='#'>Show</a>" 
-  "<a href='#' data-toggle='modal' data-target='#showGig' data-id='" + gig._id + "' class='show-gig'>Show</a>" +
-  "</ul>" +
-  "</tr> </td>"
+  "<a href='#' data-toggle='modal' data-target='#showGig' data-id='" + gig._id + "' class='show-gig'>Show</a>"
 
   $("#gigs-side-listing").prepend(gigIndex)
 
@@ -239,30 +241,6 @@ $.ajax({
   });
 }
 
-// <<<<<<< HEAD
-// =======
-
-
-// var attendGig = function(){
-//   event.preventDefault();
-//   var attend = ({
-//     users: {
-//       "attending-gigs": $(".attend-gig").val(),
-//     }
-//   });
-
-//   $.ajax({
-//     method: 'patch',
-//     url: 'http://localhost:3000/gigs/'+$(this).data().id,
-//     data: attend
-//   }).done(function(data){
-
-//     location.reload();
-//   });
-// }
-
-
-// >>>>>>> fda897f4cd20ec58bb26d32641e5bbc04fb2e874
 // REMOVE GIG
 function removeGig(){
   event.preventDefault();
@@ -297,5 +275,29 @@ var UnAttendGig = function(){
 
     location.reload();
   });
+}
+
+
+//TEST API CALL
+
+function getExternalData() {
+$.ajax({
+  url:'http://api.bandsintown.com/events/recommended.json',
+  type:'get',
+  jsonp: "callback",
+  dataType: "jsonp",
+  data: { 
+    artists: ["Skrillex"],
+    // location: {lat: 51.506178, lon:-0.088369},
+    location: "New York",
+    format: 'json',
+    app_id: "team_scheme"
+  }
+  }).done(function(data){
+    $.each(data, function(index, data){
+      console.log(data)
+
+  });
+});
 
 }

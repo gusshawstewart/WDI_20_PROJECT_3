@@ -3,24 +3,14 @@ $(document).ready(function(){
 });
 
   var navLoggedIn = 
-  "<ul class='nav navbar-nav navbar-right col-sm-8 navLoggedIn'>" +
-    "<button type='button' class='navbar-toggle' data-toggle='offcanvas' data-target='.navmenu' data-canvas='body'>" +
-      "<span class='icon-bar'></span>" +
-      "<span class='icon-bar'></span>" +
-      "<span class='icon-bar'></span>" +
-    "</button>" +
+  "<ul class='nav navbar-nav navbar-right navLoggedIn'>" +
     "<li><button type='button' class='btn' id='burger'> Sidebar </button></li>" +
-    "<li><button type='button' class='btn' id='btn-create' data-toggle='modal' data-target='#submitGig'> Add new </button></li>" +
-    "<li><button type='button' class='btn' id='btn-logout' data-toggle='modal' data-target='#logOut'> Log Out </button></li>" +
+    "<li><button type='button' class='btn btn-secondary' id='btn-create' data-toggle='modal' data-target='#submitGig'> Add new </button></li>" +
+    "<li><button type='button' class='btn btn-secondary' id='btn-logout' data-toggle='modal' data-target='#logOut'> Log Out </button></li>" +
   "</ul>";
 
   var navLoggedOut = 
   "<ul class='nav navbar-nav navbar-right col-sm-8 navLoggedOut'>" +
-      "<button type='button' class='navbar-toggle' data-toggle='offcanvas' data-target='.navmenu' data-canvas='body'>" +
-        "<span class='icon-bar'></span>" +
-        "<span class='icon-bar'></span>" +
-        "<span class='icon-bar'></span>" +
-      "</button>" +
       "<li><button type='button' class='btn' id='burger'> Sidebar </button></li>" +
       "<li><button type='button' class='btn' id='btn-signup' data-toggle='modal' data-target='#signUp'> Sign up </button></li>" +
       "<li><button type='button' class='btn' id='btn-login' data-toggle='modal' data-target='#logIn'> Log in </button></li>" +
@@ -95,7 +85,7 @@ var ajax = $.get('http://localhost:3000/currentUser')
       var editUser = "<li><a href='#' class='edit-user' data-dismiss='modal' data-toggle='modal' data-target='#edit-user' data-id='"+user.currentUser._id+"'>Edit</a></div></li>";
 
       var userShow =
-      "<li> <img src='../api/uploads/" + user.profile_photo + "'></li>" +
+      "<li> <img src='../api/" + user.currentUser.profile_photo + "'></li>" +
       "<li>First Name: " + user.currentUser.firstName + "</li>"+
       "<li>Last Name: " + user.currentUser.lastName + "</li>" +
       "<li>City: " + user.currentUser.city + "</li>" +
@@ -113,56 +103,8 @@ var ajax = $.get('http://localhost:3000/currentUser')
       toggleEdit();
     });
 
-// <<<<<<< HEAD
-// =======
-
-// >>>>>>> 7802dde63802275e8f972a7ecc12d4e20a26307b
-    // function toggleEdit(){
-    //   var currentUser = user.currentUser._id;
-    //     if(currentUser){
-    //       $('#showuser-modal').append(editDelete);
-    //     }
-    // }
-
   });
 }
-
-// // REGISTER
-//   function createUser(){
-//     event.preventDefault();
-
-//     $.ajax({
-//       url:'http://localhost:3000/register',
-//       type:'post',
-//       data: {
-//         email: $("input#reg-email").val(),
-//         password: $("input#reg-password").val(),
-//         passwordConfirmation: $("input#reg-passwordconfirmation").val(),
-//         firstName: $("input#reg-firstname").val(),
-//         lastName: $("input#reg-lastname").val(),
-//         city: $("input#reg-city").val(),
-//         country: $("select#reg-country").val()
-//       }
-//     }).done(function(data) {
-//       $("input#reg-email").val(null),
-//       $("input#reg-password").val(null),
-//       $("input#reg-firstname").val(null),
-//       $("input#reg-lastname").val(null),
-//       $("input#reg-city").val(null),
-//       $("select#reg-country").val(null)
-//     });
-//   }
-//   $.post("http://localhost:3000/login", {
-//     email: $('#login-email').val(),
-//     password: $('#login-password').val()
-//    }).done(function(data) {
-//      window.localStorage.setItem('token', data.token);
-//      $.ajaxSetup({
-//        headers: { 'Authorisation': 'Bearer ' + data.token }
-//      });    
-//   });
-// };
-
 
 function createUser(){
 event.preventDefault();
@@ -212,6 +154,18 @@ $.ajax({
 
 // EDIT USER
   function editUser(){
+
+    // $.ajax({
+    //   method: 'get',
+    //   url: 'http://localhost:3000/users/'+$(this).data().id
+    // }).done(function(gig){
+
+    //     $("input#edit-firstname").val(user.firstName),
+    //     $("input#edit-lastname").val(user.lastName),
+    //     $("input#edit-city").val(user.city),
+    //     $("select#edit-country").val(user.country)
+
+    // });
 
     var testUser = 
       {
