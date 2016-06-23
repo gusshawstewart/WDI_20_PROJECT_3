@@ -1,9 +1,9 @@
 var mongoose = require("mongoose");
 
 var gigSchema = mongoose.Schema({
-title:{ type: String},
+title: String,
 description: String,
-datetime: { type: Date},
+datetime: Date,
 lat: Number,
 lng: Number,
 cost: String,
@@ -11,7 +11,6 @@ owner: {type: mongoose.Schema.ObjectId, ref: 'User'},
 attending: [{type: mongoose.Schema.ObjectId, ref: 'User'}],
 gig_photo: String,
 gig_track: String
-
 });
 
 gigSchema.pre('remove', function(next){

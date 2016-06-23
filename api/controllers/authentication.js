@@ -29,7 +29,14 @@ function register(req, res) {
 
     if(err) return res.status(500).json({ message: err });
 
-    return res.status(200).json({ message: "Thank you for registering", user});
+    var payload = {_id: user._id};
+    var token   = jwt.sign(payload, secret, {expiresIn: 60*60*24 });
+
+    return res.status(200).json({ message: "Thank you for registering", user: user, token: token});
+
+
+
+
   });
 
 }

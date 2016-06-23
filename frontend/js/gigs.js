@@ -1,7 +1,6 @@
 $(document).ready(function(){
   getGigs();
 
-
 });
 
 console.log("gig.js loaded");
@@ -20,6 +19,7 @@ $('#reg-gigphoto').fileupload({
     });
 
 function getGigs(){
+
 var token = window.localStorage.getItem('token');
   if(token) {
 
@@ -38,8 +38,9 @@ $.ajax({
   }
   }).done(function(data){
     $.each(data, function(index, sortedArrayOfObjectElement){
-    sortedArrayOfObjectElement.gig.distance = sortedArrayOfObjectElement.distance
-    addGig(sortedArrayOfObjectElement.gig);
+    // sortedArrayOfObjectElement.gig.distance = sortedArrayOfObjectElement.distance
+    // addGig(sortedArrayOfObjectElement.gig);
+    addGig(sortedArrayOfObjectElement);
 
   });
 });
@@ -50,8 +51,6 @@ $.ajax({
 function createGig(){
   event.preventDefault();
 
-
-// check it this works without photo. 
   $.ajax({
     url:'http://localhost:3000/gigs',
     type:'post',
@@ -63,9 +62,8 @@ function createGig(){
       "lng": gigInput.coordinates.lng(), 
       "datetime": $("input#datetimepicker2").val(),
       "cost": $("input#gig-cost").val(),
-      "gig_photo" : $("#reg-gigphoto-image").data('filename')
-      // UPLOAD SONG
-      // "gig_track" : $("#reg-gigtrack").data('filename')
+      "gig_photo" : $("#reg-gigphoto-image").data('filename'),
+      "gig_track" : $("#reg-gigtrack").data('filename')
     }}
   }).done(function(data){
     console.log(data);
@@ -75,7 +73,8 @@ function createGig(){
     $("input#gig-time").val(null),
     $("input#gig-cost").val(null)
   
-    location.reload();
+    location.reload()
+
   });
 
 }
@@ -85,8 +84,9 @@ function addGig(gig){
 
   //add marker to map
      // Clear out the old markers.
+
+    var currentLatLng = new google.maps.LatLng(gig.gig.lat, gig.gig.lng);
     
-    var currentLatLng = {lat: gig.lat, lng: gig.lng};
     var marker = new google.maps.Marker({
             position: currentLatLng,
             map: gigInput.map
@@ -95,7 +95,7 @@ function addGig(gig){
 
   // add map info window
     var infowindow = new google.maps.InfoWindow({
-        content: "<p>" + gig.title + "</p><hr><p>" + gig.description + "</p><hr><a href='#' data-toggle='modal' data-target='#showGig' data-id='" + gig._id + "' class='show-gig'>Show</a>"
+        content: "<p>" + gig.gig.title + "</p><hr><p>" + gig.gig.description + "</p><hr><a href='#' data-toggle='modal' data-target='#showGig' data-id='" + gig.gig._id + "' class='show-gig'>Show</a>"
     });
 
   //open info window on click
@@ -104,29 +104,35 @@ function addGig(gig){
     });
 
 
+
   var gigIndex =
   "<tr id='music-trigger'><td id='table-style'>" +
   "<ul id='gigs-side-listing'>" +
   "<li> <img src='http://localhost:3000/uploads/thumbnail/" + gig.gig_photo + "'></li>" +
   "<li>Distance: " + gig.distance + "ml</li>" + 
-  "<li> Title: " + gig.title + "</li>" + 
-  "<li> Description: " + gig.description + "</li>" +
+  "<li>Time: " + gig.gig.datetime + "</li>" + 
+  "<li> Title: " + gig.gig.title + "</li>" + 
+  "<li> Description: " + gig.gig.description + "</li>" +
   "<li> Cost: " + gig.cost + "</li>" +
   // "<a data-id='"+gig._id+"' class='show' href='#'>Show</a>" 
-  "<a href='#' data-toggle='modal' data-target='#showGig' data-id='" + gig._id + "' class='show-gig'>Show</a>"
+  "<a href='#' data-toggle='modal' data-target='#showGig' data-id='" + gig.gig._id + "' class='show-gig'>Show</a>" + 
+  "<audio id='track" + gig.gig._id + "'<source src='audio/" + gig.gig_track + "'></source></audio>"
 
   $("#gigs-side-listing").prepend(gigIndex)
+
+  var track = $("#track" + gig.gig._id);
 
   $("#music-trigger")
     .mouseenter(function() {
      marker.setIcon('images/target-marker.png')
-
-      console.log('audio');
+     track.play()
+     console.log('audio');
     });
 
     $("#music-trigger").mouseleave(function(){
       marker.setIcon('images/marker.png')
     });
+
 
 
 }
