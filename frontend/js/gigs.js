@@ -6,7 +6,6 @@ $(document).ready(function(){
     getExternalData();
   })
 
-
 });
 
 console.log("gig.js loaded");

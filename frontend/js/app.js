@@ -72,8 +72,6 @@ $(document).ready(function(){
    showDiv('#session'); 
   });
 
-
-
 //SHOW THE RELEVANT DIV AND HIDE OTHERS
 
 function showDiv(name) {

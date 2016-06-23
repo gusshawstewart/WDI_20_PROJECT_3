@@ -110,10 +110,14 @@ nav {
   z-index: 4;
   top: 0;
   width: 100%;
-  height: 30px;
+  height: 70px;
 }
 li {
   line-height: 30px;
+}
+
+#navbar ul {
+  padding-top: 30px;
 }
 
 #burger {
@@ -157,7 +161,15 @@ li {
 }
 
 
+
 /*Google map*/
+
+#pac-input {
+  height: 35px;
+  width: 150px;
+  text-align: center;
+  font-size: 16px;
+}
 
 #floating-panel {
   margin-bottom: 30px;
@@ -293,6 +305,7 @@ button {
 
 /*navbar*/
 
+
 .affix {
     top: 0;
     width: 100%;
@@ -303,7 +316,7 @@ button {
 }
 
 #navbar {
-
+  margin: 0px;
   border: none;
 
 }
@@ -323,6 +336,17 @@ padding: 10px;
   color:black;
 }
 
+nav img {
+  height: 60px;
+  width: 60px;
+  padding: 0px;
+  margin-top: 5px;
+}
+
+.navbar-brand a {
+  margin: 10px;
+  padding: 0px;
+}
 
 
 

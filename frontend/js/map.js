@@ -15,7 +15,6 @@ $(document).ready(function(){
 //SUBMIT NEW GIG MAP
 //******************
 
-
 function initMap() {  console.log('initialising map');
 
     var inputMap = new google.maps.Map(document.getElementById('maphere'), {
@@ -34,7 +33,6 @@ function initMap() {  console.log('initialising map');
     google.maps.event.trigger(inputMap, "resize");
     inputMap.setCenter(new google.maps.LatLng(51.506178,-0.088369)); 
   });
-
   }
 
 function geocodeAddress(geocoder, resultsMap) {
@@ -82,6 +80,7 @@ function geocodeAddress(geocoder, resultsMap) {
     // Create the search box and link it to the UI element.
     var input = document.getElementById('pac-input');
     var searchBox = new google.maps.places.SearchBox(input);
+    map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
 
 
     // Bias the SearchBox results towards current map's viewport.
@@ -90,8 +89,7 @@ function geocodeAddress(geocoder, resultsMap) {
     });
 
     var markers = [];
-    // Listen for the event fired when the user selects a prediction and retrieve
-    // more details for that place.
+
 
 //HOMEPAGE MAP EVENT LISTENERS
 //****************************
@@ -175,7 +173,6 @@ searchBox.addListener('places_changed', function() {
         fillColor: 'rgba(0,255,127,0.5)',
         fillOpacity: 0.35,
         map: gigInput.map,
-        // center: new google.maps.LatLng(place.geometry.location),
         center: place.geometry.location,
         radius: 4000
       })
@@ -201,8 +198,6 @@ searchBox.addListener('places_changed', function() {
 //centering map after search and limiting zoom
   map.fitBounds(bounds);
   map.setZoom(12);
-
-  console.log("YYYYYYYYYYY")
 
 });
 
