@@ -45,6 +45,7 @@ var token = window.localStorage.getItem('token');
       $('#navbar').prepend(navLoggedIn);
       $('.navLoggedOut').hide();
 
+
       var ajax = $.get('http://localhost:3000/currentUser')
        .done(function(user){
         $('.navLoggedIn').prepend("<li><button type='button' class='btn show-user btn-create' id='btn-create' data-toggle='modal' data-target='#showUser'> Hello, " + user.currentUser.firstName + "</button></li>") 
@@ -102,12 +103,13 @@ var ajax = $.get('http://localhost:3000/currentUser')
       toggleEdit();
     });
 
-    // function toggleEdit(){
-    //   var currentUser = user.currentUser._id;
-    //     if(currentUser){
+
+    function toggleEdit(){
+      var currentUser = user.currentUser._id;
+        if(currentUser){
           $('#showuser-modal').append(editDelete);
-    //     }
-    // }
+        }
+    }
 
   });
 }
@@ -148,17 +150,11 @@ var ajax = $.get('http://localhost:3000/currentUser')
 //   });
 // };
 
+
 function createUser(){
 event.preventDefault();
 console.log("creating user");
-// console.log(
-// $("input#reg-email").val(),
-// $("input#reg-password").val(),
-// $("input#reg-firstname").val(),
-// $("input#reg-lastname").val(),
-// $("input#reg-city").val(),
-// $("select#reg-country").val()
-// );
+
 console.log("YYYYYYYY" + $("input#reg-passwordconfirmation").val());
 
 var formData = new FormData();
@@ -252,6 +248,46 @@ $.post("http://localhost:3000/login", {
       location.reload();
     });
 
-  }
+
+  
+  console.log('editing a user');
+  // $.ajax({
+  //   method: 'get',
+  //   url: 'http://localhost:3000/gigs/'+$(this).data().id
+  // }).done(function(user){
+
+  //   $("input#edit-firstname").val(user.firstname),
+  //   $("input#edit-lastname").val(user.lastname),
+  //   $("input#edit-city").val(user.city),
+  //   $("select#edit-country").val(user.country)
+  // });
+  var user = testUser;
+
+    $("input#edit-firstname").val(user.firstname),
+    $("input#edit-lastname").val(user.lastname),
+    $("input#edit-city").val(user.city),
+    $("select#edit-country").val(user.country)
+
+  $('#edit-user-form').on('submit', updateUser);
+}
+
+var updateUser = function(){
+  event.preventDefault();
+  var user= {
+ "fistname": $("input#edit-firstname").val(),
+ "lastname": $("input#edit-lastname").val(),
+ "city": $("input#edit-city").val(), 
+ "country": $("select#edit-country").val()
+  };
+  $.ajax({
+    method: 'patch',
+    url: 'http://localhost:3000/users/'+$(this).data().id,
+    data: user
+  }).done(function(data){
+    // not ideal
+    location.reload();
+  });
+}
+
 
 
