@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+
   // var beepOne = $("#testMusic")[0];
   // $("#music-trigger")
   //   .mouseenter(function() {
@@ -9,7 +10,7 @@ $(document).ready(function(){
 
 
   // getUsers();
-  
+
    $('body').on('click', '.edit-gig', editGig);
    $("form#login").on("submit", createSession);
    $("body").on("click", ".show-user", showUser);
@@ -17,10 +18,12 @@ $(document).ready(function(){
    $("body").on("click", ".edit-user", editUser);
    $("body").on("click", ".createGig", createGig);
    $("body").on("click", ".createUser", createUser);
-   // $("body").on("click", ".attend-button", attendGig);
+   $("body").on("click", ".attend-button", attendGig);
+   $("body").on("click", ".unattend-button", UnAttendGig);
    $("body").on("click", ".updateGig", updateGig);
    $("body").on("click", ".createSession", createSession);
    $("body").on("click", ".delete-gig", removeGig);
+
    // $("body").on("click", "#head-create", initMap);
 
 
@@ -59,12 +62,12 @@ $("#btn-login").click(function(e){
 //SHOW THE RELEVANT DIV AND HIDE OTHERS
 
 function showDiv(name) {
-var divArray = ['#create', '#register', '#session'];
-var toRemove = divArray.indexOf(name);
-divArray.splice(toRemove, 1);
-for (var i = 0; i < divArray.length; i++) {
-  $(divArray[i]).css('display', 'none')
-  $(name).css('display', 'block');
+  var divArray = ['#create', '#register', '#session'];
+  var toRemove = divArray.indexOf(name);
+  divArray.splice(toRemove, 1);
+  for (var i = 0; i < divArray.length; i++) {
+    $(divArray[i]).css('display', 'none')
+    $(name).css('display', 'block');
 }
 }
 

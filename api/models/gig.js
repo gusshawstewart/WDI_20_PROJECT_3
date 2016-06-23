@@ -7,25 +7,30 @@ datetime: { type: Date},
 lng: { type: String},
 lat: { type: String},
 cost: String,
-owner: [{type: mongoose.Schema.ObjectId, ref: 'User'}],
+owner: {type: mongoose.Schema.ObjectId, ref: 'User'},
 attending: [{type: mongoose.Schema.ObjectId, ref: 'User'}],
 gig_photo: String,
 gig_track: String
 
 });
 
-// var gigSchema = mongoose.Schema({
+gigSchema.pre('remove', function(next){
+    this.model('User').update(
+        {owned_gigs: this._id}, 
+        {$pull: {owned_gigs: this._id}}, 
+        {multi: true},
+        next
+    );
+});
 
-// title:{ type: String, required: true },
-// description: String,
-// datetime: { type: Date, required: true },
-// lng: { type: String, required: true },
-// lat: { type: String, required: true },
-// cost: String
-// // owner: { type: String, required: true },
-// // attending: String
-// // change attending, owner, and datetime
+gigSchema.pre('remove', function(next){
+    this.model('User').update(
+        {attending_gigs: this._id}, 
+        {$pull: {attending_gigs: this._id}}, 
+        {multi: true},
+        next
+    );
+});
 
-// });
 
 module.exports = mongoose.model('Gig', gigSchema);

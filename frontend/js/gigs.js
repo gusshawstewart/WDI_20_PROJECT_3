@@ -1,7 +1,8 @@
 $(document).ready(function(){
   getGigs();
- 
-})
+
+
+});
 
 console.log("gig.js loaded");
 
@@ -19,19 +20,9 @@ $('#reg-gigphoto').fileupload({
         }
     });
 
-// GET ALL GIGS
 
-function getGigs(){
-  var ajax = $.get('http://localhost:3000/gigs')
-  .done(function(data){
-    $.each(data, function(index, gig){
-      addGig(gig);
-    });
-  });
-}
 
 // CREATE GIG
-
 function createGig(){
   event.preventDefault();
 
@@ -61,8 +52,23 @@ function createGig(){
 
 }
 
-// ADD A GIG TO PAGE
+// ADD GIGS TO PAGE
+function getGigs(){
 
+  var ajax = $.get('http://localhost:3000/currentUser')
+   .done(function(user){
+   });
+
+  var ajax = $.get('http://localhost:3000/gigs')
+  .done(function(data){
+    $.each(data, function(index, gig){
+      addGig(gig);
+    });
+  });
+
+}
+
+// ADD A GIG TO PAGE
 function addGig(gig){
 
   var gigIndex =
@@ -72,7 +78,6 @@ function addGig(gig){
   "<li> Title: " + gig.title + "</li>" + 
   "<li> Description: " + gig.description + "</li>" +
   "<li> Cost: " + gig.cost + "</li>" +
-  // "<a data-id='"+gig._id+"' class='show' href='#'>Show</a>" 
   "<a href='#' data-toggle='modal' data-target='#showGig' data-id='" + gig._id + "' class='show-gig'>Show</a>" + 
   "</ul>" +
   "</tr> </td>"
@@ -80,34 +85,70 @@ function addGig(gig){
   $("#gigs-side-listing").prepend(gigIndex)
 }
 
-
 // SHOW GIG
-
 function showGig(){
+ $('#showgig-modal').empty();
 
-  $('#showgig-modal').empty();
-  $.ajax({
-    method: 'GET',
-    url: 'http://localhost:3000/gigs/'+ $(this).data().id
-  }).done(function(data){
-    // added data.gig before
-    var gigShow =
+ $.ajax({
+   method: 'GET',
+   url: 'http://localhost:3000/gigs/'+ $(this).data().id
+ }).done(function(gig){
 
-    // "<li> <img src='" + data.gig.gig_photo + "'></li>" +
-    "<li>" + data.gig.title + "</li>" +
-    "<li>" + data.gig.description + "</li>" +
-    "<li>Time: " + data.gig.time + "</li>" +
-    "<li>Cost: " + data.gig.cost + "</li>" +
-    "<br><a data-id='" + data.gig._id + "' data-dismiss='modal' class='delete-gig' href='#'>Delete</a> |  <a href='#' data-dismiss='modal' data-toggle='modal' data-target='#editGig' class='edit-gig' data-id='"+gig._id+"'>Edit</a>" +   "<a href='#' data-dismiss='modal' data-toggle='modal' data-target='#attendGig' class='attend-gig' data-id='"+data.gig._id+"'>Attend</a> |" +
-    "</div>";
+   var gigDate = gig.datetime.substring(0, 10);
+   var gigTime = gig.datetime.substring(11, 16);
 
-    $('#showgig-modal').prepend(gigShow);
-  });
+   var gigShow =
+   "<li> <img src='" + gig.gig_photo + "'></li>" +
+   "<li>" + gig.title + "</li>" +
+   "<li>" + gig.description + "</li>" +
+   "<li>Date: " + gigDate + "</li>" +
+   "<li>Time: " + gigTime + "</li>" +
+   "<li>Cost: " + gig.cost + "</li>";
 
+
+   var gigEditDelete =  
+   "<br><a data-id='" + gig._id + "' data-dismiss='modal' class='delete-gig' href='#'>Delete</a> | "+ 
+   "<a href='#' data-dismiss='modal' data-toggle='modal' data-target='#editGig' class='edit-gig' data-id='"+gig._id+"'>Edit</a></div>";
+
+   var gigAttending = 
+   "<a data-id='" + gig._id + "' data-dismiss='modal' class='unattend-button buttons' href='#'>Not attending</a>";
+
+   var gigNotAttending = 
+   "<a data-id='" + gig._id + "' data-dismiss='modal' class='attend-button buttons' href='#'>Attend</a>";
+
+   $('#showgig-modal').prepend(gigShow);
+
+   var ajax = $.get('http://localhost:3000/currentUser')
+    .done(function(user){
+     // $('#showgig-modal').append("<li>USER: " + user.currentUser._id + "</li>");
+
+
+    function toggleAttend(){
+      var gigArray = gig.attending;
+      var currentUser = user.currentUser._id
+        if($.inArray(currentUser, gigArray) != -1){
+          $('#showgig-modal').append(gigAttending);
+        }else{
+          $('#showgig-modal').append(gigNotAttending);
+        }
+    }
+
+    // IF OWNER, ADD EDIT AND DELETE BUTTONS
+      function toggleEdit(){
+        var gigOwner = gig.owner;
+        var currentUser = user.currentUser._id;
+          if(gigOwner == currentUser){
+            $('#showgig-modal').append(gigEditDelete);
+          }
+      }
+
+      toggleAttend();
+      toggleEdit();
+    });
+ });
 }
 
 // EDIT GIG
-
 function editGig(){
 
   // console.log('editing a gig');
@@ -135,7 +176,6 @@ function editGig(){
 }
 
 //UPDATE A GIG
-
 var updateGig = function(){
   event.preventDefault();
   var gig = {gig : {
@@ -170,36 +210,49 @@ var attendGig = function(){
     url: 'http://localhost:3000/gigs/'+$(this).data().id,
     data: attend
   }).done(function(data){
-    // not ideal
+
+    location.reload();
   });
 }
 
 
-// REMOVE GIG
 
+
+// REMOVE GIG
 function removeGig(){
   event.preventDefault();
-  console.log('removing gig');
   $.ajax({
     url:'http://localhost:3000/gigs/'+ $(this).data().id,
     type:'delete'
   })
+    location.reload();
+  }
 
-
-  location.reload();
-}
-
-
+//ATTEND A GIG
 var attendGig = function(){
-event.preventDefault();
+  event.preventDefault();
 
-$.ajax({
+  $.ajax({
     type: 'post',
-    url: 'http://localhost:3000/gigs/' + $(this).data().id,
+    url: 'http://localhost:3000/gigs/attend/' + $(this).data().id,
   }).done(function(data){
-    // not ideal
     location.reload();
   });
 
 };
+
+//UN-ATTEND A GIG
+var UnAttendGig = function(){
+  event.preventDefault();
+
+  $.ajax({
+    type: 'patch',
+    url: 'http://localhost:3000/gigs/attend/' + $(this).data().id,
+  }).done(function(data){
+
+    location.reload();
+  });
+
+}
+
 

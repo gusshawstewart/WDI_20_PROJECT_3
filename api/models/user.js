@@ -24,20 +24,6 @@ var userSchema = mongoose.Schema({
 
 });
 
-// var userSchema = mongoose.Schema({
-//   firstName: { type: String, unique: true, required: true },
-//   lastName: { type: String, unique: true, required: true },
-//   email:    { type: String, unique: true, required: true },
-//   passwordHash: { type: String, required: true },
-//   city: String,
-//   country: String,
-//   profile_photo: String,
-//   // owned_gigs: {},
-//   // attending_gigs: {},
-//   // follower_ids: [{type: Schema.Types.ObjectId, ref: 'Follower'}]
-
-// });
-
 userSchema.set('toJSON', {
   transform: function(document, json) {
     delete json.passwordHash;
