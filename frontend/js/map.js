@@ -110,7 +110,7 @@ function geocodeAddress(geocoder, resultsMap) {
     var marker = new google.maps.Marker({
         position: newCenter,
         map: gigInput.map,
-        icon: 'images/marker.png'
+        icon: 'images/marker2.png'
     });
 
     markers.push(marker);

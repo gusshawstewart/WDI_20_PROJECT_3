@@ -2,20 +2,21 @@ $(document).ready(function(){
 
 });
 
-var navLoggedIn = 
- "<ul class='nav navbar-nav navbar-right navLoggedIn '>" +
-   "<li><button type='button' class='btn' id='burger'> Sidebar </button></li>" +
-   "<li><button type='button' class='btn btn-secondary' id='btn-create' data-toggle='modal' data-target='#submitGig'> Add new </button></li>" +
-   "<li><button type='button' class='btn btn-secondary' id='btn-logout' data-toggle='modal' data-target='#logOut'> Log Out </button></li>" +
- "</ul>";
+  var navLoggedIn = 
+  "<ul class='nav navbar-nav navbar-right navLoggedIn '>" +
+    "<li><a href='homepage.html' ><img class='showHome' src='images/lineup-logo.jpg'></a></li>" +
+    "<li><button type='button' class='btn' id='burger'> Sidebar </button></li>" +
+    "<li><button type='button' class='btn btn-secondary' id='btn-create' data-toggle='modal' data-target='#submitGig'> Add new </button></li>" +
+    "<li><button type='button' class='btn btn-secondary' id='btn-logout' data-toggle='modal' data-target='#logOut'> Log Out </button></li>" +
+  "</ul>";
 
- var navLoggedOut = 
- "<ul class='nav navbar-nav navbar-right navLoggedOut'>" +
+  var navLoggedOut = 
+  "<ul class='nav navbar-nav navbar-right navLoggedOut'>" +
+  "<li><a href='homepage.html' ><img class='showHome' src='images/lineup-logo.jpg'></a></li>" +      "<li><button type='button' class='btn' id='burger'> Sidebar </button></li>" +
+      "<li><button type='button' class='btn' id='btn-signup' data-toggle='modal' data-target='#signUp'> Sign up </button></li>" +
+      "<li><button type='button' class='btn' id='btn-login' data-toggle='modal' data-target='#logIn'> Log in </button></li>" +
+    "</ul>"; 
 
-     "<li><button type='button' class='btn' id='burger'> Sidebar </button></li>" +
-     "<li><button type='button' class='btn' id='btn-signup' data-toggle='modal' data-target='#signUp'> Sign up </button></li>" +
-     "<li><button type='button' class='btn' id='btn-login' data-toggle='modal' data-target='#logIn'> Log in </button></li>" +
-   "</ul>";
 
 // CREATE SESSION WITH TOKEN (LOGIN)
 function createSession(){
@@ -49,7 +50,7 @@ if(token) {
 
   var ajax = $.get('http://localhost:3000/currentUser')
   .done(function(user){
-    $('.navLoggedIn').prepend("<li><button type='button' class='btn show-user btn-create' id='btn-create' data-toggle='modal' data-target='#showUser'> Hello, " + user.currentUser.firstName + "</button></li>") 
+    $('.navLoggedIn').append("<li><button type='button' class='btn show-user btn-create' id='btn-create' data-toggle='modal' data-target='#showUser'> Hello, " + user.currentUser.firstName + "</button></li>") 
   });
 
 }else {
@@ -151,6 +152,7 @@ function createUser(){
     location.reload();
   });
 
+
 }
 
 // EDIT USER
@@ -208,38 +210,3 @@ var updateUser = function(){
             }); 
 });
 }
-
-
-  // console.log('editing a user');
-//   var user = testUser;
-//     $("input#edit-firstname").val(user.firstname),
-//     $("input#edit-lastname").val(user.lastname),
-//     $("input#edit-city").val(user.city),
-//     $("select#edit-country").val(user.country)
-
-//   $('#edit-user-form').on('submit', updateUser);
-
-
-
-// var updateUser = function(){
-//   event.preventDefault();
-//   var user= {
-//  "fistname": $("input#edit-firstname").val(),
-//  "lastname": $("input#edit-lastname").val(),
-//  "city": $("input#edit-city").val(), 
-//  "country": $("select#edit-country").val()
-//   };
-//   $.ajax({
-//     method: 'patch',
-//     url: 'http://localhost:3000/users/'+$(this).data().id,
-//     data: user
-//   }).done(function(data){
-//     // not ideal
-//     location.reload();
-//   });
-// }
-
-
-
-
-

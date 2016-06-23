@@ -18,7 +18,7 @@ $('#reg-gigphoto').fileupload({
         }
     });
 
-function getGigs(){
+
 
 $('#reg-gigtrack').fileupload({
         dataType: 'json',
@@ -32,7 +32,7 @@ $('#reg-gigtrack').fileupload({
             $("#reg-gig-track").data('filename'  , file.name);
         }
     });
-}
+
 
 
 function getGigs(){
@@ -92,8 +92,9 @@ function createGig(){
     $("input#gig-description").val(null),
     $("input#gig-time").val(null),
     $("input#gig-cost").val(null)
-
+  
     location.reload()
+
   });
 
 }
@@ -122,7 +123,9 @@ function addGig(gig){
       infowindow.open(gigInput.map, marker);
     });
 
+
 if (gig.distance < 5){
+
 
   var gigIndex =
   "<tr id='music-trigger'><td id='table-style'>" +
