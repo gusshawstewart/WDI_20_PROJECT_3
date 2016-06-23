@@ -18,17 +18,34 @@ $('#reg-gigphoto').fileupload({
         }
     });
 
+
+
+$('#reg-gigtrack').fileupload({
+        dataType: 'json',
+        done: function (e, data) {
+
+            var file = data.result.files[0];
+            
+            var audio = $("<img></img>").attr('src' , "http://localhost:3000/uploads/thumbnail/" + file.name);
+
+            $("#reg-gig-track").append(audio);
+            $("#reg-gig-track").data('filename'  , file.name);
+        }
+    });
+
+
+
 function getGigs(){
-
 var token = window.localStorage.getItem('token');
-  if(token) {
+ if(token) {
 
-  var ajax = $.get('http://localhost:3000/currentUser')
-   .done(function(user){
-   });
+ var ajax = $.get('http://localhost:3000/currentUser')
+  .done(function(user){
+  });
 
 }
- 
+  
+
 $.ajax({
   url:'http://localhost:3000/gigs',
   type:'get',
@@ -63,7 +80,10 @@ function createGig(){
       "datetime": $("input#datetimepicker2").val(),
       "cost": $("input#gig-cost").val(),
       "gig_photo" : $("#reg-gigphoto-image").data('filename'),
-      "gig_track" : $("#reg-gigtrack").data('filename')
+      "gig_track" : $("#reg-gig-track").data('filename')
+      // UPLOAD SONG
+      // "gig_track" : $("#reg-gigtrack").data('filename')
+
     }}
   }).done(function(data){
     // console.log(data);
@@ -72,8 +92,9 @@ function createGig(){
     $("input#gig-description").val(null),
     $("input#gig-time").val(null),
     $("input#gig-cost").val(null)
-
+  
     location.reload()
+
   });
 
 }
@@ -83,7 +104,7 @@ function addGig(gig){
 
   //add marker to map
      // Clear out the old markers.
-
+     console.log(gig)
     var currentLatLng = new google.maps.LatLng(gig.gig.lat, gig.gig.lng);
     
 
@@ -91,7 +112,8 @@ function addGig(gig){
             position: currentLatLng,
             map: gigInput.map
         });
-    markers.push(marker);
+  
+    markers.push(marker)
 
   // add map info window
     var infowindow = new google.maps.InfoWindow({
@@ -103,8 +125,8 @@ function addGig(gig){
       infowindow.open(gigInput.map, marker);
     });
 
-
   if (gig.distance < 5) {
+
 
   var gigIndex =
   "<tr id='music-trigger'><td id='table-style'>" +
@@ -133,6 +155,7 @@ function addGig(gig){
     $("#music-trigger").mouseleave(function(){
       marker.setIcon('images/marker.png')
     });
+
   }
 
 }

@@ -7,7 +7,7 @@ navigator.geolocation.getCurrentPosition(function(position){
   var marker = new google.maps.Marker({
       position: latlng,
       map: gigInput.map,
-      icon: 'images/marker.png'
+      icon: 'images/marker2.png'
   });
 
   markers.push(marker);
@@ -88,6 +88,5 @@ $('#navbar').hover(
   function(){$(this).addClass('background-off')
 })
 
-
-
 });
+

@@ -322,10 +322,8 @@ padding: 10px;
 
 nav img {
   height: 50px;
-  width: 40px;
+  /*width: 40px;*/
   padding: 0px;
-  margin-left: 10px;
-  margin-top: 10px;
   
 }
 
@@ -370,6 +368,17 @@ nav img {
  margin: 0 auto;
 }
 
+#navbar a{
+  margin: 0;
+  padding: 0;
+  color:0;
+  display: inline;  
+}
+
+i{
+  color: white;
+}
+
 @media only screen and (max-width: 1200px){
   #sidemenu{
     width: 200px;
@@ -378,11 +387,23 @@ nav img {
 
 @media only screen and (max-width: 850px){
   #sidemenu{
-    display: none !important;
+    display: none;
   }
-  .nav{
-    display: inline;
+
+  #navbar li{
+    display: inline !important;
+  }
+
+  ul.nav{
+    margin-left: 30px !important;
+  }
+
+  img.showHome{
+    position: fixed;
+    top:0;
+    left:0;
   }
 }
+
 
 
