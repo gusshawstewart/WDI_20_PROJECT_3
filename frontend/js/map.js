@@ -37,7 +37,7 @@ function initMap() {  console.log('initialising map');
   }
 
 function geocodeAddress(geocoder, resultsMap) {
-    var address = document.getElementById('address').value;
+    // var address = document.getElementById('address').value;
     var searchBox = document.getElementById('address');
     var autocomplete = new google.maps.places.Autocomplete(searchBox);
     geocoder.geocode({'address': address}, function(results, status) {
