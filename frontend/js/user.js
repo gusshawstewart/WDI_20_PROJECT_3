@@ -71,47 +71,39 @@ var token = window.localStorage.getItem('token');
 function showUser(){
 //using hard coded user id in url link
 var ajax = $.get('http://localhost:3000/currentUser')
- .done(function(user){
+.done(function(user){
 
-    $('#showuser-modal').empty();
-    $.ajax({
-      method: 'GET',
-      url: 'http://localhost:3000/users/' + user.currentUser._id
-      // + $(this).data()._id
-      // + $(this).data().id
-    }).done(function(data){
-      console.log("ajax is listening");
+   $('#showuser-modal').empty();
+   $.ajax({
+     method: 'GET',
+     url: 'http://localhost:3000/users/' + user.currentUser._id
+     // + $(this).data()._id
+     // + $(this).data().id
+   }).done(function(data){
+     console.log("ajax is listening");
 
-      var editUser = "<li><a href='#' class='edit-user' data-dismiss='modal' data-toggle='modal' data-target='#edit-user' data-id='"+user.currentUser._id+"'>Edit</a></div></li>";
+     var editUser = "<li><a href='#' class='edit-user' data-dismiss='modal' data-toggle='modal' data-target='#edit-user' data-id='"+user.currentUser._id+"'>Edit</a></div></li>";
 
-      var userShow =
-      "<li> <img src='../api/uploads/" + user.profile_photo + "'></li>" +
-      "<li>First Name: " + user.currentUser.firstName + "</li>"+
-      "<li>Last Name: " + user.currentUser.lastName + "</li>" +
-      "<li>City: " + user.currentUser.city + "</li>" +
-      "<li>Country: " + user.currentUser.country + "</li>";
+     var userShow =
+     "<li> <img src='../api/" + user.currentUser.profile_photo + "'></li>" +
+     "<li>First Name: " + user.currentUser.firstName + "</li>"+
+     "<li>Last Name: " + user.currentUser.lastName + "</li>" +
+     "<li>City: " + user.currentUser.city + "</li>" +
+     "<li>Country: " + user.currentUser.country + "</li>";
 
-      $('#showuser-modal').prepend(userShow);
+     $('#showuser-modal').prepend(userShow);
 
-      function toggleEdit(){
-        var currentUser = user.currentUser._id;
-          if(currentUser){
-            $('#showuser-modal').append(editUser);
-          }
-      }
+     function toggleEdit(){
+       var currentUser = user.currentUser._id;
+         if(currentUser){
+           $('#showuser-modal').append(editUser);
+         }
+     }
 
-      toggleEdit();
-    });
+     toggleEdit();
+   });
 
-
-    function toggleEdit(){
-      var currentUser = user.currentUser._id;
-        if(currentUser){
-          $('#showuser-modal').append(editDelete);
-        }
-    }
-
-  });
+});
 }
 
 // // REGISTER

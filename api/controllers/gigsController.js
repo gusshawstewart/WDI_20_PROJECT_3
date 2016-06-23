@@ -150,10 +150,7 @@ function gigsUnAttend(req, res){
 }
 
 
-function gigsAttend(req, res){
 
-console.log("reached attending function");
-}
 
 
 module.exports = {

@@ -27,7 +27,7 @@ router.get('/users', usersController.index);
 router.get('/currentUser', usersController.currentUser);
 
 router.route('/users/:id')
-  .all(checkForToken)
+  // .all(checkForToken)
   .get(usersController.show)
   .put(usersController.update)
   .delete(usersController.delete)

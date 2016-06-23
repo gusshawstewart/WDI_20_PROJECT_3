@@ -21,12 +21,17 @@ $('#reg-gigphoto').fileupload({
 
 
 
-function getGigs(){
 
-var ajax = $.get('http://localhost:3000/currentUser')
- .done(function(user){
- });
- 
+function getGigs(){
+var token = window.localStorage.getItem('token');
+ if(token) {
+
+ var ajax = $.get('http://localhost:3000/currentUser')
+  .done(function(user){
+  });
+
+}
+  
 $.ajax({
   url:'http://localhost:3000/gigs',
   type:'get',
