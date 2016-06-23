@@ -132,10 +132,30 @@ li {
   color: black;
 }
 
+
 .right-item {
   float: right;
   margin-right: 15px;
 }
+
+.navbar-fixed-bottom {
+  height: 30vh;
+  opacity: 0.6;
+}
+
+.navbar-fixed-bottom:hover {
+  opacity: 0.9;
+  background-color: rgba(240,255,255,0.5);
+}
+
+.navbar-fixed-bottom:hover ul {
+  background-color: rgba(240,255,255,0.5);
+}
+
+#table-style {
+  background-color: rgba(240,255,255,0.5);
+}
+
 
 /*Google map*/
 
@@ -302,6 +322,9 @@ padding: 10px;
   text-align: right;
   color:black;
 }
+
+
+
 
 /*modals and forms*/
 
