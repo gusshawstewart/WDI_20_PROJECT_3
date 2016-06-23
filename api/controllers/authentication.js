@@ -8,7 +8,8 @@ function login(req, res) {
     if(err) return res.send(500).json({ message: err });
     if(!user || !user.validatePassword(req.body.password)) return res.status(401).json({ message: "Unauthorized" });
 
-    var payload = { _id: user._id };
+    var payload = {_id: user._id};
+
     var token   = jwt.sign(payload, secret, {expiresIn: 60*60*24 });
 
     return res.status(200).json({ message: "Login successful", user: user , token: token });

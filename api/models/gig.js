@@ -4,13 +4,12 @@ var gigSchema = mongoose.Schema({
 title:{ type: String},
 description: String,
 datetime: { type: Date},
-lng: { type: String},
-lat: { type: String},
+lat: Number,
+lng: Number,
 cost: String,
 owner: {type: mongoose.Schema.ObjectId, ref: 'User'},
 attending: [{type: mongoose.Schema.ObjectId, ref: 'User'}],
 gig_photo: String
-
 });
 
 gigSchema.pre('remove', function(next){

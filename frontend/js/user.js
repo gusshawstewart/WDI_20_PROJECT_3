@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+  
 });
 
   var navLoggedIn = 
@@ -112,12 +112,12 @@ var ajax = $.get('http://localhost:3000/currentUser')
       toggleEdit();
     });
 
-    // function toggleEdit(){
-    //   var currentUser = user.currentUser._id;
-    //     if(currentUser){
+    function toggleEdit(){
+      var currentUser = user.currentUser._id;
+        if(currentUser){
           $('#showuser-modal').append(editDelete);
-    //     }
-    // }
+        }
+    }
 
   });
 }
@@ -263,5 +263,3 @@ $.ajax({
     });
 
   }
-
-
