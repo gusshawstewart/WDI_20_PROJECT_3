@@ -9,12 +9,12 @@ $('#reg-gigphoto').fileupload({
         dataType: 'json',
         done: function (e, data) {
 
-            var file = data.result.files[0];
-            
-            var image = $("<img></img>").attr('src' , "http://localhost:3000/uploads/thumbnail/" + file.name);
+        var file = data.result.files[0];
+        
+        var image = $("<img></img>").attr('src' , "http://localhost:3000/uploads/thumbnail/" + file.name);
 
-            $("#reg-gigphoto-image").append(image);
-            $("#reg-gigphoto-image").data('filename'  , file.name);
+        $("#reg-gigphoto-image").append(image);
+        $("#reg-gigphoto-image").data('filename'  , file.name);
         }
     });
 
@@ -66,8 +66,8 @@ function createGig(){
       "gig_track" : $("#reg-gigtrack").data('filename')
     }}
   }).done(function(data){
-    console.log(data);
-    addGig(data);
+    // console.log(data);
+    // addGig(data);
     $("input#gig-title").val(null),
     $("input#gig-description").val(null),
     $("input#gig-time").val(null),
@@ -86,6 +86,7 @@ function addGig(gig){
 
     var currentLatLng = new google.maps.LatLng(gig.gig.lat, gig.gig.lng);
     
+
     var marker = new google.maps.Marker({
             position: currentLatLng,
             map: gigInput.map
@@ -103,11 +104,12 @@ function addGig(gig){
     });
 
 
+  if (gig.distance < 5) {
 
   var gigIndex =
   "<tr id='music-trigger'><td id='table-style'>" +
   "<ul id='gigs-side-listing'>" +
-  "<li> <img src='http://localhost:3000/uploads/thumbnail/" + gig.gig_photo + "'></li>" +
+  "<li> <img src='http://localhost:3000/uploads/thumbnail/" + gig.gig.gig_photo + "'></li>" +
   "<li>Distance: " + gig.distance + "ml</li>" + 
   "<li>Time: " + gig.gig.datetime + "</li>" + 
   "<li> Title: " + gig.gig.title + "</li>" + 
@@ -131,8 +133,7 @@ function addGig(gig){
     $("#music-trigger").mouseleave(function(){
       marker.setIcon('images/marker.png')
     });
-
-
+  }
 
 }
 
