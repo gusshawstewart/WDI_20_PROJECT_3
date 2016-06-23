@@ -26,7 +26,7 @@ $('#reg-gigtrack').fileupload({
 
             var file = data.result.files[0];
             
-            var audio = $("<img></img>").attr('src' , "http://localhost:3000/uploads/thumbnail/" + file.name);
+            var audio = $("<p></p>").attr( file.name);
 
             $("#reg-gig-track").append(audio);
             $("#reg-gig-track").data('filename'  , file.name);
