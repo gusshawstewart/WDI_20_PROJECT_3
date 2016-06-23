@@ -9,7 +9,7 @@ var cors           = require('cors');
 var routes         = require('./config/routes');
 var upload = require('jquery-file-upload-middleware');
 
-mongoose.connect('mongodb://localhost:27017/lineup');
+mongoose.connect('mongodb://localhost:27017/lineup3');
 app.use(express.static('public'));
 
 // MIDDLEWARE

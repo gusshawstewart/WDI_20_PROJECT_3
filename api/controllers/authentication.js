@@ -23,7 +23,7 @@ function register(req, res) {
 
   var user = new User(req.body);
   // PROFILE PHOTO UPLOADER PATH
-  user.profile_photo = req.file.path
+  // user.profile_photo = req.file.path
   user.save(function(err, user) {
 
     if(err) return res.status(500).json({ message: err });
