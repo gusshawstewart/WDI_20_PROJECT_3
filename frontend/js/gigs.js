@@ -143,12 +143,12 @@ function showGig(){
    var gigTime = gig.datetime.substring(11, 16);
 
    var gigShow =
-   "<li> <img src='" + gig.gig_photo + "'></li>" +
-   "<li>" + gig.title + "</li>" +
+   "<li> <div class='imageWrapper'><img class='showImage' src='http://localhost:3000/uploads/thumbnail/" + gig.gig_photo + "'></div></li>" +
+   "<div class='showInfo showGig'><li>" + gig.title + "</li>" +
    "<li>" + gig.description + "</li>" +
    "<li>Date: " + gigDate + "</li>" +
    "<li>Time: " + gigTime + "</li>" +
-   "<li>Cost: " + gig.cost + "</li>";
+   "<li>Cost: " + gig.cost + "</li></div>";
 
 
    var gigEditDelete =  
@@ -172,9 +172,9 @@ function showGig(){
       var gigArray = gig.attending;
       var currentUser = user.currentUser._id
         if($.inArray(currentUser, gigArray) != -1){
-          $('#showgig-modal').append(gigAttending);
+          $('.showGig').append(gigAttending);
         }else{
-          $('#showgig-modal').append(gigNotAttending);
+          $('.showGig').append(gigNotAttending);
         }
     }
 
@@ -183,7 +183,7 @@ function showGig(){
         var gigOwner = gig.owner;
         var currentUser = user.currentUser._id;
           if(gigOwner == currentUser){
-            $('#showgig-modal').append(gigEditDelete);
+            $('.showGig').append(gigEditDelete);
           }
       }
 

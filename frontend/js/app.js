@@ -52,11 +52,12 @@ console.log("gig input is" + gigInput.location);
 });
 
 $(document).ready(function(){
-  $('.navmenu').offcanvas({toggle: true, autohide: false, disableScrolling: false, canvas: 'map-canvas'})
+  $('.navmenu').offcanvas({toggle: true, autohide: false, disableScrolling: false, canvas: 'map-canvas'});
 
-  $('#burger').click(function(){
-   $('#sidemenu').offcanvas('toggle');
-  })
+  // $('#burger').click(function(){
+  //  $('#sidemenu').offcanvas('toggle');
+  // });
+
 
   $("#btn-create").click(function(e){
    e.preventDefault();
@@ -99,7 +100,36 @@ $('#navbar').hover(
 $('.down').click(function() {
   $('html body').animate({
     scrollTop: $(".index").offset().top
-  }, 800);
+  }, 800, function() {
+     $('.homepage').hide()
+     $('#sidemenu').show();
+  });
 });
+
+// show homepage again
+
+$('.showHome').click(function(e){
+ e.preventDefault();
+ $('.homepage').show(); 
+});
+
+// Don't show sidemenu with homepage
+if($('.homepage').show()){
+  $('#sidemenu').hide();
+}
+
+// toggle sidemenu
+$('#burger').click(function(){
+
+  if($('#sidemenu').show()){
+    $('#sidemenu').hide();
+  }else{
+  $('#sidemenu').show()
+  }
+
+});
+
+
+
 
 });

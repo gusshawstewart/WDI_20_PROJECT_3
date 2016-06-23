@@ -10,7 +10,7 @@ $(document).ready(function(){
   "</ul>";
 
   var navLoggedOut = 
-  "<ul class='nav navbar-nav navbar-right col-sm-8 navLoggedOut'>" +
+  "<ul class='nav navbar-nav navbar-right col-sm-8 navLoggedOut collapse navbar-collapse'>" +
       "<li><button type='button' class='btn' id='burger'> Sidebar </button></li>" +
       "<li><button type='button' class='btn' id='btn-signup' data-toggle='modal' data-target='#signUp'> Sign up </button></li>" +
       "<li><button type='button' class='btn' id='btn-login' data-toggle='modal' data-target='#logIn'> Log in </button></li>" +
@@ -85,20 +85,22 @@ var ajax = $.get('http://localhost:3000/currentUser')
       var editUser = "<li><a href='#' class='edit-user' data-dismiss='modal' data-toggle='modal' data-target='#edit-user' data-id='"+user.currentUser._id+"'>Edit</a></div></li>";
 
       var userShow =
-      "<li> <img src='../api/" + user.currentUser.profile_photo + "'></li>" +
-      "<li>First Name: " + user.currentUser.firstName + "</li>"+
+      "<li> <div class='imageWrapper'><img class='showImage' src='../api/" + user.currentUser.profile_photo + "'></div></li>" +
+      "<div class='showInfo userInfo'><li>First Name: " + user.currentUser.firstName + "</li>"+
       "<li>Last Name: " + user.currentUser.lastName + "</li>" +
       "<li>City: " + user.currentUser.city + "</li>" +
-      "<li>Country: " + user.currentUser.country + "</li>";
+      "<li>Country: " + user.currentUser.country + "</li></div>";
 
       $('#showuser-modal').prepend(userShow);
 
       function toggleEdit(){
         var currentUser = user.currentUser._id;
           if(currentUser){
-            $('#showuser-modal').append(editUser);
+            $('.userInfo').append(editUser);
           }
       }
+
+      // $('.userImage').css("border-radius", "25%");
 
       toggleEdit();
     });
