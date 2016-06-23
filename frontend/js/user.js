@@ -3,24 +3,14 @@ $(document).ready(function(){
 });
 
   var navLoggedIn = 
-  "<ul class='nav navbar-nav navbar-right col-sm-8 navLoggedIn'>" +
-    "<button type='button' class='navbar-toggle' data-toggle='offcanvas' data-target='.navmenu' data-canvas='body'>" +
-      "<span class='icon-bar'></span>" +
-      "<span class='icon-bar'></span>" +
-      "<span class='icon-bar'></span>" +
-    "</button>" +
+  "<ul class='nav navbar-nav navbar-right navLoggedIn'>" +
     "<li><button type='button' class='btn' id='burger'> Sidebar </button></li>" +
-    "<li><button type='button' class='btn' id='btn-create' data-toggle='modal' data-target='#submitGig'> Add new </button></li>" +
-    "<li><button type='button' class='btn' id='btn-logout' data-toggle='modal' data-target='#logOut'> Log Out </button></li>" +
+    "<li><button type='button' class='btn btn-secondary' id='btn-create' data-toggle='modal' data-target='#submitGig'> Add new </button></li>" +
+    "<li><button type='button' class='btn btn-secondary' id='btn-logout' data-toggle='modal' data-target='#logOut'> Log Out </button></li>" +
   "</ul>";
 
   var navLoggedOut = 
   "<ul class='nav navbar-nav navbar-right col-sm-8 navLoggedOut'>" +
-      "<button type='button' class='navbar-toggle' data-toggle='offcanvas' data-target='.navmenu' data-canvas='body'>" +
-        "<span class='icon-bar'></span>" +
-        "<span class='icon-bar'></span>" +
-        "<span class='icon-bar'></span>" +
-      "</button>" +
       "<li><button type='button' class='btn' id='burger'> Sidebar </button></li>" +
       "<li><button type='button' class='btn' id='btn-signup' data-toggle='modal' data-target='#signUp'> Sign up </button></li>" +
       "<li><button type='button' class='btn' id='btn-login' data-toggle='modal' data-target='#logIn'> Log in </button></li>" +

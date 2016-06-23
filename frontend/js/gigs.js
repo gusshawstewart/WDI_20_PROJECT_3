@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  getGigs();
+  // getGigs();
 
 
 });
@@ -101,17 +101,15 @@ function addGig(gig){
 
 
   var gigIndex =
-  "<tr id='music-trigger'><td>" +
+  "<tr id='music-trigger'><td id='table-style'>" +
   "<ul id='gigs-side-listing'>" +
   "<li> <img src='http://localhost:3000/uploads/thumbnail/" + gig.gig_photo + "'></li>" +
-  "<li>Distance:" + gig.distance + "</li>" + 
+  "<li>Distance: " + gig.distance + "ml</li>" + 
   "<li> Title: " + gig.title + "</li>" + 
   "<li> Description: " + gig.description + "</li>" +
   "<li> Cost: " + gig.cost + "</li>" +
   // "<a data-id='"+gig._id+"' class='show' href='#'>Show</a>" 
-  "<a href='#' data-toggle='modal' data-target='#showGig' data-id='" + gig._id + "' class='show-gig'>Show</a>" +
-  "</ul>" +
-  "</tr> </td>"
+  "<a href='#' data-toggle='modal' data-target='#showGig' data-id='" + gig._id + "' class='show-gig'>Show</a>"
 
   $("#gigs-side-listing").prepend(gigIndex)
 
@@ -296,9 +294,28 @@ var UnAttendGig = function(){
 
     location.reload();
   });
-
 }
 
+//TEST API CALL
 
+function getExternalData() {
+$.ajax({
+  url:'http://api.bandsintown.com/events/recommended.json',
+  type:'get',
+  jsonp: "callback",
+  dataType: "jsonp",
+  data: { 
+    artists: ["Skrillex"],
+    // location: {lat: 51.506178, lon:-0.088369},
+    location: "New York",
+    format: 'json',
+    app_id: "team_scheme"
+  }
+  }).done(function(data){
+    $.each(data, function(index, data){
+      console.log(data)
 
+  });
+});
 
+}

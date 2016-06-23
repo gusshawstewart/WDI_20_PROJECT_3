@@ -26,31 +26,6 @@
   <source src="audio/beep.ogg"></source>
 </audio>
  -->
-  <!-- SIDEBAR -->
-  <nav id='sidemenu' class="navmenu navmenu-default navmenu-fixed-left offcanvas col-sm-2" role="navigation">
-    <a class="navmenu-brand" href="#">LineUp</a>
-
-    <div id="custom-search-input">
-      <div class="input-group col-md-12">
-        <input type="text" class="  search-query form-control" placeholder="Search" />
-        <span class="input-group-btn">
-         <button class="btn btn-danger" type="button">
-           <span class=" glyphicon glyphicon-search"></span>
-         </button>
-       </span>
-     </div>
-   </div>
-
-   <table class="table table-striped table-hover">
-    <tbody data-link="row" class="rowlink" id="gigs-side-listing">
-
-    </tbody>
-  </table>
-
-  <ul id="gig-sidelisting">
-  </ul>
-
-</nav>
 
 <!-- HOMEPAGE -->
 <!-- <section class="homepage">
@@ -69,6 +44,9 @@
 
 <!-- TOP NAVBAR - SEE USER.JS -->
 <nav id='navbar'  class="navbar navbar-light" data-spy="affix" data-offset-top="500">
+
+<img src="images/lineup-logo.jpg">
+
 </nav>
 
 <!-- Sign up modal -->
@@ -84,7 +62,6 @@
 
  <!-- REGISTER FORM -->
  <div id="register">
-
 
    <form class="form-horizontal" role="form" id="new-user" enctype="multipart/form-data">
      <div class="form-group">
@@ -254,13 +231,13 @@
             <div id="reg-gigphoto-image"></div>
           </div>
 
+
           <div class="form-group">
             <label for="gig_track">Gig Track</label>
             <input id="reg-gigtrack" type="file" name="files[]" data-url="http://localhost:3000/upload">
             <div id="reg-gigtrack"></div>
           </div>
 
-     
 
          <div class="form-group">
            <button type="submit" class="btn btn-default createGig"  data-dismiss="modal">Submit</button> 
@@ -269,12 +246,10 @@
   
      <!-- END OF GIG FORM-->
      <div id="floating-panel">
-           <input id="address" type="textbox" value="Sydney, NSW">
-           <input id="submit-geocode" type="button" value="Geocode">
+           <input id="address" type="textbox">
+           <input id="submit-geocode" type="button" value="Search">
          </div>
-      <div class="modal-body" id="maphere">
-
-          
+      <div class="modal-body" id="maphere">         
       </div>
        
      </div>
@@ -471,6 +446,15 @@
 </div>
 
 </section>
+</div>
+
+<div class="navbar-default navbar-fixed-bottom">
+ <!--  <div class="container-fluid"> -->
+  <table class="table table-striped table-hover">
+   <tbody data-link="row" class="rowlink" id="gigs-side-listing">
+
+   </tbody>
+ </table>
 </div>
 
 
