@@ -192,94 +192,90 @@ $.post("http://localhost:3000/login", {
 // EDIT USER
   function editUser(){
 
-    var testUser = 
-      {
-      email: "bob@bob",
-      firstname: "Bob", 
-      lastname: "Smith",
-      profilePic: "images/user.jpeg",
-      city: "London",
-      country: "GB"
-      }
-    
+    var ajax = $.get('http://localhost:3000/currentUser')
+    .done(function(user){
+
+    $('#submitUserUpdate').attr('data-id', user.currentUser._id); 
+
+  
     console.log('editing a user');
-    // $.ajax({
-    //   method: 'get',
-    //   url: 'http://localhost:3000/gigs/'+$(this).data().id
-    // }).done(function(user){
 
-    //   $("input#edit-firstname").val(user.firstname),
-    //   $("input#edit-lastname").val(user.lastname),
-    //   $("input#edit-city").val(user.city),
-    //   $("select#edit-country").val(user.country)
-    // });
-    var user = testUser;
 
-      $("input#edit-firstname").val(user.firstname),
-      $("input#edit-lastname").val(user.lastname),
-      $("input#edit-city").val(user.city),
-      $("select#edit-country").val(user.country)
+    $.ajax({
+      method: 'get',
+      url: 'http://localhost:3000/users/'+ user.currentUser._id
+    }).done(function(person){
+        console.log(person);
+      $("input#edit-firstname").val(person.currentUser.firstName),
+      $("input#edit-lastname").val(person.currentUser.lastName),
+      $("input#edit-city").val(person.currentUser.city),
+      $("select#edit-country").val(person.currentUser.country)
+    });
 
-    $('#edit-user-form').on('submit', updateUser);
-  }
+      // $("input#edit-firstname").val(person.firstname),
+      // $("input#edit-lastname").val(person.lastname),
+      // $("input#edit-city").val(person.city),
+      // $("select#edit-country").val(person.country);
+
+    // $('#edit-user-form').on('submit', updateUser);
+  })
+}
 
   var updateUser = function(){
     event.preventDefault();
-    var user= {
-     "fistname": $("input#edit-firstname").val(),
-     "lastname": $("input#edit-lastname").val(),
-     "city": $("input#edit-city").val(), 
-     "country": $("select#edit-country").val()
-      };
-    $.ajax({
-      method: 'patch',
-      url: 'http://localhost:3000/users/'+$(this).data().id,
-      data: user
-    }).done(function(data){
-      // not ideal
-      location.reload();
-    });
-
-
+    console.log("listening to update");
   
-  console.log('editing a user');
-  // $.ajax({
-  //   method: 'get',
-  //   url: 'http://localhost:3000/gigs/'+$(this).data().id
-  // }).done(function(user){
+          var ajax = $.get('http://localhost:3000/currentUser')
+          .done(function(user){
 
-  //   $("input#edit-firstname").val(user.firstname),
-  //   $("input#edit-lastname").val(user.lastname),
-  //   $("input#edit-city").val(user.city),
-  //   $("select#edit-country").val(user.country)
-  // });
-  var user = testUser;
+      
+          var person = { user: { 
+           "firstName": $("input#edit-firstname").val(),
+           "lastName": $("input#edit-lastname").val(),
+           "city": $("input#edit-city").val(), 
+           "country": $("select#edit-country").val()
+            }};
 
-    $("input#edit-firstname").val(user.firstname),
-    $("input#edit-lastname").val(user.lastname),
-    $("input#edit-city").val(user.city),
-    $("select#edit-country").val(user.country)
+            $.ajax({
+              method: 'patch',
+              url: 'http://localhost:3000/users/'+ user.currentUser._id,
+              data: person
+              }).done(function(data){
+              // not ideal
+              location.reload();
+           }); 
+      });
+  }
 
-  $('#edit-user-form').on('submit', updateUser);
-}
 
-var updateUser = function(){
-  event.preventDefault();
-  var user= {
- "fistname": $("input#edit-firstname").val(),
- "lastname": $("input#edit-lastname").val(),
- "city": $("input#edit-city").val(), 
- "country": $("select#edit-country").val()
-  };
-  $.ajax({
-    method: 'patch',
-    url: 'http://localhost:3000/users/'+$(this).data().id,
-    data: user
-  }).done(function(data){
-    // not ideal
-    location.reload();
-  });
-}
+  // console.log('editing a user');
+//   var user = testUser;
+//     $("input#edit-firstname").val(user.firstname),
+//     $("input#edit-lastname").val(user.lastname),
+//     $("input#edit-city").val(user.city),
+//     $("select#edit-country").val(user.country)
+
+//   $('#edit-user-form').on('submit', updateUser);
+
+
+
+// var updateUser = function(){
+//   event.preventDefault();
+//   var user= {
+//  "fistname": $("input#edit-firstname").val(),
+//  "lastname": $("input#edit-lastname").val(),
+//  "city": $("input#edit-city").val(), 
+//  "country": $("select#edit-country").val()
+//   };
+//   $.ajax({
+//     method: 'patch',
+//     url: 'http://localhost:3000/users/'+$(this).data().id,
+//     data: user
+//   }).done(function(data){
+//     // not ideal
+//     location.reload();
+//   });
+// }
 
 
 

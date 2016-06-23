@@ -20,6 +20,19 @@ $('#reg-gigphoto').fileupload({
     });
 
 
+$('#reg-gigtrack').fileupload({
+        dataType: 'json',
+        done: function (e, data) {
+
+            var file = data.result.files[0];
+            
+            var audio = $("<img></img>").attr('src' , "http://localhost:3000/uploads/thumbnail/" + file.name);
+
+            $("#reg-gig-track").append(audio);
+            $("#reg-gig-track").data('filename'  , file.name);
+        }
+    });
+
 
 
 function getGigs(){
@@ -66,7 +79,8 @@ function createGig(){
       "lng": gigInput.coordinates.lng(), 
       "datetime": $("input#datetimepicker2").val(),
       "cost": $("input#gig-cost").val(),
-      "gig_photo" : $("#reg-gigphoto-image").data('filename')
+      "gig_photo" : $("#reg-gigphoto-image").data('filename'),
+      "gig_track" : $("#reg-gig-track").data('filename')
       // UPLOAD SONG
       // "gig_track" : $("#reg-gigtrack").data('filename')
     }}
