@@ -18,8 +18,6 @@ $('#reg-gigphoto').fileupload({
         }
     });
 
-
-
 $('#reg-gigtrack').fileupload({
         dataType: 'json',
         done: function (e, data) {

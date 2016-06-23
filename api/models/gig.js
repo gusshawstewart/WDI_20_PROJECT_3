@@ -9,7 +9,7 @@ lng: Number,
 cost: String,
 owner: {type: mongoose.Schema.ObjectId, ref: 'User'},
 attending: [{type: mongoose.Schema.ObjectId, ref: 'User'}],
-gig_photo: String,
+gig_photo: { type: String, default: 'lineup.jpg' },
 gig_track: String
 });
 
