@@ -18,7 +18,6 @@ $('#reg-gigphoto').fileupload({
         }
     });
 
-function getGigs(){
 
 $('#reg-gigtrack').fileupload({
         dataType: 'json',
@@ -32,7 +31,7 @@ $('#reg-gigtrack').fileupload({
             $("#reg-gig-track").data('filename'  , file.name);
         }
     });
-}
+
 
 
 function getGigs(){
