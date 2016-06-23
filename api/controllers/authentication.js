@@ -1,7 +1,8 @@
-var jwt    = require('jsonwebtoken');
-var User   = require('../models/user');
-var secret = require('../config/config').secret;
-var jwtDecode = require('jwt-decode');
+var jwt                      = require('jsonwebtoken');
+var User                     = require('../models/user');
+var secret                   = require('../config/config').secret;
+var jwtDecode                = require('jwt-decode');
+var User                     = require('../models/user');
 
 function login(req, res) {
   User.findOne({ email: req.body.email }, function(err, user) {
@@ -37,6 +38,7 @@ function register(req, res) {
 
 
   });
+
 }
 
 module.exports = {

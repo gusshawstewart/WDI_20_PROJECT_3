@@ -9,7 +9,8 @@ var cors           = require('cors');
 var routes         = require('./config/routes');
 var upload = require('jquery-file-upload-middleware');
 
-mongoose.connect('mongodb://localhost:27017/lineup_development2');
+mongoose.connect('mongodb://localhost:27017/lineup_groupdevelopment');
+
 app.use(express.static('public'));
 
 // MIDDLEWARE
@@ -28,8 +29,8 @@ app.use(routes);
 
   // configure upload middleware for file upload
   upload.configure({
-      uploadDir: __dirname + '/api/uploads',
-      uploadUrl: '/api/uploads',
+      uploadDir: __dirname + '/public/uploads',
+      uploadUrl: '/uploads',
       imageVersions: {
           thumbnail: {
               width: 80,
@@ -39,10 +40,9 @@ app.use(routes);
   });
 
 
-  app.use('/api/uploads', upload.fileHandler());
+  app.use('/upload', upload.fileHandler());
 
 
 app.listen(port, function() {
   console.log("Express is listening on port " + port);
 });
-

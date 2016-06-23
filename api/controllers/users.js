@@ -1,4 +1,3 @@
-
 var authenticationController = require('../controllers/authentication');
 var Gig                      = require("../models/gig");
 var jwtDecode                = require('jwt-decode');

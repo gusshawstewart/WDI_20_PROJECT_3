@@ -57,7 +57,6 @@ function gigsIndex(req, res){
     return res.status(200).send(sorted);
   });
 
-
 }
 
 
@@ -161,10 +160,6 @@ function gigsUnAttend(req, res){
 }
 
 
-function gigsAttend(req, res){
-
-console.log("reached attending function");
-}
 
 
 module.exports = {
