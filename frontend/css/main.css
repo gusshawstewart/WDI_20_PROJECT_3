@@ -158,7 +158,9 @@ li {
 
 #table-style {
   background-color: rgba(240,255,255,0.5);
+  display: inline;
 }
+
 
 
 

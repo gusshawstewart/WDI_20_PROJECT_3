@@ -37,8 +37,9 @@ $.ajax({
   }
   }).done(function(data){
     $.each(data, function(index, sortedArrayOfObjectElement){
-    sortedArrayOfObjectElement.gig.distance = sortedArrayOfObjectElement.distance
-    addGig(sortedArrayOfObjectElement.gig);
+    // sortedArrayOfObjectElement.gig.distance = sortedArrayOfObjectElement.distance
+    // addGig(sortedArrayOfObjectElement.gig);
+    addGig(sortedArrayOfObjectElement);
 
   });
 });
@@ -73,6 +74,8 @@ function createGig(){
     $("input#gig-description").val(null),
     $("input#gig-time").val(null),
     $("input#gig-cost").val(null)
+
+    location.reload()
   });
 
 }
@@ -82,8 +85,9 @@ function addGig(gig){
 
   //add marker to map
      // Clear out the old markers.
+
+    var currentLatLng = new google.maps.LatLng(gig.lat, gig.lng);
     
-    var currentLatLng = {lat: gig.lat, lng: gig.lng};
     var marker = new google.maps.Marker({
             position: currentLatLng,
             map: gigInput.map
@@ -106,6 +110,7 @@ function addGig(gig){
   "<ul id='gigs-side-listing'>" +
   "<li> <img src='http://localhost:3000/uploads/thumbnail/" + gig.gig_photo + "'></li>" +
   "<li>Distance: " + gig.distance + "ml</li>" + 
+  "<li>Time: " + gig.datetime + "</li>" + 
   "<li> Title: " + gig.title + "</li>" + 
   "<li> Description: " + gig.description + "</li>" +
   "<li> Cost: " + gig.cost + "</li>" +

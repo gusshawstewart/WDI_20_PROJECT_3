@@ -183,17 +183,15 @@ $.ajax({
   $("input#reg-lastname").val(null),
   $("input#reg-city").val(null),
   $("select#reg-country").val(null)
+
+  window.localStorage.setItem('token', data.token);
+  $.ajaxSetup({
+    headers: { 'Authorisation': 'Bearer ' + data.token }
+  }); 
+  location.reload();
 });
 
-$.post("http://localhost:3000/login", {
-  email: $('#login-email').val(),
-  password: $('#login-password').val()
- }).done(function(data) {
-   window.localStorage.setItem('token', data.token);
-   $.ajaxSetup({
-     headers: { 'Authorisation': 'Bearer ' + data.token }
-   }); 
-});
+
 
 }
 

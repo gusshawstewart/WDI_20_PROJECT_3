@@ -6,6 +6,11 @@ var secret                   = require('../config/config').secret;
 var User                     = require('../models/user');
 
 
+// Gig.find(function(err, gigs) {
+//   if(err) return res.status(500).json({ message: err });
+//   return res.status(200).json({ gigs: gigs });
+// });
+
 
 function gigsIndex(req, res){
 
@@ -34,25 +39,27 @@ function gigsIndex(req, res){
 
     for (var i = gigs.length - 1; i >= 0; i--) {
       
-      var distanceOfGig = 0.62137119 * getDistanceFromLatLonInKm(req.query.latitude, req.query.longitude, gigs[i].lat, gigs[i].lng);
+      var distanceOfGig = getDistanceFromLatLonInKm(req.query.latitude, req.query.longitude, gigs[i].lat, gigs[i].lng);
 
-      if (distanceOfGig < 2.65) {
+      // if (distanceOfGig < 4) {  
 
       var gigDistanceFromUser = {gig: gigs[i], distance: Math.round(distanceOfGig*2)/2}
       gigsToSort.push(gigDistanceFromUser);
-    }
+    // }
     }
     var sorted = gigsToSort.sort(
          function(a, b) {
              return b.distance - a.distance
          }  
      ) 
+    // keep this commented out for now
+    // sorted[0].gig.distance = sorted[0].distance
     return res.status(200).send(sorted);
-
   });
 
 
 }
+
 
 // THIS WILL MAKE THE LOGGED IN USER THE OWNER
 
@@ -72,7 +79,6 @@ function gigsCreate(req, res){
     console.log("THIS IS THE ERRRRRRROR" + err)
     console.log("THIS IS THE GIG" + gig)
     if (err) return res.status(500).send(err);
-
     res.status(201).send(gig)
   });
 
