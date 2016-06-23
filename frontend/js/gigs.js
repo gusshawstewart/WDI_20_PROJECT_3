@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  // getGigs();
+  getGigs();
 
 });
 
@@ -122,12 +122,12 @@ function addGig(gig){
       infowindow.open(gigInput.map, marker);
     });
 
-
+if (gig.distance < 5){
 
   var gigIndex =
   "<tr id='music-trigger'><td id='table-style'>" +
   "<ul id='gigs-side-listing'>" +
-  "<li> <img src='http://localhost:3000/uploads/thumbnail/" + gig.gig_photo + "'></li>" +
+  "<li> <img src='http://localhost:3000/uploads/thumbnail/" + gig.gig.gig_photo + "'></li>" +
   "<li>Distance: " + gig.distance + "ml</li>" + 
   "<li>Time: " + gig.gig.datetime + "</li>" + 
   "<li> Title: " + gig.gig.title + "</li>" + 
@@ -152,7 +152,7 @@ function addGig(gig){
       marker.setIcon('images/marker.png')
     });
 
-
+  }
 
 }
 

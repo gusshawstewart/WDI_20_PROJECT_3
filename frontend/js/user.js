@@ -3,19 +3,19 @@ $(document).ready(function(){
 });
 
 var navLoggedIn = 
-"<ul class='nav navbar-nav navbar-right navLoggedIn'>" +
-"<li><button type='button' class='btn' id='burger'> Sidebar </button></li>" +
-"<li><button type='button' class='btn btn-secondary' id='btn-create' data-toggle='modal' data-target='#submitGig'> Add new </button></li>" +
-"<li><button type='button' class='btn btn-secondary' id='btn-logout' data-toggle='modal' data-target='#logOut'> Log Out </button></li>" +
-"</ul>";
+ "<ul class='nav navbar-nav navbar-right navLoggedIn '>" +
+   "<li><button type='button' class='btn' id='burger'> Sidebar </button></li>" +
+   "<li><button type='button' class='btn btn-secondary' id='btn-create' data-toggle='modal' data-target='#submitGig'> Add new </button></li>" +
+   "<li><button type='button' class='btn btn-secondary' id='btn-logout' data-toggle='modal' data-target='#logOut'> Log Out </button></li>" +
+ "</ul>";
 
-var navLoggedOut = 
+ var navLoggedOut = 
+ "<ul class='nav navbar-nav navbar-right navLoggedOut'>" +
 
-"<ul class='nav navbar-nav navbar-right col-sm-8 navLoggedOut'>" +
-"<li><button type='button' class='btn' id='burger'> Sidebar </button></li>" +
-"<li><button type='button' class='btn' id='btn-signup' data-toggle='modal' data-target='#signUp'> Sign up </button></li>" +
-"<li><button type='button' class='btn' id='btn-login' data-toggle='modal' data-target='#logIn'> Log in </button></li>" +
-"</ul>"; 
+     "<li><button type='button' class='btn' id='burger'> Sidebar </button></li>" +
+     "<li><button type='button' class='btn' id='btn-signup' data-toggle='modal' data-target='#signUp'> Sign up </button></li>" +
+     "<li><button type='button' class='btn' id='btn-login' data-toggle='modal' data-target='#logIn'> Log in </button></li>" +
+   "</ul>";
 
 // CREATE SESSION WITH TOKEN (LOGIN)
 function createSession(){
