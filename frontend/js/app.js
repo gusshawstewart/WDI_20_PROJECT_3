@@ -88,6 +88,4 @@ $('#navbar').hover(
   function(){$(this).addClass('background-off')
 })
 
-
-
 });

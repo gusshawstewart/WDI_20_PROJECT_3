@@ -18,7 +18,6 @@ $('#reg-gigphoto').fileupload({
         }
     });
 
-
 $('#reg-gigtrack').fileupload({
         dataType: 'json',
         done: function (e, data) {
@@ -122,7 +121,9 @@ function addGig(gig){
       infowindow.open(gigInput.map, marker);
     });
 
-if(gig.distance < 5) {
+
+if (gig.distance < 5){
+
 
   var gigIndex =
   "<tr id='music-trigger'><td id='table-style'>" +

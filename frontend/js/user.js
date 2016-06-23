@@ -17,6 +17,7 @@ $(document).ready(function(){
       "<li><button type='button' class='btn' id='btn-login' data-toggle='modal' data-target='#logIn'> Log in </button></li>" +
     "</ul>"; 
 
+
 // CREATE SESSION WITH TOKEN (LOGIN)
 function createSession(){
   event.preventDefault();
