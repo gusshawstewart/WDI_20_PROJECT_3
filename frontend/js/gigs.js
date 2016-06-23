@@ -1,6 +1,7 @@
 $(document).ready(function(){
   getGigs();
 
+
 });
 
 console.log("gig.js loaded");
@@ -17,7 +18,6 @@ $('#reg-gigphoto').fileupload({
             $("#reg-gigphoto-image").data('filename'  , file.name);
         }
     });
-
 
 function getGigs(){
 
@@ -46,6 +46,7 @@ $.ajax({
 function createGig(){
   event.preventDefault();
 
+
 // check it this works without photo. 
   $.ajax({
     url:'http://localhost:3000/gigs',
@@ -59,6 +60,8 @@ function createGig(){
       "datetime": $("input#datetimepicker2").val(),
       "cost": $("input#gig-cost").val(),
       "gig_photo" : $("#reg-gigphoto-image").data('filename')
+      // UPLOAD SONG
+      // "gig_track" : $("#reg-gigtrack").data('filename')
     }}
   }).done(function(data){
     console.log(data);
@@ -161,6 +164,7 @@ function showGig(){
    var ajax = $.get('http://localhost:3000/currentUser')
     .done(function(user){
      // $('#showgig-modal').append("<li>USER: " + user.currentUser._id + "</li>");
+
 
     function toggleAttend(){
       var gigArray = gig.attending;
