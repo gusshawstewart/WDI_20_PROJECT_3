@@ -15,7 +15,6 @@ var User                     = require('../models/user');
 function gigsIndex(req, res){
 
 
-// <<<<<<< HEAD
  function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
    var R = 6371; // Radius of the earth in km
    var dLat = deg2rad(lat2-lat1);  // deg2rad below
@@ -57,49 +56,6 @@ function gigsIndex(req, res){
    // sorted[0].gig.distance = sorted[0].distance
    return res.status(200).send(sorted);
  });
-// =======
-//   function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
-//     var R = 6371; // Radius of the earth in km
-//     var dLat = deg2rad(lat2-lat1);  // deg2rad below
-//     var dLon = deg2rad(lon2-lon1); 
-//     var a = 
-//       Math.sin(dLat/2) * Math.sin(dLat/2) +
-//       Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
-//       Math.sin(dLon/2) * Math.sin(dLon/2); 
-//     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-//     var d = R * c; // Distance in km
-//     return d;
-//   }
-
-//   function deg2rad(deg) {
-//     return deg * (Math.PI/180)
-//   }
-
-//   Gig.find({datetime: {$gt: Date.now()}}, function(err, gigs) {
-//     if(err) return res.status(500).json({ message: err });
-    
-//     var gigsToSort = []
-
-//     for (var i = gigs.length - 1; i >= 0; i--) {
-      
-//       var distanceOfGig = getDistanceFromLatLonInKm(req.query.latitude, req.query.longitude, gigs[i].lat, gigs[i].lng);
-
-//       // if (distanceOfGig < 4) {  
-
-//       var gigDistanceFromUser = {gig: gigs[i], distance: Math.round(distanceOfGig*2)/2}
-//       gigsToSort.push(gigDistanceFromUser);
-//     // }
-//     }
-//     var sorted = gigsToSort.sort(
-//          function(a, b) {
-//              return b.distance - a.distance
-//          }  
-//      ) 
-//     // keep this commented out for now
-//     // sorted[0].gig.distance = sorted[0].distance
-//     return res.status(200).send(sorted);
-//   });
-// >>>>>>> 2e104875359e5b263a4d860f57afd3c92b02ada1
 
 }
 
@@ -202,7 +158,6 @@ function gigsUnAttend(req, res){
      });
   });
 }
-
 
 
 

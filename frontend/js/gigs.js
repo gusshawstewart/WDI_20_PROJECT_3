@@ -20,15 +20,32 @@ $('#reg-gigphoto').fileupload({
 
 function getGigs(){
 
-var token = window.localStorage.getItem('token');
-  if(token) {
+$('#reg-gigtrack').fileupload({
+        dataType: 'json',
+        done: function (e, data) {
 
-  var ajax = $.get('http://localhost:3000/currentUser')
-   .done(function(user){
-   });
+            var file = data.result.files[0];
+            
+            var audio = $("<img></img>").attr('src' , "http://localhost:3000/uploads/thumbnail/" + file.name);
+
+            $("#reg-gig-track").append(audio);
+            $("#reg-gig-track").data('filename'  , file.name);
+        }
+    });
+}
+
+
+function getGigs(){
+var token = window.localStorage.getItem('token');
+ if(token) {
+
+ var ajax = $.get('http://localhost:3000/currentUser')
+  .done(function(user){
+  });
 
 }
- 
+  
+
 $.ajax({
   url:'http://localhost:3000/gigs',
   type:'get',
@@ -63,11 +80,14 @@ function createGig(){
       "datetime": $("input#datetimepicker2").val(),
       "cost": $("input#gig-cost").val(),
       "gig_photo" : $("#reg-gigphoto-image").data('filename'),
-      "gig_track" : $("#reg-gigtrack").data('filename')
+      "gig_track" : $("#reg-gig-track").data('filename')
+      // UPLOAD SONG
+      // "gig_track" : $("#reg-gigtrack").data('filename')
+
     }}
   }).done(function(data){
     console.log(data);
-    addGig(data);
+    // addGig(data);
     $("input#gig-title").val(null),
     $("input#gig-description").val(null),
     $("input#gig-time").val(null),
@@ -84,7 +104,7 @@ function addGig(gig){
 
   //add marker to map
      // Clear out the old markers.
-
+     console.log(gig)
     var currentLatLng = new google.maps.LatLng(gig.gig.lat, gig.gig.lng);
     
     var marker = new google.maps.Marker({
@@ -103,12 +123,12 @@ function addGig(gig){
       infowindow.open(gigInput.map, marker);
     });
 
-
+if(gig.distance < 5) {
 
   var gigIndex =
   "<tr id='music-trigger'><td id='table-style'>" +
   "<ul id='gigs-side-listing'>" +
-  "<li> <img src='http://localhost:3000/uploads/thumbnail/" + gig.gig_photo + "'></li>" +
+  "<li> <img src='http://localhost:3000/uploads/thumbnail/" + gig.gig.gig_photo + "'></li>" +
   "<li>Distance: " + gig.distance + "ml</li>" + 
   "<li>Time: " + gig.gig.datetime + "</li>" + 
   "<li> Title: " + gig.gig.title + "</li>" + 
@@ -133,7 +153,7 @@ function addGig(gig){
       marker.setIcon('images/marker.png')
     });
 
-
+  }
 
 }
 

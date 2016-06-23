@@ -7,7 +7,7 @@ navigator.geolocation.getCurrentPosition(function(position){
   var marker = new google.maps.Marker({
       position: latlng,
       map: gigInput.map,
-      icon: 'images/marker.png'
+      icon: 'images/marker2.png'
   });
 
   markers.push(marker);
@@ -87,27 +87,6 @@ $('#datetimepicker2').datetimepicker({toolbarPlacement: 'bottom', sideBySide: tr
 $('#navbar').hover(
   function(){$(this).addClass('background-off')
 })
-
-// // Scrolling to speicific section with js
-
-// $('.down').click(function() {
-//   $('html body').animate({
-//     scrollTop: $(".index").offset().top
-//   }, 800, function() {
-//      $('.homepage').hide()
-//      $('#sidemenu').show();
-//   });
-// });
-
-
-
-// // });
-
-// $('.down').click(function() {
-
-//   $.load('localhost/3000');
-
-// });
 
 
 
