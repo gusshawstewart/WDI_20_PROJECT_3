@@ -11,7 +11,6 @@ owner: {type: mongoose.Schema.ObjectId, ref: 'User'},
 attending: [{type: mongoose.Schema.ObjectId, ref: 'User'}],
 gig_photo: String,
 gig_track: String
-
 });
 
 gigSchema.pre('remove', function(next){

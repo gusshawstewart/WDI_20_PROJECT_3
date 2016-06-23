@@ -190,9 +190,6 @@ $.ajax({
   }); 
   location.reload();
 });
-
-
-
 }
 
 // EDIT USER
@@ -221,8 +218,8 @@ $.ajax({
     // });
     var user = testUser;
 
-      $("input#edit-firstname").val(user.firstname),
-      $("input#edit-lastname").val(user.lastname),
+      $("input#edit-firstname").val(user.firstName),
+      $("input#edit-lastname").val(user.lastName),
       $("input#edit-city").val(user.city),
       $("select#edit-country").val(user.country)
 
@@ -232,8 +229,8 @@ $.ajax({
   var updateUser = function(){
     event.preventDefault();
     var user= {
-     "fistname": $("input#edit-firstname").val(),
-     "lastname": $("input#edit-lastname").val(),
+     "firstName": $("input#edit-firstname").val(),
+     "lastName": $("input#edit-lastname").val(),
      "city": $("input#edit-city").val(), 
      "country": $("select#edit-country").val()
       };

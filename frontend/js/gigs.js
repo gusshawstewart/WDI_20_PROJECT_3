@@ -50,8 +50,6 @@ $.ajax({
 function createGig(){
   event.preventDefault();
 
-
-// check it this works without photo. 
   $.ajax({
     url:'http://localhost:3000/gigs',
     type:'post',
@@ -62,10 +60,9 @@ function createGig(){
       "lat": gigInput.coordinates.lat(), 
       "lng": gigInput.coordinates.lng(), 
       "datetime": $("input#datetimepicker2").val(),
-      "cost": $("input#gig-cost").val()
-      // "gig_photo" : $("#reg-gigphoto-image").data('filename')
-      // UPLOAD SONG
-      // "gig_track" : $("#reg-gigtrack").data('filename')
+      "cost": $("input#gig-cost").val(),
+      "gig_photo" : $("#reg-gigphoto-image").data('filename'),
+      "gig_track" : $("#reg-gigtrack").data('filename')
     }}
   }).done(function(data){
     console.log(data);
@@ -105,6 +102,7 @@ function addGig(gig){
     });
 
 
+
   var gigIndex =
   "<tr id='music-trigger'><td id='table-style'>" +
   "<ul id='gigs-side-listing'>" +
@@ -115,20 +113,24 @@ function addGig(gig){
   "<li> Description: " + gig.description + "</li>" +
   "<li> Cost: " + gig.cost + "</li>" +
   // "<a data-id='"+gig._id+"' class='show' href='#'>Show</a>" 
-  "<a href='#' data-toggle='modal' data-target='#showGig' data-id='" + gig._id + "' class='show-gig'>Show</a>"
+  "<a href='#' data-toggle='modal' data-target='#showGig' data-id='" + gig._id + "' class='show-gig'>Show</a>" + 
+  "<audio id='track" + gig._id + "'<source src='audio/" + gig.gig_track + "'></source></audio>"
 
   $("#gigs-side-listing").prepend(gigIndex)
+
+  var track = $("#track" + gig._id);
 
   $("#music-trigger")
     .mouseenter(function() {
      marker.setIcon('images/target-marker.png')
-
-      console.log('audio');
+     track.play()
+     console.log('audio');
     });
 
     $("#music-trigger").mouseleave(function(){
       marker.setIcon('images/marker.png')
     });
+
 
 
 }

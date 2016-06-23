@@ -29,13 +29,6 @@ navigator.geolocation.getCurrentPosition(function(position){
 
 console.log("gig input is" + gigInput.location);
 
-  // var beepOne = $("#testMusic")[0];
-  // $("#music-trigger")
-  //   .mouseenter(function() {
-  //     console.log('audio');
-  //     beepOne.play();
-  //   });
-
    $('body').on('click', '.edit-gig', editGig);
    $("form#login").on("submit", createSession);
    $("body").on("click", ".show-user", showUser);
@@ -100,5 +93,6 @@ $('.down').click(function() {
     scrollTop: $(".index").offset().top
   }, 800);
 });
+
 
 });
