@@ -1,4 +1,3 @@
-
 var authenticationController = require('../controllers/authentication');
 var Gig                      = require("../models/gig");
 var jwtDecode                = require('jwt-decode');
@@ -15,6 +14,7 @@ function usersIndex(req, res) {
     if(err) return res.status(500).json({ message: err });
     return res.status(200).json({ users: users });
   });
+  
 }
 
 function usersShow(req, res) {

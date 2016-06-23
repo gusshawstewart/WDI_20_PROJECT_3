@@ -9,8 +9,7 @@ var cors           = require('cors');
 var routes         = require('./config/routes');
 var upload = require('jquery-file-upload-middleware');
 
-
-mongoose.connect('mongodb://localhost:27017/lineup');
+mongoose.connect('mongodb://localhost:27017/lineup_groupdevelopment');
 
 app.use(express.static('public'));
 
@@ -47,4 +46,3 @@ app.use(routes);
 app.listen(port, function() {
   console.log("Express is listening on port " + port);
 });
-

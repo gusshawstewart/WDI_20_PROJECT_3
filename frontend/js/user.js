@@ -2,70 +2,71 @@ $(document).ready(function(){
 
 });
 
-  var navLoggedIn = 
-  "<ul class='nav navbar-nav navbar-right navLoggedIn'>" +
-    "<li><button type='button' class='btn' id='burger'> Sidebar </button></li>" +
-    "<li><button type='button' class='btn btn-secondary' id='btn-create' data-toggle='modal' data-target='#submitGig'> Add new </button></li>" +
-    "<li><button type='button' class='btn btn-secondary' id='btn-logout' data-toggle='modal' data-target='#logOut'> Log Out </button></li>" +
-  "</ul>";
+var navLoggedIn = 
+"<ul class='nav navbar-nav navbar-right navLoggedIn'>" +
+"<li><button type='button' class='btn' id='burger'> Sidebar </button></li>" +
+"<li><button type='button' class='btn btn-secondary' id='btn-create' data-toggle='modal' data-target='#submitGig'> Add new </button></li>" +
+"<li><button type='button' class='btn btn-secondary' id='btn-logout' data-toggle='modal' data-target='#logOut'> Log Out </button></li>" +
+"</ul>";
 
-  var navLoggedOut = 
-  "<ul class='nav navbar-nav navbar-right col-sm-8 navLoggedOut'>" +
-      "<li><button type='button' class='btn' id='burger'> Sidebar </button></li>" +
-      "<li><button type='button' class='btn' id='btn-signup' data-toggle='modal' data-target='#signUp'> Sign up </button></li>" +
-      "<li><button type='button' class='btn' id='btn-login' data-toggle='modal' data-target='#logIn'> Log in </button></li>" +
-    "</ul>"; 
+var navLoggedOut = 
+
+"<ul class='nav navbar-nav navbar-right col-sm-8 navLoggedOut'>" +
+"<li><button type='button' class='btn' id='burger'> Sidebar </button></li>" +
+"<li><button type='button' class='btn' id='btn-signup' data-toggle='modal' data-target='#signUp'> Sign up </button></li>" +
+"<li><button type='button' class='btn' id='btn-login' data-toggle='modal' data-target='#logIn'> Log in </button></li>" +
+"</ul>"; 
 
 // CREATE SESSION WITH TOKEN (LOGIN)
-  function createSession(){
+function createSession(){
   event.preventDefault();
 
-    $.post("http://localhost:3000/login", {
-      email: $('#login-email').val(),
-      password: $('#login-password').val()
-     }).done(function(data) {
-       window.localStorage.setItem('token', data.token);
-       location.reload();
+  $.post("http://localhost:3000/login", {
+    email: $('#login-email').val(),
+    password: $('#login-password').val()
+  }).done(function(data) {
+   window.localStorage.setItem('token', data.token);
+   location.reload();
 
-       $.ajaxSetup({
-         headers: { 'Authorisation': 'Bearer ' + data.token }
-       });  
+   $.ajaxSetup({
+     headers: { 'Authorisation': 'Bearer ' + data.token }
+   });  
 
-    });
+ });
 
-  };
+};
 
 // CHECK FOR TOKEN
 var token = window.localStorage.getItem('token');
-  if(token) {
+if(token) {
 
-    $.ajaxSetup({
-      headers: {'Authorisation': 'Bearer ' + token }
-    });
-      $('#navbar').prepend(navLoggedIn);
-      $('.navLoggedOut').hide();
+  $.ajaxSetup({
+    headers: {'Authorisation': 'Bearer ' + token }
+  });
+  $('#navbar').prepend(navLoggedIn);
+  $('.navLoggedOut').hide();
 
 
-      var ajax = $.get('http://localhost:3000/currentUser')
-       .done(function(user){
-        $('.navLoggedIn').prepend("<li><button type='button' class='btn show-user btn-create' id='btn-create' data-toggle='modal' data-target='#showUser'> Hello, " + user.currentUser.firstName + "</button></li>") 
-      });
+  var ajax = $.get('http://localhost:3000/currentUser')
+  .done(function(user){
+    $('.navLoggedIn').prepend("<li><button type='button' class='btn show-user btn-create' id='btn-create' data-toggle='modal' data-target='#showUser'> Hello, " + user.currentUser.firstName + "</button></li>") 
+  });
 
-    }else {
-      $('#navbar').prepend(navLoggedOut);
-      $('.navLoggedIn').hide();
+}else {
+  $('#navbar').prepend(navLoggedOut);
+  $('.navLoggedIn').hide();
 
-    }
+}
 
 // LOGOUT
-  $('#btn-logout').click(function(){
-    window.localStorage.removeItem('token');
+$('#btn-logout').click(function(){
+  window.localStorage.removeItem('token');
 
-     $('#navbar').prepend(navLoggedOut);
-     $('.navLoggedIn').hide();
-     location.reload();
+  $('#navbar').prepend(navLoggedOut);
+  $('.navLoggedIn').hide();
+  location.reload();
 
-  });
+});
 
 // SHOW USER
 function showUser(){
@@ -73,83 +74,49 @@ function showUser(){
 var ajax = $.get('http://localhost:3000/currentUser')
 .done(function(user){
 
-   $('#showuser-modal').empty();
-   $.ajax({
-     method: 'GET',
-     url: 'http://localhost:3000/users/' + user.currentUser._id
-     // + $(this).data()._id
-     // + $(this).data().id
-   }).done(function(data){
-     console.log("ajax is listening");
+  $('#showuser-modal').empty();
+  $.ajax({
+    method: 'GET',
+    url: 'http://localhost:3000/users/' + user.currentUser._id
+      // + $(this).data()._id
+      // + $(this).data().id
+    }).done(function(data){
+      console.log("ajax is listening");
 
-     var editUser = "<li><a href='#' class='edit-user' data-dismiss='modal' data-toggle='modal' data-target='#edit-user' data-id='"+user.currentUser._id+"'>Edit</a></div></li>";
+      var editUser = "<li><a href='#' class='edit-user' data-dismiss='modal' data-toggle='modal' data-target='#edit-user' data-id='"+user.currentUser._id+"'>Edit</a></div></li>";
 
-     var userShow =
-     "<li> <img src='../api/" + user.currentUser.profile_photo + "'></li>" +
-     "<li>First Name: " + user.currentUser.firstName + "</li>"+
-     "<li>Last Name: " + user.currentUser.lastName + "</li>" +
-     "<li>City: " + user.currentUser.city + "</li>" +
-     "<li>Country: " + user.currentUser.country + "</li>";
+      var userShow =
+      "<li> <div class='imageWrapper'><img class='showImage' src='../api/" + user.currentUser.profile_photo + "'></div></li>" +
+      "<div class='showInfo userInfo'><li>First Name: " + user.currentUser.firstName + "</li>"+
+      "<li>Last Name: " + user.currentUser.lastName + "</li>" +
+      "<li>City: " + user.currentUser.city + "</li>" +
+      "<li>Country: " + user.currentUser.country + "</li></div>";
 
-     $('#showuser-modal').prepend(userShow);
+      $('#showuser-modal').prepend(userShow);
 
-     function toggleEdit(){
-       var currentUser = user.currentUser._id;
-         if(currentUser){
-           $('#showuser-modal').append(editUser);
-         }
-     }
+      function toggleEdit(){
+        var currentUser = user.currentUser._id;
+        if(currentUser){
+          $('.userInfo').append(editUser);
+        }
+      }
 
-     toggleEdit();
-   });
+      // $('.userImage').css("border-radius", "25%");
 
-});
+      toggleEdit();
+    });
+
+  });
+
 }
 
-// // REGISTER
-//   function createUser(){
-//     event.preventDefault();
-
-//     $.ajax({
-//       url:'http://localhost:3000/register',
-//       type:'post',
-//       data: {
-//         email: $("input#reg-email").val(),
-//         password: $("input#reg-password").val(),
-//         passwordConfirmation: $("input#reg-passwordconfirmation").val(),
-//         firstName: $("input#reg-firstname").val(),
-//         lastName: $("input#reg-lastname").val(),
-//         city: $("input#reg-city").val(),
-//         country: $("select#reg-country").val()
-//       }
-//     }).done(function(data) {
-//       $("input#reg-email").val(null),
-//       $("input#reg-password").val(null),
-//       $("input#reg-firstname").val(null),
-//       $("input#reg-lastname").val(null),
-//       $("input#reg-city").val(null),
-//       $("select#reg-country").val(null)
-//     });
-//   }
-//   $.post("http://localhost:3000/login", {
-//     email: $('#login-email').val(),
-//     password: $('#login-password').val()
-//    }).done(function(data) {
-//      window.localStorage.setItem('token', data.token);
-//      $.ajaxSetup({
-//        headers: { 'Authorisation': 'Bearer ' + data.token }
-//      });    
-//   });
-// };
-
-
 function createUser(){
-event.preventDefault();
-console.log("creating user");
+  event.preventDefault();
+  console.log("creating user");
 
-console.log("YYYYYYYY" + $("input#reg-passwordconfirmation").val());
+  console.log("YYYYYYYY" + $("input#reg-passwordconfirmation").val());
 
-var formData = new FormData();
+  var formData = new FormData();
   formData.append("email", $("input#reg-email").val())
   formData.append("password", $("input#reg-password").val())
   formData.append("passwordConfirmation", $("input#reg-passwordconfirmation").val())
@@ -160,57 +127,52 @@ var formData = new FormData();
   // APPENDING PROFILE PHOTO
   formData.append("profile_photo", $('#reg-profilephoto')[0].files[0]);
 
-$.ajax({
-  url:'http://localhost:3000/register',
-  type:'post',
-  data: formData,
-  cache: false,
-  contentType: false,
-  processData: false,
-}).done(function(data) {
-  console.log(data);
-  $("input#reg-email").val(null),
-  $("input#reg-password").val(null),
-  $("input#reg-firstname").val(null),
-  $("input#reg-lastname").val(null),
-  $("input#reg-city").val(null),
-  $("select#reg-country").val(null)
-});
+  $.ajax({
+    url:'http://localhost:3000/register',
+    type:'post',
+    data: formData,
+    cache: false,
+    contentType: false,
+    processData: false,
+  }).done(function(data) {
+    console.log(data);
+    $("input#reg-email").val(null),
+    $("input#reg-password").val(null),
+    $("input#reg-firstname").val(null),
+    $("input#reg-lastname").val(null),
+    $("input#reg-city").val(null),
+    $("select#reg-country").val(null)
 
-$.post("http://localhost:3000/login", {
-  email: $('#login-email').val(),
-  password: $('#login-password').val()
- }).done(function(data) {
-   window.localStorage.setItem('token', data.token);
-   $.ajaxSetup({
-     headers: { 'Authorisation': 'Bearer ' + data.token }
-   }); 
-});
+
+    window.localStorage.setItem('token', data.token);
+    $.ajaxSetup({
+      headers: { 'Authorisation': 'Bearer ' + data.token }
+    }); 
+    location.reload();
+  });
 
 }
 
 // EDIT USER
-  function editUser(){
+function editUser(){
 
-    var ajax = $.get('http://localhost:3000/currentUser')
-    .done(function(user){
+  var ajax = $.get('http://localhost:3000/currentUser')
+  .done(function(user){
 
     $('#submitUserUpdate').attr('data-id', user.currentUser._id); 
 
-  
     console.log('editing a user');
 
-
-    $.ajax({
-      method: 'get',
-      url: 'http://localhost:3000/users/'+ user.currentUser._id
-    }).done(function(person){
-        console.log(person);
-      $("input#edit-firstname").val(person.currentUser.firstName),
-      $("input#edit-lastname").val(person.currentUser.lastName),
-      $("input#edit-city").val(person.currentUser.city),
-      $("select#edit-country").val(person.currentUser.country)
-    });
+   $.ajax({
+    method: 'get',
+    url: 'http://localhost:3000/users/'+ user.currentUser._id
+  }).done(function(person){
+    console.log(person);
+    $("input#edit-firstname").val(person.currentUser.firstName),
+    $("input#edit-lastname").val(person.currentUser.lastName),
+    $("input#edit-city").val(person.currentUser.city),
+    $("select#edit-country").val(person.currentUser.country)
+  });
 
       // $("input#edit-firstname").val(person.firstname),
       // $("input#edit-lastname").val(person.lastname),
@@ -221,31 +183,31 @@ $.post("http://localhost:3000/login", {
   })
 }
 
-  var updateUser = function(){
-    event.preventDefault();
-    console.log("listening to update");
+var updateUser = function(){
+  event.preventDefault();
+  console.log("listening to update");
   
-          var ajax = $.get('http://localhost:3000/currentUser')
-          .done(function(user){
+  var ajax = $.get('http://localhost:3000/currentUser')
+  .done(function(user){
 
-      
-          var person = { user: { 
-           "firstName": $("input#edit-firstname").val(),
-           "lastName": $("input#edit-lastname").val(),
-           "city": $("input#edit-city").val(), 
-           "country": $("select#edit-country").val()
-            }};
 
-            $.ajax({
-              method: 'patch',
-              url: 'http://localhost:3000/users/'+ user.currentUser._id,
-              data: person
-              }).done(function(data){
+    var person = { user: { 
+     "firstName": $("input#edit-firstname").val(),
+     "lastName": $("input#edit-lastname").val(),
+     "city": $("input#edit-city").val(), 
+     "country": $("select#edit-country").val()
+   }};
+
+   $.ajax({
+    method: 'patch',
+    url: 'http://localhost:3000/users/'+ user.currentUser._id,
+    data: person
+  }).done(function(data){
               // not ideal
               location.reload();
-           }); 
-      });
-  }
+            }); 
+});
+}
 
 
   // console.log('editing a user');
@@ -276,6 +238,8 @@ $.post("http://localhost:3000/login", {
 //     location.reload();
 //   });
 // }
+
+
 
 
 

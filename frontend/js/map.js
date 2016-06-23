@@ -28,12 +28,14 @@ function initMap() {  console.log('initialising map');
    }
    );
 
+
  $("#submitGig").on("shown.bs.modal", function(e) {
    console.log("MAP IS" + inputMap)
    google.maps.event.trigger(inputMap, "resize");
    inputMap.setCenter(new google.maps.LatLng(51.506178,-0.088369)); 
  });
  }
+
 
 function geocodeAddress(geocoder, resultsMap) {
    var address = document.getElementById('address').value;
@@ -72,6 +74,7 @@ function geocodeAddress(geocoder, resultsMap) {
    }
 
 
+
  var map = new google.maps.Map(canvas , mapOptions);
  //!!!assignment for future use of this map elsewhere
  gigInput.map = map;
@@ -82,13 +85,12 @@ function geocodeAddress(geocoder, resultsMap) {
    var searchBox = new google.maps.places.SearchBox(input);
    map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
 
+    // Bias the SearchBox results towards current map's viewport.
+    map.addListener('bounds_changed', function() {
+      searchBox.setBounds(map.getBounds());
+    });
 
-   // Bias the SearchBox results towards current map's viewport.
-   map.addListener('bounds_changed', function() {
-     searchBox.setBounds(map.getBounds());
-   });
-
-   var markers = [];
+    var markers = [];
 
 
 //HOMEPAGE MAP EVENT LISTENERS
@@ -173,6 +175,7 @@ searchBox.addListener('places_changed', function() {
         fillColor: 'rgba(0,255,127,0.5)',
         fillOpacity: 0.35,
         map: gigInput.map,
+        // center: new google.maps.LatLng(place.geometry.location),
         center: place.geometry.location,
         radius: 4000
       })
@@ -199,8 +202,7 @@ searchBox.addListener('places_changed', function() {
   map.fitBounds(bounds);
   map.setZoom(12);
 
+  console.log("YYYYYYYYYYY")
+
 });
-
-
-
 
