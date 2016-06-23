@@ -74,6 +74,8 @@ function createGig(){
     $("input#gig-description").val(null),
     $("input#gig-time").val(null),
     $("input#gig-cost").val(null)
+  
+    location.reload();
   });
 
 }

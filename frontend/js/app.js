@@ -113,21 +113,21 @@ $('.showHome').click(function(e){
  $('.homepage').show(); 
 });
 
-// Don't show sidemenu with homepage
-if($('.homepage').show()){
-  $('#sidemenu').hide();
-}
+// // Don't show sidemenu with homepage
+// if($('.homepage').show()){
+//   $('#sidemenu').hide();
+// }
 
-// toggle sidemenu
-$('#burger').click(function(){
+// // toggle sidemenu
+// $('#burger').click(function(){
 
-  if($('#sidemenu').show()){
-    $('#sidemenu').hide();
-  }else{
-  $('#sidemenu').show()
-  }
+//   if($('#sidemenu').show()){
+//     $('#sidemenu').hide();
+//   }else{
+//   $('#sidemenu').show()
+//   }
 
-});
+// });
 
 
 
