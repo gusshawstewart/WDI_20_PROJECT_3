@@ -125,16 +125,19 @@ function addGig(gig){
 
   if (gig.distance < 5) {
 
+  var gigDate = gig.gig.datetime.substring(0, 10);
+  var gigTime = gig.gig.datetime.substring(11, 16);
 
   var gigIndex =
   "<tr id='music-trigger'><td id='table-style'>" +
   "<ul id='gigs-side-listing'>" +
   "<li> <img src='/uploads/thumbnail/" + gig.gig.gig_photo + "'></li>" +
   "<li>Distance: " + gig.distance + "ml</li>" + 
-  "<li>Time: " + gig.gig.datetime + "</li>" + 
+  "<li>Date: " + gigDate + "</li>" +
+  "<li>Time: " + gigTime + "</li>" +
   "<li> Title: " + gig.gig.title + "</li>" + 
   "<li> Description: " + gig.gig.description + "</li>" +
-  "<li> Cost: " + gig.cost + "</li>" +
+  "<li> Cost: " + gig.gig.cost + "</li>" +
   // "<a data-id='"+gig._id+"' class='show' href='#'>Show</a>" 
   "<a href='#' data-toggle='modal' data-target='#showGig' data-id='" + gig.gig._id + "' class='show-gig'>Show</a>" + 
   "<audio id='track" + gig.gig._id + "'<source src='audio/" + gig.gig_track + "'></source></audio>"
