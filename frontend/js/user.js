@@ -72,7 +72,7 @@ $('#btn-logout').click(function(){
 
 // SHOW USER
 function showUser(){
-//using hard coded user id in url link
+
 var ajax = $.get('http://localhost:3000/currentUser')
 .done(function(user){
 
