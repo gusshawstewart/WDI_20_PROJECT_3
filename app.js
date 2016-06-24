@@ -38,7 +38,7 @@ app.use(routes);
   // configure upload middleware for file upload
   upload.configure({
       uploadDir: __dirname + '/public/uploads',
-      uploadUrl: '/uploads',
+      uploadUrl: 'public/uploads',
       imageVersions: {
           thumbnail: {
               width: 80,
@@ -48,7 +48,7 @@ app.use(routes);
   });
 
 
-  app.use('/upload', upload.fileHandler());
+  app.use('public/upload', upload.fileHandler());
 
 
 app.listen(port, function() {

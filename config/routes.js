@@ -4,7 +4,7 @@ var authenticationController = require('../controllers/authentication');
 var jwt                      = require('jsonwebtoken');
 var secret                   = require('./config').secret;
 var multer                   = require('multer');
-var upload                   = multer({ dest: './uploads' });
+var upload                   = multer({ dest: './public/uploads' });
 
 // Middleware function here
 function checkForToken(req, res, next){
