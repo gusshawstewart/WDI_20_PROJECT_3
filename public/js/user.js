@@ -88,7 +88,7 @@ var ajax = $.get('/currentUser')
       var editUser = "<li><a href='#' class='edit-user' data-dismiss='modal' data-toggle='modal' data-target='#edit-user' data-id='"+user.currentUser._id+"'>Edit</a></div></li>";
 
       var userShow =
-      "<li> <div class='imageWrapper'><img class='showImage' src='../api/" + user.currentUser.profile_photo + "'></div></li>" +
+      "<li> <div class='imageWrapper'><img class='showImage' src='/uploads/" + user.currentUser.profile_photo + "'></div></li>" +
       "<div class='showInfo userInfo'><li>First Name: " + user.currentUser.firstName + "</li>"+
       "<li>Last Name: " + user.currentUser.lastName + "</li>" +
       "<li>City: " + user.currentUser.city + "</li>" +

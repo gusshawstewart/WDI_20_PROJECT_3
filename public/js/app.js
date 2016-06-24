@@ -42,7 +42,7 @@ console.log("gig input is" + gigInput.location);
    $("body").on("click", ".createSession", createSession);
    $("body").on("click", ".delete-gig", removeGig);
 
-});
+}   );
 
 $(document).ready(function(){
   $('.navmenu').offcanvas({toggle: true, autohide: false, disableScrolling: false, canvas: 'map-canvas'});
