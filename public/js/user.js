@@ -2,6 +2,7 @@ $(document).ready(function(){
 
 });
 
+
   var navLoggedIn = 
   "<ul class='nav navbar-nav navbar-right navLoggedIn '>" +
     "<li><a href='homepage.html' ><img class='showHome' src='images/lineup-logo.jpg'></a></li>" +
@@ -22,7 +23,7 @@ $(document).ready(function(){
 function createSession(){
   event.preventDefault();
 
-  $.post("http://localhost:3000/login", {
+  $.post("/login", {
     email: $('#login-email').val(),
     password: $('#login-password').val()
   }).done(function(data) {
@@ -48,7 +49,7 @@ if(token) {
   $('.navLoggedOut').hide();
 
 
-  var ajax = $.get('http://localhost:3000/currentUser')
+  var ajax = $.get('/currentUser')
   .done(function(user){
     $('.navLoggedIn').append("<li><button type='button' class='btn show-user btn-create' id='btn-create' data-toggle='modal' data-target='#showUser'> Hello, " + user.currentUser.firstName + "</button></li>") 
   });
@@ -71,14 +72,14 @@ $('#btn-logout').click(function(){
 
 // SHOW USER
 function showUser(){
-//using hard coded user id in url link
-var ajax = $.get('http://localhost:3000/currentUser')
+
+var ajax = $.get('/currentUser')
 .done(function(user){
 
   $('#showuser-modal').empty();
   $.ajax({
     method: 'GET',
-    url: 'http://localhost:3000/users/' + user.currentUser._id
+    url: '/users/' + user.currentUser._id
       // + $(this).data()._id
       // + $(this).data().id
     }).done(function(data){
@@ -129,7 +130,7 @@ function createUser(){
   formData.append("profile_photo", $('#reg-profilephoto')[0].files[0]);
 
   $.ajax({
-    url:'http://localhost:3000/register',
+    url:'/register',
     type:'post',
     data: formData,
     cache: false,
@@ -158,7 +159,7 @@ function createUser(){
 // EDIT USER
 function editUser(){
 
-  var ajax = $.get('http://localhost:3000/currentUser')
+  var ajax = $.get('/currentUser')
   .done(function(user){
 
     $('#submitUserUpdate').attr('data-id', user.currentUser._id); 
@@ -167,7 +168,7 @@ function editUser(){
 
    $.ajax({
     method: 'get',
-    url: 'http://localhost:3000/users/'+ user.currentUser._id
+    url: '/users/'+ user.currentUser._id
   }).done(function(person){
     console.log(person);
     $("input#edit-firstname").val(person.currentUser.firstName),
@@ -189,7 +190,7 @@ var updateUser = function(){
   event.preventDefault();
   console.log("listening to update");
   
-  var ajax = $.get('http://localhost:3000/currentUser')
+  var ajax = $.get('/currentUser')
   .done(function(user){
 
 
@@ -202,7 +203,7 @@ var updateUser = function(){
 
    $.ajax({
     method: 'patch',
-    url: 'http://localhost:3000/users/'+ user.currentUser._id,
+    url: '/users/'+ user.currentUser._id,
     data: person
   }).done(function(data){
               // not ideal

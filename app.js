@@ -9,7 +9,14 @@ var cors           = require('cors');
 var routes         = require('./config/routes');
 var upload = require('jquery-file-upload-middleware');
 
-mongoose.connect('mongodb://localhost:27017/lineup_groupdevelopment');
+mongoose.connect( process.env.MONGODB_URI || 'mongodb://localhost:27017/lineup_groupdevelopment');
+
+app.get("/" , function(req, res){
+
+  res.sendFile(__dirname + "/public/homepage.html");
+
+});
+
 
 app.use(express.static('public'));
 
@@ -25,6 +32,7 @@ app.use(methodOverride(function(req, res){
     return method; 
   }
 }));
+
 app.use(routes);
 
   // configure upload middleware for file upload

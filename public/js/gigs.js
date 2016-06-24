@@ -9,12 +9,12 @@ $('#reg-gigphoto').fileupload({
         dataType: 'json',
         done: function (e, data) {
 
-            var file = data.result.files[0];
-            
-            var image = $("<img></img>").attr('src' , "http://localhost:3000/uploads/thumbnail/" + file.name);
+        var file = data.result.files[0];
+        
+        var image = $("<img></img>").attr('src' , "/uploads/thumbnail/" + file.name);
 
-            $("#reg-gigphoto-image").append(image);
-            $("#reg-gigphoto-image").data('filename'  , file.name);
+        $("#reg-gigphoto-image").append(image);
+        $("#reg-gigphoto-image").data('filename'  , file.name);
         }
     });
 
@@ -24,7 +24,7 @@ $('#reg-gigtrack').fileupload({
 
             var file = data.result.files[0];
             
-            var audio = $("<img></img>").attr('src' , "http://localhost:3000/uploads/thumbnail/" + file.name);
+            var audio = $("<img></img>").attr('src' , "/uploads/thumbnail/" + file.name);
 
             $("#reg-gig-track").append(audio);
             $("#reg-gig-track").data('filename'  , file.name);
@@ -37,7 +37,7 @@ function getGigs(){
 var token = window.localStorage.getItem('token');
  if(token) {
 
- var ajax = $.get('http://localhost:3000/currentUser')
+ var ajax = $.get('/currentUser')
   .done(function(user){
   });
 
@@ -45,7 +45,7 @@ var token = window.localStorage.getItem('token');
   
 
 $.ajax({
-  url:'http://localhost:3000/gigs',
+  url:'/gigs',
   type:'get',
   data: { 
     latitude: gigInput.userLat,
@@ -67,7 +67,7 @@ function createGig(){
   event.preventDefault();
 
   $.ajax({
-    url:'http://localhost:3000/gigs',
+    url:'/gigs',
     type:'post',
     cache: false,
     data: { gig: {
@@ -84,7 +84,7 @@ function createGig(){
 
     }}
   }).done(function(data){
-    console.log(data);
+    // console.log(data);
     // addGig(data);
     $("input#gig-title").val(null),
     $("input#gig-description").val(null),
@@ -105,11 +105,13 @@ function addGig(gig){
      console.log(gig)
     var currentLatLng = new google.maps.LatLng(gig.gig.lat, gig.gig.lng);
     
+
     var marker = new google.maps.Marker({
             position: currentLatLng,
             map: gigInput.map
         });
-    markers.push(marker);
+  
+    markers.push(marker)
 
   // add map info window
     var infowindow = new google.maps.InfoWindow({
@@ -121,14 +123,13 @@ function addGig(gig){
       infowindow.open(gigInput.map, marker);
     });
 
-
-if (gig.distance < 5){
+  if (gig.distance < 5) {
 
 
   var gigIndex =
   "<tr id='music-trigger'><td id='table-style'>" +
   "<ul id='gigs-side-listing'>" +
-  "<li> <img src='http://localhost:3000/uploads/thumbnail/" + gig.gig.gig_photo + "'></li>" +
+  "<li> <img src='/uploads/thumbnail/" + gig.gig.gig_photo + "'></li>" +
   "<li>Distance: " + gig.distance + "ml</li>" + 
   "<li>Time: " + gig.gig.datetime + "</li>" + 
   "<li> Title: " + gig.gig.title + "</li>" + 
@@ -164,14 +165,14 @@ function showGig(){
 
  $.ajax({
    method: 'GET',
-   url: 'http://localhost:3000/gigs/'+ $(this).data().id
+   url: '/gigs/'+ $(this).data().id
  }).done(function(gig){
 
    var gigDate = gig.datetime.substring(0, 10);
    var gigTime = gig.datetime.substring(11, 16);
 
    var gigShow =
-   "<li> <div class='imageWrapper'><img class='showImage' src='http://localhost:3000/uploads/thumbnail/" + gig.gig_photo + "'></div></li>" +
+   "<li> <div class='imageWrapper'><img class='showImage' src='/uploads/thumbnail/" + gig.gig_photo + "'></div></li>" +
    "<div class='showInfo showGig'><li>" + gig.title + "</li>" +
    "<li>" + gig.description + "</li>" +
    "<li>Date: " + gigDate + "</li>" +
@@ -191,7 +192,7 @@ function showGig(){
 
    $('#showgig-modal').prepend(gigShow);
 
-   var ajax = $.get('http://localhost:3000/currentUser')
+   var ajax = $.get('/currentUser')
     .done(function(user){
      // $('#showgig-modal').append("<li>USER: " + user.currentUser._id + "</li>");
 
@@ -237,7 +238,7 @@ function editGig(){
 
   $.ajax({
     method: 'get',
-    url: 'http://localhost:3000/gigs/'+$(this).data().id
+    url: '/gigs/'+$(this).data().id
   }).done(function(gig){
     $("input#edit-gig-title").val(gig.title);
     $("#edit-gig-description").html(gig.description);
@@ -260,7 +261,7 @@ var updateGig = function(){
 }};
 $.ajax({
   method: 'patch',
-  url: 'http://localhost:3000/gigs/'+$(this).data().id,
+  url: '/gigs/'+$(this).data().id,
   data: gig
 }).done(function(data){
   console.log('got to the done');
@@ -273,7 +274,7 @@ $.ajax({
 function removeGig(){
   event.preventDefault();
   $.ajax({
-    url:'http://localhost:3000/gigs/'+ $(this).data().id,
+    url:'/gigs/'+ $(this).data().id,
     type:'delete'
   })
     location.reload();
@@ -286,7 +287,7 @@ var attendGig = function(){
 
   $.ajax({
     type: 'post',
-    url: 'http://localhost:3000/gigs/attend/' + $(this).data().id,
+    url: '/gigs/attend/' + $(this).data().id,
   }).done(function(data){
     location.reload();
   });
@@ -298,7 +299,7 @@ var UnAttendGig = function(){
 
   $.ajax({
     type: 'patch',
-    url: 'http://localhost:3000/gigs/attend/' + $(this).data().id,
+    url: '/gigs/attend/' + $(this).data().id,
   }).done(function(data){
 
     location.reload();
