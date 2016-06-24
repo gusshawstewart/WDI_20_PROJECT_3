@@ -52,7 +52,7 @@ function currentUser(req, res){
   var user_id = decoded._id;
 
   User.findById(user_id, function(err, user){
-      console.log(user._id);
+      
 
     return res.status(200).json({ currentUser: user });
 
